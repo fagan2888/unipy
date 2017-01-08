@@ -1,9 +1,8 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jan  4 20:33:37 2017
 
-@author: dawkiny
+@author: Young Ju Kim
 """
 
 import math

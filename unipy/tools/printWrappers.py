@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jan  5 20:55:26 2017
+Created on Sun Jan  8 04:52:13 2017
 
 @author: Young Ju Kim
 """
-
