@@ -22,6 +22,11 @@ Features
     - ```ibm DB2```
     - ```oracleDB```
 
+  - import ```pandas.DataFrame``` to:
+  
+    - ```mysql```
+    - ```mariadb```
+
 * Mathmatics:
 
   - Coordinate plane
@@ -43,34 +48,34 @@ Features
 Structure
 =========
 
-* database:
+* database
 
   - getQuery
   - importQuery
 
-* math:
+* math
 
   - geometry
  
-* statsmod:
+* statsmod
 
   - getQuery
   - importQuery
   
-* tools:
+* tools
 
   - printWrappers
 
-* sample:
+* sample
 
   * datasets
     - dataManager
   - sample
   
-* tests:
+* tests
 
   - test
   
-* docs:
+* docs
 
   - readme
