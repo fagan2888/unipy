@@ -12,6 +12,33 @@ Documentation
 Features
 ========
 
+* database connection:
+
+  - get ```pandas.DataFrame``` from:
+  
+    - ```mysql```
+    - ```mariadb```
+    - ```postgresql```
+    - ```ibm DB2```
+    - ```oracleDB```
+
+* Mathmatics:
+
+  - Coordinate plane
+
+* Statistics:
+
+  - Hypothesis Test
+  - Multivariate Analysis
+    - Variance Inflation Factor
+    - Stepwise Elimination with VIF
+    - Feature Selection
+
+* Sample Datasets:
+
+  - Adult(UCI)
+  - Wine Quality(UCI)
+
 
 Structure
 =========
@@ -24,11 +51,6 @@ Structure
 * math:
 
   - geometry
- 
-* database:
-
-  - hypoTests
-  - multivariates
  
 * statsmod:
 
@@ -48,3 +70,7 @@ Structure
 * tests:
 
   - test
+  
+* docs:
+
+  - readme
