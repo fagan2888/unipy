@@ -14,18 +14,18 @@ Features
 
 * database connection:
 
-  - get ```pandas.DataFrame``` from:
+  - get ``pandas.DataFrame`` from:
   
-    - ```mysql```
-    - ```mariadb```
-    - ```postgresql```
-    - ```ibm DB2```
-    - ```oracleDB```
+    - ``mysql``
+    - ``mariadb``
+    - ``postgresql``
+    - ``ibm DB2``
+    - ``oracleDB``
 
-  - import ```pandas.DataFrame``` to:
+  - import ``pandas.DataFrame`` to:
   
-    - ```mysql```
-    - ```mariadb```
+    - ``mysql``
+    - ``mariadb``
 
 * Mathmatics:
 
