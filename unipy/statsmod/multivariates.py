@@ -5,8 +5,31 @@ Created on Sun Jan  8 03:46:03 2017
 @author: Young Ju Kim
 """
 
+import numpy as np
 import pandas as pd
 import statsmodels.api as sm
+
+
+def linear_regress(data, yvar, xvars):
+
+    y = data[yvar]
+    X = data[xvars]
+
+    X['intercept'] = 1.
+    res = sm.OLS(y, X).fit()
+    return res.params
+
+
+def linear_regression(data, yvar, Xvars):
+
+    # Change input to array
+    y_arr = data[yvar].values
+    X_arr = data[Xvars].values.values
+
+    # Calculate a linear regression(Ordinary Least Square)
+    reg = sm.add_constant(X_arr)
+    est = sm.OLS(y_arr, reg).fit()
+    return est
 
 
 def vif(y, X):
@@ -29,6 +52,47 @@ def vif(y, X):
     vif = 1 / (1 - rsq)
 
     return vif
+
+
+def mean_absolute_percentage_error(measure, predict, thresh=3.0):
+    '''Mean Absolute Percentage Error.
+    It is a percent of errors.
+    It measures the prediction accuracy of a forecasting method in Statistics
+    with the real mesured values and the predicted values, for example in trend
+    estimation.
+    If MAPE is 5, it means this prediction method potentially has 5% error.
+    It cannot be used if there are zero values,
+    because there would be a division by zero.
+    '''
+    mape = np.mean(np.absolute((measure - predict) / measure)) * 100
+
+    return mape
+
+
+def average_absoulte_deviation(measure, predict, thresh=2):
+    '''Average Absolute Deviation.
+    It is ...
+    It measures the prediction accuracy of a forecasting method in Statistics
+    with the real mesured values and the predicted values, for example in trend
+    estimation.
+    If MAD is 5, it means this prediction method potentially has...
+    '''
+    aad = np.mean(np.absolute(measure - predict))
+
+    return aad
+
+
+def median_absoulte_deviation(measure, predict, thresh=2):
+    '''Median Absolute Deviation.
+    It is ...
+    It measures the prediction accuracy of a forecasting method in Statistics
+    with the real mesured values and the predicted values, for example in trend
+    estimation.
+    If MAD is 5, it means this prediction method potentially has...
+    '''
+    mad = np.median(np.absolute(measure - predict))
+
+    return mad
 
 
 def feature_selection_vif(data, thresh=5.0):

@@ -1,8 +1,8 @@
 Metadata-Version: 1.1
 Name: unipy
-Version: 0.0.1.45
+Version: 0.0.1.49
 Summary: Useful tools for Data Scientists
-Home-page: http://github.com/pydemia
+Home-page: http://github.com/pydemia/unipy
 Author: Young Ju Kim
 Author-email: pydemia@gmail.com
 License: MIT License

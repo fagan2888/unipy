@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 """
 Created on Thu Jan  5 20:55:26 2017
 
@@ -32,10 +32,10 @@ This contains codes for data manipulation and Analysis tools.
 """
 
 setup(name='unipy',
-      version='0.0.1.45',
+      version='0.0.1.49',
       description='Useful tools for Data Scientists',
       long_description=long_desc,
-      url='http://github.com/pydemia',
+      url='http://github.com/pydemia/unipy',
       author='Young Ju Kim',
       author_email='pydemia@gmail.com',
       license='MIT License',
