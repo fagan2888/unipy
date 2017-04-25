@@ -19,6 +19,8 @@ unipy/sample/datasets/dataManager.py
 unipy/sample/datasets/resources.tar.gz
 unipy/statsmod/__init__.py
 unipy/statsmod/hypoTests.py
+unipy/statsmod/interActionFunction.py
+unipy/statsmod/lasso.py
 unipy/statsmod/multivariates.py
 unipy/tests/__init__.py
 unipy/tests/test.py
