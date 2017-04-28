@@ -17,3 +17,14 @@ def splitor(iterable, size):
     while item:
         yield item
         item = list(itertools.islice(data, size))
+
+
+def exceptor(x, exceptlist):
+    
+    res = [member for member in x if member not in exceptlist]
+    
+    return res
+    
+###
+# list(filter(lambda col: col not in ['capital_gain'], test.columns))
+# [member for member in test.columns if member not in ['capital_gain']]
