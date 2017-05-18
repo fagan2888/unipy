@@ -32,7 +32,7 @@ This contains codes for data manipulation and Analysis tools.
 """
 
 setup(name='unipy',
-      version='0.0.1.56',
+      version='0.0.1.62',
       description='Useful tools for Data Scientists',
       long_description=long_desc,
       url='http://github.com/pydemia/unipy',
