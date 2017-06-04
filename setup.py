@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 """
-Created on Thu Jan  5 20:55:26 2017
+Created on 2017-01-05 20:55:26
+Modified on 2017-05-30 13:30:55
 
 @author: Young Ju Kim
 """
@@ -32,7 +33,7 @@ This contains codes for data manipulation and Analysis tools.
 """
 
 setup(name='unipy',
-      version='0.0.1.62',
+      version='0.0.1.71',
       description='Useful tools for Data Scientists',
       long_description=long_desc,
       url='http://github.com/pydemia/unipy',

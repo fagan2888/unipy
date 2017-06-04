@@ -25,5 +25,7 @@ unipy/statsmod/multivariates.py
 unipy/tests/__init__.py
 unipy/tests/test.py
 unipy/tools/__init__.py
+unipy/tools/data_handler.py
 unipy/tools/misc.py
 unipy/tools/printWrappers.py
+unipy/tools/time_wrapper.py
