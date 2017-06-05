@@ -118,3 +118,17 @@ ln -s libclntsh.so.11.1   libclntsh.so
 ```sh
 sudo ldconfig
 ```
+
+-----
+
+```sh
+sudo vim /etc/profile.d/oracle.sh
+```
+
+```vim
+# Oracle Instant Client PATH
+export ORACLE_HOME="/home/pydemia/apps/instantclient_11_2"
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME
+```
+
+
