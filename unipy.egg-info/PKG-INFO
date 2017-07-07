@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: unipy
-Version: 0.0.1.71
+Version: 0.0.2.52
 Summary: Useful tools for Data Scientists
 Home-page: http://github.com/pydemia/unipy
 Author: Young Ju Kim
@@ -11,7 +11,7 @@ Description:
         This contains codes for data manipulation and Analysis tools.
         
 Platform: UNKNOWN
-Classifier: Development Status :: 3 - Alpha
+Classifier: Development Status :: 4 - Beta
 Classifier: Environment :: Console
 Classifier: Programming Language :: Python :: 3.5
 Classifier: Operating System :: OS Independent

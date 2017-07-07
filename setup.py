@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 """
 Created on 2017-01-05 20:55:26
-Modified on 2017-05-30 13:30:55
+Modified on 2017-06-26 02:36:25
 
 @author: Young Ju Kim
 """
@@ -20,7 +20,7 @@ import tarfile
 
 def package_data_listup():
 
-    filename = 'sample/datasets/resources.gz/resources.tar.gz'
+    filename = 'dataset/resources.gz/resources.tar.gz'
     tar = tarfile.open(filename)
     filelist = list(set(map(lambda x: x.split('/')[0], tar.getnames())))
     filelist.sort()
@@ -33,7 +33,7 @@ This contains codes for data manipulation and Analysis tools.
 """
 
 setup(name='unipy',
-      version='0.0.1.71',
+      version='0.0.2.52',
       description='Useful tools for Data Scientists',
       long_description=long_desc,
       url='http://github.com/pydemia/unipy',
@@ -42,7 +42,7 @@ setup(name='unipy',
       license='MIT License',
       classifiers=[
             # How Mature: 3 - Alpha, 4 - Beta, 5 - Production/Stable
-            'Development Status :: 3 - Alpha',
+            'Development Status :: 4 - Beta',
             'Environment :: Console',
             'Programming Language :: Python :: 3.5',
             'Operating System :: OS Independent',
@@ -53,11 +53,14 @@ setup(name='unipy',
             ],
       packages=find_packages(exclude=['contrib', 'docs', 'tests']),
       install_requires=[
-                        'pandas', 'numpy', 'scipy', 'statsmodels',
-                        'pymysql', 'psycopg2', 'sqlalchemy',
-                        'ibm_db_sa'
-                        # 'cx_Oracle'
+                        'pandas>=0.20.2',
+                        'numpy==1.12.1, <1.13.1',
+                        'scipy>=0.19.0',
+                        'scikit-learn>=0.18.0',
+                        'statsmodels>=0.8.0',
+                        'matplotlib>=2.0.2',
+                        'paramiko>=2.1.2'
                         ],
       zip_safe=False,
-      package_data={'unipy': ['*.gz', 'sample/datasets/resources.tar.gz']}
+      package_data={'unipy': ['*.gz', 'dataset/resources.tar.gz']}
       )

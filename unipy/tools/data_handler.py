@@ -6,10 +6,21 @@ Created on Fri Jun  2 13:41:19 2017
 """
 
 
+import os
+import pandas as pd
+
 # Split an iterable by equal length
 import collections
 import itertools as it
 import numpy as np
+
+__all__ = ['splitter',
+           'pair_unique',
+           'df_pair_unique',
+           'map_to_tuple',
+           'map_to_list',
+           'merge_csv']
+
 
 # A Function to split an Iterable into smaller chunks 
 def splitter(iterable, how='equal', size=2):
@@ -39,7 +50,7 @@ def splitter(iterable, how='equal', size=2):
 
 
 # Unique Pair List Creator
-def uniquePair(*args):
+def pair_unique(*args):
 
     argsTuple = (*args, )
 
@@ -50,6 +61,13 @@ def uniquePair(*args):
     
     return resList
 
+
+# Unique Pair List Creator For DataFrame
+def df_pair_unique(dataFrame, colList):
+    
+    argsTupleMap = dataFrame[colList].itertuples(index=False)
+    resList = list(set(tuple(idx) for idx in argsTupleMap))
+    return resList
 
 # %% Item Transformator
 def map_to_tuple(iterable):
@@ -62,8 +80,26 @@ def map_to_tuple(iterable):
 def map_to_list(iterable):
 
     isinstance(iterable, collections.Iterable)
-    res = list(map(lambda list: tuple(item), iterable))
+    res = list(map(lambda item: tuple(item), iterable))
 
     return res
 
+
+# %% Data Concatenator within a Folder
+def merge_csv(filePath, ext='.csv', sep=',', if_save=True, saveName=None):
+    if filePath[-1] != '/':
+        filePath = filePath + '/'
+    fileList = os.listdir(filePath)
+    dataList = [name for name in fileList if name.find(ext) != -1]
+
+    resFrame = pd.DataFrame()
+    for _ in dataList:
+        eachName = filePath + _
+        eachFile = pd.read_csv(eachName, sep=sep)
+        resFrame = resFrame.append(eachFile, ignore_index=True)
+
+    if if_save == True:
+        resFrame.to_csv(saveName, header=True, index=False)
+
+    return resFrame
 

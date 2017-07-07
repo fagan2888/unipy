@@ -5,8 +5,11 @@ Created on Wed Jan  4 20:33:37 2017
 @author: Young Ju Kim
 """
 
+
 import math
-from pandas import DataFrame as df
+import pandas as pd
+
+__all__ = ['Ellipse']
 
 class Ellipse:
     
@@ -42,5 +45,5 @@ class Ellipse:
                     if (pow(x - center_x, 2) / pow(radius_x, 2)) +
                         (pow(y - center_y, 2) / pow(radius_y, 2)) <= 1]
         
-        coords = df(coord_list, columns=['xcoord', 'ycoord'])
+        coords = pd.DataFrame(coord_list, columns=['xcoord', 'ycoord'])
         return coords

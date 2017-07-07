@@ -8,8 +8,11 @@ Created on Mon Jan 30 17:05:27 2017
 
 import itertools
 
+__all__ = ['split_generator',
+           'exceptor']
 
-def splitor(iterable, size):
+
+def split_generator(iterable, size):
 
     data = iter(iterable)
     item = list(itertools.islice(data, size))
