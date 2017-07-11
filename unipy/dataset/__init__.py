@@ -6,10 +6,10 @@ Created on Sun Jan  8 05:03:19 2017
 """
 
 
-from unipy.dataset import data_manager
+from unipy.dataset import api
 
-from unipy.dataset.data_manager import *
+from unipy.dataset.api import *
 
 __all__ = []
-__all__ += data_manager.__all__
+__all__ += api.__all__
 

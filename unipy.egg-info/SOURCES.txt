@@ -1,6 +1,7 @@
 README
 setup.py
 unipy/__init__.py
+unipy/_version.py
 unipy.egg-info/PKG-INFO
 unipy.egg-info/SOURCES.txt
 unipy.egg-info/dependency_links.txt
@@ -11,7 +12,6 @@ unipy/core/__init__.py
 unipy/core/api.py
 unipy/dataset/__init__.py
 unipy/dataset/api.py
-unipy/dataset/data_manager.py
 unipy/dataset/resources.tar.gz
 unipy/image/__init__.py
 unipy/image/api.py

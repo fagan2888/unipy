@@ -86,7 +86,7 @@ def map_to_list(iterable):
 
 
 # %% Data Concatenator within a Folder
-def merge_csv(filePath, ext='.csv', sep=',', if_save=True, saveName=None):
+def merge_csv(filePath, ext='.csv', sep=',', if_save=True, saveName=None, low_memory=True):
     if filePath[-1] != '/':
         filePath = filePath + '/'
     fileList = os.listdir(filePath)
@@ -95,7 +95,7 @@ def merge_csv(filePath, ext='.csv', sep=',', if_save=True, saveName=None):
     resFrame = pd.DataFrame()
     for _ in dataList:
         eachName = filePath + _
-        eachFile = pd.read_csv(eachName, sep=sep)
+        eachFile = pd.read_csv(eachName, sep=sep, low_memory=low_memory)
         resFrame = resFrame.append(eachFile, ignore_index=True)
 
     if if_save == True:

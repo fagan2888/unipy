@@ -6,6 +6,10 @@ Created on Sun Jan  8 03:46:03 2017
 """
 
 
+
+from unipy import _version
+from unipy._version import *
+
 #from unipy import core
 from unipy import math
 from unipy import plot
@@ -29,6 +33,8 @@ from unipy.tools import *
 from unipy.util import *
 
 __all__ = []
+__all__ += _version.__all__
+
 #__all__ += core.__all__
 __all__ += math.__all__
 __all__ += plot.__all__

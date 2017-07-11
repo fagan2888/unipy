@@ -1,11 +1,11 @@
 package:
   name: unipy
-  version: "0.0.2.52"
+  version: "0.0.2.53"
 
 source:
-  fn: unipy-0.0.2.52.tar.gz
-  url: https://pypi.python.org/packages/b0/a9/f369b8a5e63d3979938fddf0503d7fd2cca17c2768f79a07688ba90c05d5/unipy-0.0.2.52.tar.gz
-  md5: be5f1380fefb24c8af348b5e58e7dd67
+  fn: unipy-0.0.2.53.tar.gz
+  url: https://pypi.python.org/packages/f1/47/77a5cb3e59c9cea4979418e970180867bc269283a3d201fbcd0ab3b12db5/unipy-0.0.2.53.tar.gz
+  md5: b03a1ff8dff70fd397d11ed16a0f7c87
 #  patches:
    # List any patch files here
    # - fix.patch
