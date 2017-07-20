@@ -19,7 +19,9 @@ __all__ = ['splitter',
            'df_pair_unique',
            'map_to_tuple',
            'map_to_list',
-           'merge_csv']
+           'merge_csv',
+           'nancumsum',
+           'nancum_calculator']
 
 
 # A Function to split an Iterable into smaller chunks 
@@ -102,4 +104,35 @@ def merge_csv(filePath, ext='.csv', sep=',', if_save=True, saveName=None, low_me
         resFrame.to_csv(saveName, header=True, index=False)
 
     return resFrame
+
+
+def nancumsum(iterable):
+
+    iterator = iter(iterable)
+    prev = next(iterator)
+    yield prev
+
+    for item in iterator:
+        if ~np.isnan(item):
+            res = prev + item
+        prev = res
+        yield res
+
+
+
+def nancum_calculator(func):
+
+    def nancum_generator(iterable):
+
+        iterator = iter(iterable)
+        prev = next(iterator)
+        yield prev
+
+        for item in iterator:
+            if ~np.isnan(item):
+                res = func(prev, item)
+            prev = res
+            yield res
+
+    return nancum_generator
 
