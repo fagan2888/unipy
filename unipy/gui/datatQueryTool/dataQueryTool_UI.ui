@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1074</width>
+    <height>343</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="pushButton_CANCEL">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>260</y>
+      <width>99</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cancel</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_GETDATA">
+    <property name="geometry">
+     <rect>
+      <x>950</x>
+      <y>260</y>
+      <width>99</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Get Data!</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="FAC_ID_inputText">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>56</y>
+      <width>211</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>M14</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="FAC_ID_label">
+    <property name="geometry">
+     <rect>
+      <x>22</x>
+      <y>60</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>FAC_ID</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="AREA_CD_label">
+    <property name="geometry">
+     <rect>
+      <x>22</x>
+      <y>90</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>AREA_CD</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="AREA_CD_inputText">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>86</y>
+      <width>211</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>T/F</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="EQP_MODEL_label">
+    <property name="geometry">
+     <rect>
+      <x>22</x>
+      <y>120</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>EQP_MODEL</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="EQP_MODEL_inputText">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>116</y>
+      <width>211</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>CHALLENGER_HT</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="EQP_ID_label">
+    <property name="geometry">
+     <rect>
+      <x>22</x>
+      <y>150</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>EQP_ID</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="EQP_ID_inputText">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>146</y>
+      <width>211</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>4TPE1601</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="RECIPE_ID_label">
+    <property name="geometry">
+     <rect>
+      <x>22</x>
+      <y>180</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RECIPE_ID</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="RECIPE_ID_inputText">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>176</y>
+      <width>211</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>DE_ARC_450_ABC</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="END_DT_label">
+    <property name="geometry">
+     <rect>
+      <x>22</x>
+      <y>210</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>END_DT_TM</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="END_DT_inputText">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>206</y>
+      <width>121</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>20170303</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="START_DT_inputText">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>266</y>
+      <width>121</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="TM_WINDOW_inputText">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>236</y>
+      <width>51</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>2</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="YTYPE_label">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>90</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TYPE</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="YTYPE_inputText">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>86</y>
+      <width>211</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PT1H</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ROPER_label">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>60</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>OPER</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="RPRMT_NM_inputText">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>116</y>
+      <width>211</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>T1_RAN</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ROPER_inputText">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>56</y>
+      <width>211</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>A1017014A</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="RPRMT_NM_label">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>120</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PRMT_NM</string>
+    </property>
+   </widget>
+   <widget class="Line" name="vertical_line_01">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>24</y>
+      <width>20</width>
+      <height>271</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="X_label">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>16</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>X value</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="R_label">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>16</y>
+      <width>141</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Resp. value</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="TM_WINDOW_label">
+    <property name="geometry">
+     <rect>
+      <x>22</x>
+      <y>239</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TM_WINDOW</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="START_DT_label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>270</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>START_DT_TM</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="FILENAME_label">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>199</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>FILENAME</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="FILENAME_inputText">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>194</y>
+      <width>551</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>(Optional)</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="Line" name="horizontal_line">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>166</y>
+      <width>691</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="DIRECTORY_inputText">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>225</y>
+      <width>551</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>D:/workspaces/SKHy_MCC/300. Python/mcc_pjt</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="DIRECTORY_label">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>230</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>DIRECTORY</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="END_TM_Text">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>206</y>
+      <width>81</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>065959</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="START_TM_Text">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>266</y>
+      <width>81</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>070000</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="YPRMT_NM_label">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>120</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PRMT_NM</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="YOPER_inputText">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>56</y>
+      <width>211</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Z1020000A</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="YOPER_label">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>60</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>OPER</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="YPRMT_NM_inputText">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>116</y>
+      <width>211</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PT1H</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Y_label">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>16</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Y value</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="Line" name="vertical_line_02">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>22</y>
+      <width>20</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_CONFIRM">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>260</y>
+      <width>99</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Confirm</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1074</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuPopup">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionMenu1"/>
+   </widget>
+   <widget class="QMenu" name="menuSetting">
+    <property name="title">
+     <string>Setting</string>
+    </property>
+    <addaction name="actionSetting1"/>
+   </widget>
+   <addaction name="menuPopup"/>
+   <addaction name="menuSetting"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionMenu1">
+   <property name="text">
+    <string>menu1</string>
+   </property>
+  </action>
+  <action name="actionSetting1">
+   <property name="text">
+    <string>setting1</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton_CANCEL</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>549</x>
+     <y>338</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>190</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_GETDATA</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>659</x>
+     <y>338</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>190</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>END_DT_inputText</sender>
+   <signal>editingFinished()</signal>
+   <receiver>START_DT_inputText</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>244</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>200</x>
+     <y>304</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
