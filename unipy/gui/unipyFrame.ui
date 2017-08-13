@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
+<<<<<<< Updated upstream
  <class>unipyFrameViewerWindow</class>
  <widget class="QMainWindow" name="unipyFrameViewerWindow">
+=======
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+>>>>>>> Stashed changes
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< Updated upstream
     <width>1300</width>
     <height>857</height>
    </rect>
@@ -16,10 +22,17 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+=======
+    <width>1280</width>
+    <height>720</height>
+   </rect>
+  </property>
+>>>>>>> Stashed changes
   <property name="windowTitle">
    <string>unipy DataFrame Viewer</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+<<<<<<< Updated upstream
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
      <horstretch>0</horstretch>
@@ -438,6 +451,17 @@ AND ROWNUM &lt;= 10</string>
     <property name="text">
      <string>Reset</string>
     </property>
+=======
+   <widget class="QTableView" name="tableView">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>70</y>
+      <width>1111</width>
+      <height>561</height>
+     </rect>
+    </property>
+>>>>>>> Stashed changes
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -445,7 +469,11 @@ AND ROWNUM &lt;= 10</string>
     <rect>
      <x>0</x>
      <y>0</y>
+<<<<<<< Updated upstream
      <width>1300</width>
+=======
+     <width>1280</width>
+>>>>>>> Stashed changes
      <height>25</height>
     </rect>
    </property>

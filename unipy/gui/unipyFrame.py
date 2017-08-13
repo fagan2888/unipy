@@ -6,15 +6,17 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+
+import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, Qt
 from qtpy.compat import from_qvariant, to_qvariant
 import pandas as pd
 import unipy.dataset.api as dm
 from pandasql import sqldf
 
-from spyder.widgets.variableexplorer.dataframeeditor import DataFrameModel, DataFrameView
+#from spyder.widgets.variableexplorer.dataframeeditor import DataFrameModel, DataFrameView
 
-
+__all__ = ['tv']
 
 
 class PandasModel(QtCore.QAbstractTableModel):
@@ -567,6 +569,35 @@ def tv(dataFrame):
     unipyFrameViewerWindow.show()
 
 
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(1280, 720)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.tableView = QtWidgets.QTableView(self.centralwidget)
+        self.tableView.setGeometry(QtCore.QRect(40, 70, 1111, 561))
+        self.tableView.setObjectName("tableView")
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1280, 25))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "unipy DataFrame Viewer"))
+
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -574,5 +605,9 @@ if __name__ == "__main__":
     ui = Ui_unipyFrameViewerWindow()
     ui.setupUi(unipyFrameViewerWindow)
     unipyFrameViewerWindow.show()
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
     sys.exit(app.exec_())
 
