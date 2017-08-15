@@ -7,7 +7,11 @@ __all__ = ['point_boxplot',
            'point_grid_boxplot']
 
 
+<<<<<<< HEAD
 def point_boxplot(value, by=None, data=None, dotcolor='b.', spread=.3, *args, **kwargs):
+=======
+def point_boxplot(value, by=None, data=None, dotcolor='b.', rot=90, spread=.2, dot_alpha=.2, *args, **kwargs):
+>>>>>>> master
 
     flierprops = dict(marker='o', markerfacecolor='white', alpha=1., markersize=5, linestyle='none', markeredgewidth=.7)
 
@@ -18,7 +22,11 @@ def point_boxplot(value, by=None, data=None, dotcolor='b.', spread=.3, *args, **
     for i in range(pvt.shape[1]):
         y = pvt[pvt.columns[i]]
         x = np.random.normal(i+1, spread/pvt.shape[1], len(y))
+<<<<<<< HEAD
         plt.plot(x, y, dotcolor, alpha=.2)
+=======
+        plt.plot(x, y, dotcolor, alpha=dot_alpha)
+>>>>>>> master
 
     return plot
 

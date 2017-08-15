@@ -6,18 +6,16 @@ Modified on 2017-06-26 02:36:25
 @author: Young Ju Kim
 """
 
-from unipy import _version
-
 try:
-
     from setuptools import setup, find_packages
-
 except ImportError:
-
     from distutils.core import setup, find_packages
 
-
 import tarfile
+
+
+_version = '0.0.3.04'
+
 
 
 def package_data_listup():
@@ -34,8 +32,25 @@ This is made for some specific environment.
 This contains codes for data manipulation and Analysis tools.
 """
 
+required_packages = [
+                     'pandas >= 0.20.2', # a>=1, <2
+                     'numpy >= 1.13.0',
+                     'scipy >= 0.19.0',
+                     'scikit-learn >= 0.18.0',
+                     'statsmodels >= 0.8.0',
+                     'matplotlib >= 2.0.2',
+                     'paramiko >= 2.1.2',
+                     'pandasql',
+                     'seaborn',
+                     'scikit-image',
+                     #'pyqt5',
+                     'mglearn',
+                     'numba',
+                    # 'nomkl',  # conda
+                    ]
+
 setup(name='unipy',
-      version=_version.__version__,
+      version=_version,
       description='Useful tools for Data Scientists',
       long_description=long_desc,
       url='http://github.com/pydemia/unipy',
@@ -47,6 +62,7 @@ setup(name='unipy',
             'Development Status :: 4 - Beta',
             'Environment :: Console',
             'Programming Language :: Python :: 3.5',
+            'Programming Language :: Python :: 3.6',
             'Operating System :: OS Independent',
             'Intended Audience :: End Users/Desktop',
             'Intended Audience :: Developers',
@@ -54,15 +70,8 @@ setup(name='unipy',
             'Natural Language :: English',
             ],
       packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-      install_requires=[
-                        'pandas>=0.20.2', # a>=1, <2
-                        'numpy>=1.13.0, <=1.13.1',
-                        'scipy>=0.19.0',
-                        'scikit-learn>=0.18.0',
-                        'statsmodels>=0.8.0',
-                        'matplotlib>=2.0.2',
-                        'paramiko>=2.1.2'
-                        ],
+      #setup_requires=required_packages,
+      install_requires=required_packages,
       zip_safe=False,
       package_data={'unipy': ['*.gz', 'dataset/resources.tar.gz']}
       )

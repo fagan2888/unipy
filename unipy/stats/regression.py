@@ -6,90 +6,95 @@ Created on Sun Jan  8 03:46:03 2017
 """
 
 
+#import numba as nb
 import numpy as np
 import pandas as pd
+import sklearn as skl
 import matplotlib.pyplot as plt
 from sklearn.linear_model import Lasso
+from unipy.stats.formula import from_formula
 
-__all__ = ['lasso']
+
+__all__ = ['lasso_rank']
 
 
-def lasso(data, thresh=2):
-    data = data.copy()
-    
-    # Generate an alias list: [x_1, ..., x_n]
-    colBackup = data.columns.copy()
-    predictors = ['x_%d'%i for i in range(1, data.shape[1])]
-    dataAlias = predictors + ['y']
-    
-    # Generate an alias-variable Match Table
-    matchTbl = pd.DataFrame({'alias': dataAlias, 'var_name': colBackup})
-    
-    # Change Columns to Alias
-    data.columns = dataAlias
-    
-    # Generate Alphas for Lasso
-    alpha = np.arange(.00001, .1, .001)
-    
-    # Generate A Result Table
-    col = ['rss', 'intercept'] + ['coef_' + x for x in predictors]
-    ind = ['alpha_%.2g'%alpha[i] for i in range(len(alpha))]
-    coefMatrix = pd.DataFrame(index=ind, columns=col)
-    predict = {}
-    
-    # Defining a Lasso generic function
-    def lassoRegression(data, predictors, alpha):
-    
-        # Fit to the model
-        lassoReg = Lasso(alpha=alpha, normalize=True, max_iter=1e5)
-        lassoReg.fit(data[predictors], data['y'])
-        yPredict = lassoReg.predict(data[predictors])
-    
-        # Return the result in pre-defined format
-        rss = sum((yPredict - data['y']) ** 2)
-        ret = [rss]
-        ret.extend([lassoReg.intercept_])
-        ret.extend(lassoReg.coef_)
-    
-        return ret, yPredict
-    
+# Defining a Lasso generic function
+def _lasso_for_loop(data, X=None, y=None, alpha=.0001, *args, **kwargs):
+
+    # Fit to the model
+    lassoReg = Lasso(alpha=alpha, fit_intercept=True,
+                     normalize=True, precompute=False,
+                     max_iter=1e5, tol=1e-7,
+                     warm_start=False, positive=False,
+                     selection='cyclic', *args, **kwargs)
+
+    lassoReg.fit(data[X], data[y].squeeze())
+    yPredict = lassoReg.predict(data[X])
+
+    # Return the result in pre-defined format
+    rss = np.sum((yPredict - data[y].squeeze()) ** 2)
+    ret = [rss]
+    ret.extend([lassoReg.intercept_])
+    ret.extend(lassoReg.coef_)
+
+    return ret, yPredict
+
+
+def lasso_rank(formula=None, X=None, y=None, data=None, 
+               alpha=np.arange(1e-5, 1e-2, 1e-4), k=2, plot=False,
+               *args, **kwargs):
+
+    if formula is not None:
+        X, y = from_formula(formula)
+    else:
+        X = list(X)
+        y = y
+
     # Iterate over the alpha values
-    for _ in range(len(alpha)):
-        coefMatrix.iloc[_, ], pred = lassoRegression(data, predictors, alpha[_])
-        predict[ind[_]] = pred
-        
+    coefMatrix = {'alpha_%.5f' % a: _lasso_for_loop(data, X=X, y=y, alpha=a, *args, **kwargs)[0] for a in alpha}
+    predict    = {'alpha_%.5f' % a: _lasso_for_loop(data, X=X, y=y, alpha=a, *args, **kwargs)[1] for a in alpha}
+
+    coefMatrix = pd.DataFrame(coefMatrix).T
+    coefMatrix.columns = ['RSS', 'Intercept'] + X
     coefMatrix['var_count'] = coefMatrix.apply(np.count_nonzero, axis=1) - 2
-    
+
     # Filter by thresh >= var_count
-    filtered = coefMatrix[coefMatrix['var_count'] <= thresh].iloc[0]
+    kBest = coefMatrix[coefMatrix['var_count'] <= k]
+    kBest = kBest.loc[kBest[['var_count']].idxmax()]
+    kBest = kBest.loc[kBest[['Intercept']].idxmin()]
     
+    # Minumum Intercept
+    minIntercept = coefMatrix.loc[coefMatrix[['Intercept']].idxmin()]
+
     # Get Predicted Y value
-    alphaVal = filtered.name
-    predictedY = predict[alpahVal]
-    
+    alphaVal = kBest.index[0]
+    kBestPredY = {alphaVal: predict[alphaVal]}
+
     # Get a Rank Table
-    lassoVal = filtered[np.nonzero(filtered)[0].tolist()][2:-1]
-    filteredTbl = pd.DataFrame({'lasso_coef': lassoVal,
-                                'abs_coef': abs(lassoVal)})
+    lassoVal = kBest.iloc[:, kBest.squeeze().nonzero()[0].tolist()[2:-1]]
+    filteredTbl = pd.concat([lassoVal.T, abs(lassoVal).T], axis=1)
+    filteredTbl.columns = ['lasso_coef', 'abs_coef']
     filteredTbl = filteredTbl.sort_values(by='abs_coef', ascending=False)
-    filteredTbl = filteredTbl.reset_index()
-    filteredTbl['index'] = filteredTbl['index'].str[5:]
-    
-    filteredTbl = filteredTbl.merge(matchTbl, left_on='index', right_on='alias')
-    filteredTbl['rank'] = range(1, len(filtTbl) + 1)
-    rankTbl = filteredTbl[['rank', 'var_name', 'lasso_coef', 'abs_coef']]
-    
+    filteredTbl['rank'] = range(1, len(filteredTbl) + 1)
+    rankTbl = filteredTbl[['rank', 'lasso_coef', 'abs_coef']]
+
     # Plots
-    fig = plt.figure(figsize=(12, 9))
-    title = 'Top {} variables : absolute coefficient by Lasso'.format(len(filteredTbl))
-    rankTbl.set_index('var_name')['abs_coef'].plot(kind='barh')
-    fig.suptitle(title, fontsize=14, fontweight='bold')
-    plt.tight_layout(pad=5)
+    #fig = plt.figure(figsize=(12, 9))
+    #title = 'Top {} variables : absolute coefficient by Lasso'.format(len(filteredTbl))
+    #rankTbl['abs_coef'].plot(kind='barh')
+    #fig.suptitle(title, fontsize=14, fontweight='bold')
+    #plt.tight_layout(pad=5)
     
-    return rankTbl, coefMatrix, matchTbl, predictedY
+    return rankTbl, minIntercept, coefMatrix, kBest, kBestPredY
 
 
 if __name__ == '__main__':
-    #ranked, lsCoef, prmTbl, predicted = lasso(pvTbl)
-    pass    
+
+    import unipy.dataset.api as dm
+    dm.init()
+    wine_red = dm.load('winequality_red')
+
+    ranked, best_by_intercept, coefTbl, kBest, kBestPred = lasso_rank(X=wine_red.columns.drop('quality'), y=['quality'], data=wine_red)
+
+
 
