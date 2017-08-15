@@ -6,6 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, Qt
 from qtpy.compat import from_qvariant, to_qvariant
 import pandas as pd
@@ -15,9 +16,7 @@ from pandasql import sqldf
 from spyder.widgets.variableexplorer.dataframeeditor import DataFrameModel, DataFrameView
 
 
-
-
-class PandasModel(QtCore.QAbstractTableModel):
+class aPandasModel(QtCore.QAbstractTableModel):
     """
     Class to populate a table view with a pandas dataframe
     """
@@ -33,13 +32,13 @@ class PandasModel(QtCore.QAbstractTableModel):
 
         if orientation == QtCore.Qt.Horizontal:
             try:
-                return self._df.columns.tolist()[section]
+                return self._df_header[section]
             except (IndexError,):
                 return QtCore.QVariant()
         elif orientation == QtCore.Qt.Vertical:
             try:
                 # return self.df.index.tolist()
-                return self._df.index.tolist()[section]
+                return self._df_index[section]
             except (IndexError,):
                 return QtCore.QVariant()
 
@@ -130,8 +129,238 @@ class columnListWidget(QtWidgets.QListWidget):
             super(columnListWidget, self).dropEvent(event)
 
 
+# -*- coding: utf-8 -*-
+"""
+Created on 24/07/17 23:23
+
+@author: pydemia
+"""
+
+
+
+class FreezeTableWidget(Qt.QTableView):
+    def __init__(self, parent=None, *args):
+        Qt.QTableView.__init__(self, parent, *args)
+
+        self.setMinimumSize(800, 600)
+
+        tm = MyTableModel(self)
+
+        # set the proxy model
+        pm = Qt.QSortFilterProxyModel(self)
+        pm.setSourceModel(tm)
+
+        self.setModel(pm)
+
+        self.frozenTableView = Qt.QTableView(self)
+        self.frozenTableView.setModel(pm)
+        self.frozenTableView.verticalHeader().hide()
+        self.frozenTableView.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.frozenTableView.horizontalHeader().setSectionResizeMode(Qt.QHeaderView.Fixed)
+        self.frozenTableView.setStyleSheet('''border: none; background-color: #8EDE21; 
+                                       selection-background-color: #999''')
+        self.frozenTableView.setSelectionModel(Qt.QAbstractItemView.selectionModel(self))
+        self.frozenTableView.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.frozenTableView.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+
+        self.viewport().stackUnder(self.frozenTableView)
+
+        self.setEditTriggers(Qt.QAbstractItemView.SelectedClicked)
+
+        # hide gridnt()
+        #        self.setShowGrid(False)
+        self.setStyleSheet('font: 10pt "Courier New"')
+
+        hh = self.horizontalHeader()
+        hh.setDefaultAlignment(QtCore.Qt.AlignCenter)
+        hh.setStretchLastSection(True)
+
+        #        self.resizeColumnsToContents()
+
+        ncol = tm.columnCount(self)
+        for col in range(ncol):
+            if col == 0:
+                self.horizontalHeader().resizeSection(col, 60)
+                self.horizontalHeader().setSectionResizeMode(col, Qt.QHeaderView.Fixed)
+                self.frozenTableView.setColumnWidth(col, self.columnWidth(col))
+            elif col == 1:
+                self.horizontalHeader().resizeSection(col, 150)
+                self.horizontalHeader().setSectionResizeMode(col, Qt.QHeaderView.Fixed)
+                self.frozenTableView.setColumnWidth(col, self.columnWidth(col))
+            else:
+                self.horizontalHeader().resizeSection(col, 100)
+                self.frozenTableView.setColumnHidden(col, True)
+
+        self.frozenTableView.setSortingEnabled(True)
+        self.frozenTableView.sortByColumn(0, QtCore.Qt.AscendingOrder)
+
+        self.setAlternatingRowColors(True)
+
+        vh = self.verticalHeader()
+        vh.setDefaultSectionSize(25)
+        vh.setDefaultAlignment(QtCore.Qt.AlignCenter)
+        vh.setVisible(True)
+        self.frozenTableView.verticalHeader().setDefaultSectionSize(vh.defaultSectionSize())
+
+        #        nrows = tm.rowCount(self)
+        #        for row in xrange(nrows):
+        #            self.setRowHeight(row, 25)
+
+        self.frozenTableView.show()
+        self.updateFrozenTableGeometry()
+
+        self.setHorizontalScrollMode(Qt.QAbstractItemView.ScrollPerPixel)
+        self.setVerticalScrollMode(Qt.QAbstractItemView.ScrollPerPixel)
+        self.frozenTableView.setVerticalScrollMode(Qt.QAbstractItemView.ScrollPerPixel)
+
+        tm.dataChanged.connect(self.test)
+        # connect the headers and scrollbars of both tableviews together
+        self.horizontalHeader().sectionResized.connect(self.updateSectionWidth)
+        self.verticalHeader().sectionResized.connect(self.updateSectionHeight)
+        self.frozenTableView.verticalScrollBar().valueChanged.connect(self.verticalScrollBar().setValue)
+        self.verticalScrollBar().valueChanged.connect(self.frozenTableView.verticalScrollBar().setValue)
+
+    def test(self, index):
+        print(index.row(), index.column())
+
+    def updateSectionWidth(self, logicalIndex, oldSize, newSize):
+        if logicalIndex == 0 or logicalIndex == 1:
+            self.frozenTableView.setColumnWidth(logicalIndex, newSize)
+            self.updateFrozenTableGeometry()
+
+    def updateSectionHeight(self, logicalIndex, oldSize, newSize):
+        self.frozenTableView.setRowHeight(logicalIndex, newSize)
+
+    def resizeEvent(self, event):
+        Qt.QTableView.resizeEvent(self, event)
+        self.updateFrozenTableGeometry()
+
+    def scrollTo(self, index, hint):
+        if index.column() > 1:
+            Qt.QTableView.scrollTo(self, index, hint)
+
+    def updateFrozenTableGeometry(self):
+        if self.verticalHeader().isVisible():
+            self.frozenTableView.setGeometry(self.verticalHeader().width() + self.frameWidth(),
+                                             self.frameWidth(), self.columnWidth(0) + self.columnWidth(1),
+                                             self.viewport().height() + self.horizontalHeader().height())
+        else:
+            self.frozenTableView.setGeometry(self.frameWidth(),
+                                             self.frameWidth(), self.columnWidth(0) + self.columnWidth(1),
+                                             self.viewport().height() + self.horizontalHeader().height())
+
+    def moveCursor(self, cursorAction, modifiers):
+        current = Qt.QTableView.moveCursor(self, cursorAction, modifiers)
+        if cursorAction == self.MoveLeft and current.column() > 1 and self.visualRect(current).topLeft().x() < (
+            self.frozenTableView.columnWidth(0) + self.frozenTableView.columnWidth(1)):
+            newValue = self.horizontalScrollBar().value() + self.visualRect(current).topLeft().x() - (
+            self.frozenTableView.columnWidth(0) + self.frozenTableView.columnWidth(1))
+            self.horizontalScrollBar().setValue(newValue)
+        return current
+
+#MyTableModel
+class PandasModel(QtCore.QAbstractTableModel):
+    def __init__(self, data, parent=None, *args):
+        QtCore.QAbstractTableModel.__init__(self, parent, *args)
+
+        self.df = pd.DataFrame(data)
+        self.df_header = self.df.columns.tolist()
+        self.df_index = self.df.index.tolist()
+        self._format = format
+        self.complex_intran = None
+
+
+    def rowCount(self, parent):
+        return len(self.df)
+
+    def columnCount(self, parent):
+        return len(self.df_header)
+
+    def get_value(self, index):
+        i = index.row()
+        j = index.column()
+        return self.df[i][j]
+
+    def data(self, index, role=QtCore.Qt.DisplayRole):
+        if index.isValid():
+            if role == QtCore.Qt.DisplayRole:
+                column = index.column()
+                row = index.row()
+                return Qt.QVariant(str(self.df.iloc[index.row(), index.column()]))
+        return None
+
+    def setData(self, index, value, role):
+        if index.isValid() and role == QtCore.Qt.EditRole:
+            self.df[index.row()][index.column()] = value
+            self.dataChanged.emit(index, index)
+            return True
+        else:
+            return False
+
+    def headerData(self, section, orientation, role):
+        if orientation == QtCore.Qt.Horizontal and role == QtCore.Qt.DisplayRole:
+            header = self.df_header[section]
+            return header
+        if orientation == QtCore.Qt.Vertical and role == QtCore.Qt.DisplayRole:
+            return str(section + 1)
+
+        return None
+
+    def flags(self, index):
+        if not index.isValid():
+            return QtCore.Qt.ItemIsEnabled
+        elif index.column() > 1:
+            return QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEditable
+
+        return QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
+
+
+    def update_df_index(self):
+        """"Update the DataFrame index"""
+        self.df_index = self.df.index.tolist()
+
+
+    def sort(self, column, order=QtCore.Qt.AscendingOrder):
+        """Overriding sort method"""
+        if self.complex_intran is not None:
+            if self.complex_intran.any(axis=0).iloc[column-1]:
+                QMessageBox.critical(self.dialog, "Error",
+                                     "TypeError error: no ordering "
+                                     "relation is defined for complex numbers")
+                return False
+        try:
+            ascending = order == QtCore.Qt.AscendingOrder
+            if column > 0:
+                try:
+                    self.df.sort_values(by=self.df.columns[column-1],
+                                        ascending=ascending, inplace=True,
+                                        kind='mergesort')
+                except AttributeError:
+                    # for pandas version < 0.17
+                    self.df.sort(columns=self.df.columns[column-1],
+                                 ascending=ascending, inplace=True,
+                                 kind='mergesort')
+                self.update_df_index()
+            else:
+                self.df.sort_index(inplace=True, ascending=ascending)
+                self.update_df_index()
+        except TypeError as e:
+            QMessageBox.critical(self.dialog, "Error",
+                                 "TypeError error: %s" % str(e))
+            return False
+
+        self.reset()
+        return True
+
+
+    def reset(self):
+        self.beginResetModel()
+        self.endResetModel()
+
 class errorMsg(Qt.QErrorMessage):
     pass
+
+
 
 
 
