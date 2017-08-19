@@ -14,7 +14,7 @@ except ImportError:
 import tarfile
 
 
-_version = '0.0.3.04'
+_version = '0.0.3.18'
 
 
 
@@ -33,9 +33,9 @@ This contains codes for data manipulation and Analysis tools.
 """
 
 required_packages = [
-                     'pandas >= 0.20.2', # a>=1, <2
-                     'numpy >= 1.13.0',
-                     'scipy >= 0.19.0',
+                     'pandas >= 0.20.1',
+                     'numpy >= 1.13.1',
+                     'scipy >= 0.19.1',
                      'scikit-learn >= 0.18.0',
                      'statsmodels >= 0.8.0',
                      'matplotlib >= 2.0.2',

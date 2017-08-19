@@ -21,7 +21,8 @@ __all__ = ['splitter',
            'map_to_list',
            'merge_csv',
            'nancumsum',
-           'nancum_calculator']
+           'nancum_calculator',
+           'between_generator']
 
 
 # A Function to split an Iterable into smaller chunks 
@@ -135,4 +136,13 @@ def nancum_calculator(func):
             yield res
 
     return nancum_generator
+
+
+def between_generator(start, end, term):
+    pre, nxt = start, start + term -1
+    yield pre, nxt
+    while nxt < end:
+        pre, nxt = nxt, nxt + term
+        yield pre+1, nxt
+
 
