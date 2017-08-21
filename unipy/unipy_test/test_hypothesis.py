@@ -15,11 +15,12 @@ import statsmodels.api as sm
 import sklearn as skl
 import unipy
 import unipy.dataset.api as dm
+
 import matplotlib
+matplotlib.use('Agg')
+
 import matplotlib.pyplot as plt
 import seaborn as sbn
-
-matplotlib.use('Agg')
 
 
 dm.init()
