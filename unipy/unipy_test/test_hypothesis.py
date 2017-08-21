@@ -47,7 +47,6 @@ col12 = data11['race']
 
 import sklearn as skl
 
-skl.datasets.load_breast_cancer()
 # 1 sample
 t_stat, pvalue = st.ttest_1samp(col01, col01.mean(), axis=0, nan_policy='propagate')
 
@@ -82,7 +81,6 @@ st.kstest('norm', False, N=20, alternative='two-sided', mode='approx')
 st.chisquare(col01, col02)
 st.chi2_contingency(col01, col02)
 st.chi2_contingency(col11, col12)
-sm
 
 unipy.chi_square(data11, x='education', y='race')
 
@@ -104,4 +102,3 @@ st.f_oneway(col01, col02, col03)
 
 unipy.lasso(data01.iloc[:, :-1])
 
-lasso
