@@ -53,7 +53,8 @@ required_packages = [
 
 with open('REQUIREMENTS.txt', 'w') as f:
     header = '--index-url https://pypi.python.org/simple/'
-    f.write('\n'.join([header]+required_packages))
+    pkg_ls = '\n'.join(required_packages).replace('>=', '==')
+    f.write('\n'.join([header, pkg_ls])
 
 
 setup(name='unipy',

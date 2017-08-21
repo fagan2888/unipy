@@ -6,10 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, Qt
 from qtpy.compat import from_qvariant, to_qvariant
@@ -19,14 +16,8 @@ from pandasql import sqldf
 
 #from spyder.widgets.variableexplorer.dataframeeditor import DataFrameModel, DataFrameView
 
-<<<<<<< HEAD
-class aPandasModel(QtCore.QAbstractTableModel):
-=======
-__all__ = ['tv']
-
 
 class PandasModel(QtCore.QAbstractTableModel):
->>>>>>> master
     """
     Class to populate a table view with a pandas dataframe
     """
