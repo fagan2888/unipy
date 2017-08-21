@@ -6,6 +6,7 @@ Modified on 2017-06-26 02:36:25
 @author: Young Ju Kim
 """
 
+
 try:
     from setuptools import setup, find_packages
 except ImportError:
@@ -14,7 +15,7 @@ except ImportError:
 import tarfile
 
 
-_version = '0.0.3.18'
+_version = '0.0.3.19'
 
 
 
@@ -40,14 +41,20 @@ required_packages = [
                      'statsmodels >= 0.8.0',
                      'matplotlib >= 2.0.2',
                      'paramiko >= 2.1.2',
-                     'pandasql',
-                     'seaborn',
-                     'scikit-image',
+                     'pandasql >= 0.7.3',
+                     'seaborn >= 0.8',
+                     'scikit-image >= 0.13.0',
                      #'pyqt5',
-                     'mglearn',
-                     'numba',
+                     'mglearn >= 0.1.6',
+                     'numba >= 0.34.0',
                     # 'nomkl',  # conda
                     ]
+
+
+with open('REQUIREMENTS.txt', 'w') as f:
+    header = '--index-url https://pypi.python.org/simple/'
+    f.write('\n'.join([header]+required_packages))
+
 
 setup(name='unipy',
       version=_version,
@@ -75,3 +82,5 @@ setup(name='unipy',
       zip_safe=False,
       package_data={'unipy': ['*.gz', 'dataset/resources.tar.gz']}
       )
+
+

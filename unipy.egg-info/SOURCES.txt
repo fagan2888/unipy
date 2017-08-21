@@ -14,6 +14,8 @@ unipy/dataset/__init__.py
 unipy/dataset/api.py
 unipy/dataset/resources.tar.gz
 unipy/gui/__init__.py
+unipy/gui/frozen_column.py
+unipy/gui/pandasmodel.py
 unipy/gui/tmp1.py
 unipy/gui/tmp2.py
 unipy/gui/tmp3.py
