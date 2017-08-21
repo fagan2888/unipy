@@ -13,15 +13,6 @@ unipy/core/api.py
 unipy/dataset/__init__.py
 unipy/dataset/api.py
 unipy/dataset/resources.tar.gz
-unipy/gui/__init__.py
-unipy/gui/frozen_column.py
-unipy/gui/pandasmodel.py
-unipy/gui/tmp1.py
-unipy/gui/tmp2.py
-unipy/gui/tmp3.py
-unipy/gui/unipyFrame.py
-unipy/gui/unipyFrame_developed.py
-unipy/gui/unipyFrame_edited.py
 unipy/image/__init__.py
 unipy/image/api.py
 unipy/image/houghmatrix.py

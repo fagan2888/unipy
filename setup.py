@@ -15,7 +15,7 @@ except ImportError:
 import tarfile
 
 
-_version = '0.0.3.19'
+_version = '0.0.3.20'
 
 
 
@@ -54,7 +54,7 @@ required_packages = [
 with open('REQUIREMENTS.txt', 'w') as f:
     header = '--index-url https://pypi.python.org/simple/'
     pkg_ls = '\n'.join(required_packages).replace('>=', '==')
-    f.write('\n'.join([header, pkg_ls])
+    f.write('\n'.join([header, pkg_ls]))
 
 
 setup(name='unipy',

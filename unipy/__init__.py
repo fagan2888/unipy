@@ -17,7 +17,6 @@ from unipy import image
 from unipy import stats
 
 #from unipy import dataset
-from unipy import gui
 from unipy import tools
 from unipy import util
 
@@ -28,7 +27,6 @@ from unipy.image import *
 from unipy.stats import *
 
 #from unipy.dataset import *
-from unipy.gui import *
 from unipy.tools import *
 from unipy.util import *
 
