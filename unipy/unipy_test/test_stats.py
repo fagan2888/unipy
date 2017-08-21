@@ -16,7 +16,7 @@ dm.init()
 dm.reset()
 
 # Get a Dataset list
-dm.datalist()
+dm.ls()
 
 # Load Datasets
 wine1 = dm.load('winequality_red')

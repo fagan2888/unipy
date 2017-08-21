@@ -18,6 +18,9 @@ import unipy.dataset.api as dm
 import matplotlib.pyplot as plt
 import seaborn as sbn
 
+matplotlib.use('Agg')
+
+
 dm.init()
 data01 = dm.load('iris')
 data02 = data01.iloc[:, :2]
