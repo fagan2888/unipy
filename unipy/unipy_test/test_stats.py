@@ -7,7 +7,7 @@ Created on Thu Jan  5 20:55:26 2017
 
 
 #%% Sample datasets
-import unipy.data as dm
+import unipy.dataset.api as dm
 
 # Extract Datasets for the first time
 dm.init()
@@ -23,9 +23,9 @@ wine1 = dm.load('winequality_red')
 wine2 = dm.load('winequality_white')
 
 #%% VIF
-from unipy.stats import feature_selection_vif as fsv
+#from unipy.stats import feature_selection_vif as fsv
 
-res, drp = fsv(wine1, thresh=5.0)
+#res, drp = fsv(wine1, thresh=5.0)
 
 
 #%% Inter-Action
