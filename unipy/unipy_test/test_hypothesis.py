@@ -59,12 +59,13 @@ t_stat, pvalue = st.ttest_1samp(col01, col01.mean(), axis=0, nan_policy='propaga
 # (This test assumes that the populations have identical variances.)
 st.ttest_ind(col01, col02, axis=0, equal_var=True)
 sm.stats.ttest_ind(col01, col02)
-plt.hist(col01, bins=None)
-plt.hist(col02, bins=None)
-col01.plot(kind='density')
-data02.plot(kind='density')
-sbn.distplot(col01)
-sbn.kdeplot(col01)
+
+#plt.hist(col01, bins=None)
+#plt.hist(col02, bins=None)
+#col01.plot(kind='density')
+#data02.plot(kind='density')
+#sbn.distplot(col01)
+#sbn.kdeplot(col01)
 
 # check 2 related or repeated samples have identical averages.
 # Defines how to handle when input contains nan.
@@ -72,7 +73,8 @@ sbn.kdeplot(col01)
 # ‘raise’ throws an error
 # ‘omit’ performs the calculations ignoring nan values
 st.ttest_rel(col01, col02, axis=0, nan_policy='propagate')
-data02.plot(kind='density')
+
+#data02.plot(kind='density')
 
 
 # %% KS-Test
