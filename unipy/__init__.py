@@ -40,6 +40,7 @@ __all__ += image.__all__
 __all__ += stats.__all__
 
 #__all__ += dataset.__all__
-__all__ += gui.__all__
 __all__ += tools.__all__
 __all__ += util.__all__
+
+
