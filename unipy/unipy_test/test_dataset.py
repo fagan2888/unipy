@@ -7,7 +7,7 @@ Created on Thu Jan  5 20:55:26 2017
 
 
 #%% Sample datasets
-import unipy.data as dm
+import unipy.datast.api as dm
 
 # Extract Datasets for the first time
 dm.init()
