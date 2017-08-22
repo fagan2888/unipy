@@ -1,4 +1,33 @@
+.. -*- mode: rst -*-
+
+
+
 | Travis Build Status | | Appveyor Build Status | | Coveralls Coverage |
+
+|Travis|_ |AppVeyor|_ |Coveralls|_ |Python27|_ |Python35|_ |PyPi|_ |DOI|_
+
+
+.. |Travis| image:: https://api.travis-ci.org/scikit-learn/scikit-learn.svg?branch=master
+.. _Travis: https://travis-ci.org/scikit-learn/scikit-learn
+
+.. |AppVeyor| image:: https://ci.appveyor.com/api/projects/status/github/scikit-learn/scikit-learn?branch=master&svg=true
+.. _AppVeyor: https://ci.appveyor.com/project/sklearn-ci/scikit-learn/history
+
+.. |Coveralls| image:: https://coveralls.io/repos/scikit-learn/scikit-learn/badge.svg?branch=master&service=github
+.. _Coveralls: https://coveralls.io/r/scikit-learn/scikit-learn
+
+.. |Python35| image:: https://img.shields.io/badge/python-3.5-blue.svg
+.. _Python35: https://badge.fury.io/py/scikit-learn
+
+.. |Python36| image:: https://img.shields.io/badge/python-3.6-blue.svg
+.. _Python36: https://badge.fury.io/py/scikit-learn
+
+.. |PyPi| image:: https://badge.fury.io/py/scikit-learn.svg
+.. _PyPi: https://badge.fury.io/py/scikit-learn
+
+.. |DOI| image:: https://zenodo.org/badge/21369/scikit-learn/scikit-learn.svg
+.. _DOI: https://zenodo.org/badge/latestdoi/21369/scikit-learn/scikit-learn
+
 
 unipy
 =====
