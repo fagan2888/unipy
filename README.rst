@@ -1,4 +1,4 @@
-|Travis Build Status| |Appveyor Build Status| |Coveralls Coverage|
+| Travis Build Status | | Appveyor Build Status | | Coveralls Coverage |
 
 unipy
 =====
