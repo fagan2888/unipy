@@ -87,9 +87,9 @@ st.kstest('norm', False, N=20, alternative='two-sided', mode='approx')
 
 st.chisquare(col01, col02)
 st.chi2_contingency(col01, col02)
-st.chi2_contingency(col11, col12)
+#st.chi2_contingency(col11, col12)
 
-unipy.chi_square(data11, x='education', y='race')
+unipy.chisq_test(data11, x='education', y='race')
 
 # %% Bartlett Test
 # Test for equal variances
@@ -107,5 +107,5 @@ st.f_oneway(col01, col02, col03)
 # %% Lasso
 
 
-unipy.lasso(data01.iloc[:, :-1])
+#unipy.lasso(data01.iloc[:, :-1])
 
