@@ -10,8 +10,8 @@
 .. |Travis| image:: https://travis-ci.org/pydemia/unipy.svg?branch=master
 .. _Travis: https://travis-ci.org/pydemia/unipy
 
-.. |AppVeyor| image:: https://ci.appveyor.com/api/projects/status/github/scikit-learn/scikit-learn?branch=master&svg=true
-.. _AppVeyor: https://ci.appveyor.com/project/sklearn-ci/scikit-learn/history
+.. |AppVeyor| image:: https://ci.appveyor.com/api/projects/status/github/unipy/unipy?branch=master&svg=true
+.. _AppVeyor: https://ci.appveyor.com/project/pydemia/unipy/history
 
 .. |Coveralls| image:: https://coveralls.io/repos/scikit-learn/scikit-learn/badge.svg?branch=master&service=github
 .. _Coveralls: https://coveralls.io/r/scikit-learn/scikit-learn
