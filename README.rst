@@ -1,7 +1,7 @@
 .. -*- mode: rst -*-
 
 
-|Travis|_ |AppVeyor|_ |Coveralls|_ |Python35|_ |Python36|_ |PyPi|_ |DOI|_
+|Travis|_  |AppVeyor|_  |Coveralls|_  |Python35|_  |Python36|_  |PyPi|_  |DOI|_
 
 
 .. |Travis| image:: https://travis-ci.org/pydemia/unipy.svg?branch=master
