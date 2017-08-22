@@ -16,8 +16,8 @@
 .. |Python35| image:: https://img.shields.io/badge/python-3.5-blue.svg 
 .. _Python35: https://badge.fury.io/py/unipy.svg 
 
-.. |Pa37| image:: https://img.shields.io/badge/python-3.6-blue.svg 
-.. _Pa37: https://badge.fury.io/py/unipy.svg 
+.. |Python35| image:: https://img.shields.io/badge/python-3.6-blue.svg 
+.. _Python35: https://badge.fury.io/py/unipy.svg 
 
 .. |PyPi| image:: https://badge.fury.io/py/unipy.svg
 .. _PyPi: https://badge.fury.io/py/unipy.svg
