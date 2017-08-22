@@ -22,8 +22,8 @@
 .. |PyPi| image:: https://badge.fury.io/py/unipy.svg
 .. _PyPi: https://badge.fury.io/py/unipy.svg
 
-.. |DOI| image:: https://zenodo.org/badge/21369/scikit-learn/scikit-learn.svg
-.. _DOI: https://zenodo.org/badge/latestdoi/21369/scikit-learn/scikit-learn
+.. |DOI| image:: https://zenodo.org/badge/21369/pydemia/unipy.svg
+.. _DOI: https://zenodo.org/badge/latestdoi/21369/pydemia/unipy
 
 
 unipy
