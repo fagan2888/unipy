@@ -1,9 +1,6 @@
 .. -*- mode: rst -*-
 
 
-
-| Travis Build Status | | Appveyor Build Status | | Coveralls Coverage |
-
 |Travis|_ |AppVeyor|_ |Coveralls|_ |Python35|_ |Python36|_ |PyPi|_ |DOI|_
 
 
