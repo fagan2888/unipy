@@ -18,7 +18,7 @@ unipy
 .. |Coveralls| image:: https://coveralls.io/repos/github/pydemia/unipy/badge.svg?branch=master&service=github
 .. _Coveralls: https://coveralls.io/github/pydemia/unipy
 
-.. |Readthedocs| image:: http://unipy.readthedocs.io/en/latest/?badge=latest
+.. |Readthedocs| image:: https://readthedocs.org/projects/unipy/badge/?version=latest
 .. _Readthedocs: http://unipy.readthedocs.io/en/latest/
 
 .. |Python35| image:: https://img.shields.io/badge/python-3.5-blue.svg 
