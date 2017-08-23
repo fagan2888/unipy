@@ -20,7 +20,7 @@ unipy
 .. _Coveralls: https://coveralls.io/github/pydemia/unipy
 
 .. |Readthedocs| image:: https://readthedocs.org/projects/unipy/badge/?version=latest
-.. _Readthedocs: http://unipy.readthedocs.io/en/latest/
+.. _Readthedocs: http://unipy.readthedocs.io/en/latest/?badge=latest
 
 .. |PyPi| image:: https://badge.fury.io/py/unipy.svg
 .. _PyPi: https://badge.fury.io/py/unipy.svg
