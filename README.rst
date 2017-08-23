@@ -6,7 +6,7 @@ unipy
 
 
 
-|Travis|_  |AppVeyor|_  |Coveralls|_  |Readthedocs|_ 
+|Travis|_  |AppVeyor|_  |Coveralls|_  |Readthedocs|_   
 |PyPi|_  |Python35|_  |Python36|_ |DOI|_
 
 
