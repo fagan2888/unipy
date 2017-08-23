@@ -109,9 +109,11 @@ Structure
   - readme
 
 
-## Issues
+Issues
+======
 
-### `cx_Oracle` Setting
+`cx_Oracle` Setting
+====================
 
 0. Install this:
 ```sh
