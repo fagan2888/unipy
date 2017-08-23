@@ -15,7 +15,7 @@ except ImportError:
 import tarfile
 
 
-_version = '0.0.3.23'
+_version = '0.0.3.24'
 
 
 long_desc = """

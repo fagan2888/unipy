@@ -7,8 +7,8 @@ Created on Sun Jan  8 03:46:03 2017
 
 
 
-from unipy import _version
-from unipy._version import *
+from unipy import version
+from unipy.version import *
 
 #from unipy import core
 from unipy import math
@@ -31,7 +31,7 @@ from unipy.tools import *
 from unipy.util import *
 
 __all__ = []
-__all__ += _version.__all__
+__all__ += version.__all__
 
 #__all__ += core.__all__
 __all__ += math.__all__
