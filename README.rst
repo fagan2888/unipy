@@ -6,7 +6,8 @@ unipy
 
 
 
-|Travis|_  |AppVeyor|_  |Coveralls|_  |Readthedocs|_  |Python35|_  |Python36|_  |PyPi|_  |DOI|_
+|Travis|_  |AppVeyor|_  |Coveralls|_  |Readthedocs|_ 
+|PyPi|_  |Python35|_  |Python36|_ |DOI|_
 
 
 .. |Travis| image:: https://travis-ci.org/pydemia/unipy.svg?branch=master
@@ -21,14 +22,14 @@ unipy
 .. |Readthedocs| image:: https://readthedocs.org/projects/unipy/badge/?version=latest
 .. _Readthedocs: http://unipy.readthedocs.io/en/latest/
 
+.. |PyPi| image:: https://badge.fury.io/py/unipy.svg
+.. _PyPi: https://badge.fury.io/py/unipy.svg
+
 .. |Python35| image:: https://img.shields.io/badge/python-3.5-blue.svg 
 .. _Python35: https://badge.fury.io/py/unipy.svg 
 
 .. |Python36| image:: https://img.shields.io/badge/python-3.6-blue.svg 
 .. _Python36: https://badge.fury.io/py/unipy.svg 
-
-.. |PyPi| image:: https://badge.fury.io/py/unipy.svg
-.. _PyPi: https://badge.fury.io/py/unipy.svg
 
 .. |DOI| image:: https://zenodo.org/badge/21369/pydemia/unipy.svg
 .. _DOI: https://zenodo.org/badge/latestdoi/21369/pydemia/unipy
