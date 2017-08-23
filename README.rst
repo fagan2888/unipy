@@ -1,5 +1,10 @@
 .. --- mode: rst ---
 
+=====
+unipy
+=====
+
+
 
 |Travis|_  |AppVeyor|_  |Coveralls|_  |Python35|_  |Python36|_  |PyPi|_  |DOI|_
 
@@ -25,10 +30,6 @@
 
 .. |DOI| image:: https://zenodo.org/badge/21369/pydemia/unipy.svg
 .. _DOI: https://zenodo.org/badge/latestdoi/21369/pydemia/unipy
-
-
-unipy
-=====
 
 
 Documentation
