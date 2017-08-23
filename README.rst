@@ -1,4 +1,4 @@
-.. -*- mode: rst -*-
+.. --- mode: rst ---
 
 
 |Travis|_  |AppVeyor|_  |Coveralls|_  |Python35|_  |Python36|_  |PyPi|_  |DOI|_
@@ -39,7 +39,7 @@ Documentation
 Features
 ========
 
-* database connection:
+- database connection:
 
   - get ``pandas.DataFrame`` from:
   
@@ -54,11 +54,11 @@ Features
     - ``mysql``
     - ``mariadb``
 
-* Mathmatics:
+- Mathmatics:
 
   - Coordinate plane
 
-* Statistics:
+- Statistics:
 
   - Hypothesis Test
   - Multivariate Analysis
@@ -66,7 +66,7 @@ Features
     - Stepwise Elimination with VIF
     - Feature Selection
 
-* Sample Datasets:
+- Sample Datasets:
 
   - Adult(UCI)
   - Wine Quality(UCI)
@@ -75,35 +75,35 @@ Features
 Structure
 =========
 
-* database
+- database
 
   - getQuery
   - importQuery
 
-* math
+- math
 
   - geometry
  
-* statsmod
+- statsmod
 
   - getQuery
   - importQuery
   
-* tools
+- tools
 
   - printWrappers
 
-* sample
+- sample
 
-  * datasets
+  - datasets
     - dataManager
   - sample
   
-* tests
+- tests
 
   - test
   
-* docs
+- docs
 
   - readme
 
@@ -157,5 +157,4 @@ sudo vim /etc/profile.d/oracle.sh
 export ORACLE_HOME="/home/pydemia/apps/instantclient_11_2"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME
 ```
-
 
