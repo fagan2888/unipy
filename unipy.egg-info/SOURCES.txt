@@ -2,6 +2,7 @@ README
 setup.py
 unipy/__init__.py
 unipy/_version.py
+unipy/version.py
 unipy.egg-info/PKG-INFO
 unipy.egg-info/SOURCES.txt
 unipy.egg-info/dependency_links.txt
