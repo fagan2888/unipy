@@ -1,4 +1,4 @@
-README
+README.rst
 setup.py
 unipy/__init__.py
 unipy/_version.py

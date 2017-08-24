@@ -15,7 +15,8 @@ __all__ = ['split_generator',
            'multiprocessor',
            'num_fromto_generator',
            'dt_fromto_generator',
-           'tm_fromto_generator']
+           'tm_fromto_generator',
+           'uprint']
 
 
 def split_generator(iterable, size):
@@ -87,7 +88,10 @@ def tm_fromto_generator(start, end, day_term,
                res_nxt.strftime(tm_format) + tm_string[1])
 
 
-
+def uprint(*args, **kwargs, print_ok=True):
+    if print_ok:
+        print(*args, **kwargs)
+    
 
 if __name__ == '__main__':
     res = [item for item in tm_fromto_generator(10001, 300000, 100000)]
