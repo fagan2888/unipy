@@ -88,7 +88,7 @@ def tm_fromto_generator(start, end, day_term,
                res_nxt.strftime(tm_format) + tm_string[1])
 
 
-def uprint(*args, **kwargs, print_ok=True):
+def uprint(*args, print_ok=True, **kwargs):
     if print_ok:
         print(*args, **kwargs)
     
