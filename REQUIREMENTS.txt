@@ -10,4 +10,3 @@ pandasql == 0.7.3
 seaborn == 0.8
 scikit-image == 0.13.0
 mglearn == 0.1.6
-numba == 0.34.0

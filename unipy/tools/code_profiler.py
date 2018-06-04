@@ -77,9 +77,9 @@ def montecarlo_pi_estimator(nbr_estimates):
         x = random.uniform(0, 1)
         y = random.uniform(0, 1)
         is_in_unit_circle = x ** 2 + y ** 2 <= 1.0
-        nbr_trials_in_quater_unit_circle += is_in_unit_circle
+        nbr_trials_in_quarter_unit_circle += is_in_unit_circle
     
-    return nbr_trials_in_quater_unit_circle
+    return nbr_trials_in_quarter_unit_circle
 
 
 if __name__ == '__main__':

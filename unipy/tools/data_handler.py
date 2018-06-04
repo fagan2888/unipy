@@ -22,7 +22,10 @@ __all__ = ['splitter',
            'merge_csv',
            'nancumsum',
            'nancum_calculator',
-           'between_generator']
+           'between_generator',
+           'zero_padder_3d',
+           'ReusableGenerator',
+           'copy_generator']
 
 
 # A Function to split an Iterable into smaller chunks 
@@ -184,4 +187,62 @@ def between_generator(start, end, term):
         pre, nxt = nxt, nxt + term
         yield pre+1, nxt
 
+
+def zero_padder_3d(arr, max_len=None, method='backward'):
+
+    
+    assert isinstance(arr, collections.Iterable)
+    assert all(isinstance(item, collections.Iterable) for item in arr)
+    assert method in ['forward', 'backward']
+    arr_max_len = max(map(len, arr))
+    if not max_len:
+        max_len = arr_max_len
+    else:
+        assert max_len >= arr_max_len
+    
+    if method == 'forward':
+        res = [np.pad(item, ((max_len-len(item), 0), (0, 0)),
+                      mode='constant',
+                      constant_values=0)\
+               for item in arr]
+
+    elif method == 'backward':
+        res = [np.pad(item, ((0, max_len-len(item)), (0, 0)),
+                      mode='constant',
+                      constant_values=0)\
+               for item in arr]
+
+    #return np.asarray(res)
+    return np.stack(res)
+
+
+class ReusableGenerator(object):
+    def __init__(self, generator):
+        self._copy(generator)
+
+    def __iter__(self):
+        self._copy(self._dummy)
+        return self._source.__iter__()
+
+    def next(self):
+        if self._source == None:
+            self._copy(self._dummy)
+        try:
+            return self._source.next()
+
+        except StopIteration:
+            self._source = None
+            raise
+
+    def _copy(self, generator):
+        self._source, self._dummy = it.tee(generator)
+        # self._source = (i for i in _source)
+        # self._dummy = (i for i in _dummy)
+
+
+def copy_generator(generator):
+    _source, _dummy = it.tee(generator)
+    _source = (i for i in _source)
+    _dummy = (i for i in _dummy)
+    return _source, _dummy
 

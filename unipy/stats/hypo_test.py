@@ -6,6 +6,7 @@ Created on Sun Jan  8 03:46:03 2017
 """
 
 
+import warnings
 import numpy as np
 import pandas as pd
 import scipy.stats as st
@@ -27,29 +28,39 @@ def f_test(a, b, scale=1, alternative='two-sided', conf_level=.95, *args, **kwar
     assert 0 < scale <= 1
     assert 0 < conf_level <= 1
 
-    var_a = pd.Series(a).var()
-    var_b = pd.Series(b).var()
-
     dfn = len(a) - 1
     dfd = len(b) - 1
 
-    f_statistics = var_a / var_b
-    p_value = st.f.cdf(np.abs(f_statistics), dfn, dfd, scale=scale)
-    #p_value = distributions.t.sf(np.abs(t), df)
+    if (len(a) or len(b)) < 2:
 
-    conf_interval = st.f.interval(conf_level, dfn, dfd, scale=scale)
-    conf_min, conf_max = np.multiply(f_statistics, conf_interval)
+        print('Observations are insufficient.')
+        f_statistics = np.nan
+        p_value = np.nan
+        conf_min, conf_max = np.nan, np.nan
+
+    else:
+
+        try:
+            f_statistics = np.array(a).var() / np.array(b).var()
+        except ZeroDivisionError:
+            f_statistics = np.nan
+ 
+        p_value = st.f.cdf(np.abs(f_statistics), dfn, dfd, scale=scale)
+        #p_value = distributions.t.sf(np.abs(t), df)
+
+        conf_interval = st.f.interval(conf_level, dfn, dfd, scale=scale)
+        conf_min, conf_max = np.multiply(f_statistics, conf_interval)
 
 
-    if alternative == 'two-sided':
-        p_value = 2 * np.min([p_value, 1-p_value])
+        if alternative == 'two-sided':
+            p_value = 2 * np.min([p_value, 1-p_value])
 
-    elif alternative == 'greater':
-        p_value = st.f.sf(f_statistics, dfn, dfd, scale=scale)
-        conf_min, conf_max = conf_min, np.inf
+        elif alternative == 'greater':
+            p_value = st.f.sf(f_statistics, dfn, dfd, scale=scale)
+            conf_min, conf_max = conf_min, np.inf
 
-    elif alternative == 'less':
-        conf_min, conf_max = 0, conf_max
+        elif alternative == 'less':
+            conf_min, conf_max = 0, conf_max
 
 
     #print('F-Statistics: %.4g' % f_statistics)
@@ -75,29 +86,39 @@ def f_test_formula(a, b, scale=1, alternative='two-sided', conf_level=.95, *args
     assert 0 < scale <= 1
     assert 0 < conf_level <= 1
 
-    var_a = pd.Series(a).var()
-    var_b = pd.Series(b).var()
-
     dfn = len(a) - 1
     dfd = len(b) - 1
 
-    f_statistics = var_a / var_b
-    p_value = st.f.cdf(np.abs(f_statistics), dfn, dfd, scale=scale)
-    #p_value = distributions.t.sf(np.abs(t), df)
+    if (len(a) or len(b)) < 2:
 
-    conf_interval = st.f.interval(conf_level, dfn, dfd, scale=scale)
-    conf_min, conf_max = np.multiply(f_statistics, conf_interval)
+        print('Observations are insufficient.')
+        f_statistics = np.nan
+        p_value = np.nan
+        conf_min, conf_max = np.nan, np.nan
+
+    else:
+
+        try:
+            f_statistics = np.array(a).var() / np.array(b).var()
+        except ZeroDivisionError:
+            f_statistics = np.nan
+ 
+        p_value = st.f.cdf(np.abs(f_statistics), dfn, dfd, scale=scale)
+        #p_value = distributions.t.sf(np.abs(t), df)
+
+        conf_interval = st.f.interval(conf_level, dfn, dfd, scale=scale)
+        conf_min, conf_max = np.multiply(f_statistics, conf_interval)
 
 
-    if alternative == 'two-sided':
-        p_value = 2 * np.min([p_value, 1-p_value])
+        if alternative == 'two-sided':
+            p_value = 2 * np.min([p_value, 1-p_value])
 
-    elif alternative == 'greater':
-        p_value = st.f.sf(f_statistics, dfn, dfd, scale=scale)
-        conf_min, conf_max = conf_min, np.inf
+        elif alternative == 'greater':
+            p_value = st.f.sf(f_statistics, dfn, dfd, scale=scale)
+            conf_min, conf_max = conf_min, np.inf
 
-    elif alternative == 'less':
-        conf_min, conf_max = 0, conf_max
+        elif alternative == 'less':
+            conf_min, conf_max = 0, conf_max
 
 
     #print('F-Statistics: %.4g' % f_statistics)
@@ -199,8 +220,8 @@ def chisq_test(data, x=None, y=None, correction=None, lambda_=None, margin=True,
         print('-'*60 + '\n')
     
     if check_chisq_rule == False:
-        print('Warning: The precondition of Chi-Square was not implemented.')
-        print('Chi-squared approximation may be incorrect')
+        warnings.warn('Warning: The precondition of Chi-Square was not implemented.')
+        warnings.warn('Chi-squared approximation may be incorrect')
 
     return pd.Series({'cross_t': crossT, 'chisq-stat': chiSqr, 'p_value': pValue, 'df': freeDeg, 'expected': expectedV})
 

@@ -1,7 +1,7 @@
 README.rst
 setup.py
 unipy/__init__.py
-unipy/_version.py
+unipy/__version__.py
 unipy/version.py
 unipy.egg-info/PKG-INFO
 unipy.egg-info/SOURCES.txt

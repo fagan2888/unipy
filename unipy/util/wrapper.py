@@ -6,10 +6,12 @@ Created on Tue May 30 10:33:36 2017
 """
 
 
+import logging
 from datetime import datetime as dt
 from functools import wraps
 
 __all__ = ['time_profiler',
+           'time_logger',
            'job_wrapper']
 
 
@@ -19,19 +21,40 @@ def time_profiler(func):
     def profiler(*args, **kwargs):
 
         start_tm = dt.now()
-        print("JobStart :", start_tm)
+        print("(%s) Start  :" % func.__name__, start_tm)
 
         res = func(*args, **kwargs)
 
         end_tm = dt.now()
-        print("JobEnd   :", end_tm)
+        print("(%s) End    :" % func.__name__, end_tm)
 
         elapsed_tm = end_tm - start_tm
-        print("Elapsed  :", elapsed_tm)
+        print("(%s) Elapsed:" % func.__name__, elapsed_tm)
 
         return res
 
     return profiler
+
+
+def time_logger(func):
+
+    @wraps(func)
+    def logger(*args, **kwargs):
+
+        start_tm = dt.now()
+        logging.info("(%s) Start  : " % func.__name__ + str(start_tm))
+
+        res = func(*args, **kwargs)
+
+        end_tm = dt.now()
+        logging.info("(%s) End    : " % func.__name__ + str(end_tm))
+
+        elapsed_tm = end_tm - start_tm
+        logging.info("(%s) Elapsed: " % func.__name__ + str(elapsed_tm))
+
+        return res
+
+    return logger
 
 
 

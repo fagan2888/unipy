@@ -4,5 +4,5 @@
 __all__ = ['_version']
 
 
-_version = '0.0.3.28'
+_version = '<module 'unipy.__version__' from '/mnt/hdc1/data/git/unipy/unipy/__version__.py'>'
 
