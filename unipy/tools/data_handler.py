@@ -10,11 +10,13 @@ import os
 import pandas as pd
 
 # Split an iterable by equal length
+
 import collections
 import itertools as it
 import numpy as np
 
 __all__ = ['splitter',
+           'even_chunk',
            'pair_unique',
            'df_pair_unique',
            'map_to_tuple',
@@ -92,6 +94,12 @@ def splitter(iterable, how='equal', size=2):
             resList = list(splitted)
             
             return resList
+
+
+def even_chunk(iterable, chunk_size):
+    iterator = iter(iterable)
+    slicer = iter(lambda: list(it.islice(iterator, chunk_size)), [])
+    yield from slicer
 
 
 # Unique Pair List Creator

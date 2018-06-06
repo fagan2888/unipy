@@ -21,7 +21,7 @@ This is made for some specific environment.
 This contains codes for data manipulation and Analysis tools.
 """
 
-__version__ = '0.0.3.45'
+__version__ = '0.0.3.46'
 
 with open('unipy/__version__.py', 'w') as f:
     version_py_string = '''#-*- coding: utf-8 -*-
