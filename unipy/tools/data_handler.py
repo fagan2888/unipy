@@ -7,13 +7,13 @@ Created on Fri Jun  2 13:41:19 2017
 
 
 import os
+import collections
+import itertools as it
+
+import numpy as np
 import pandas as pd
 
 # Split an iterable by equal length
-
-import collections
-import itertools as it
-import numpy as np
 
 __all__ = ['splitter',
            'even_chunk',
@@ -75,34 +75,67 @@ def splitter(iterable, how='equal', size=2):
     isinstance(size, int)
     
     if not size > 0:
-
         raise ValueError("'size' must be greater than 0")
-
     else:
-        
         if how == 'equal':
-
             splitted = np.array_split(iterable, (len(iterable) / size) + 1)
             resList = [tuple(chunks) for chunks in splitted]
-            
             return resList
-        
-        elif how == 'remaining':
 
+        elif how == 'remaining':
             tmpIterator = iter(iterable)
             splitted = iter(lambda: tuple(it.islice(tmpIterator, size)), ())
             resList = list(splitted)
-            
             return resList
 
 
-def even_chunk(iterable, chunk_size):
+def _even_chunk(iterable, chunk_size):
+    assert isinstance(iterable, collections.Iterable)
     iterator = iter(iterable)
     slicer = iter(lambda: list(it.islice(iterator, chunk_size)), [])
     yield from slicer
 
 
-# Unique Pair List Creator
+def _even_chunk_arr(arr, chunk_size, axis=0):
+    assert isinstance(arr, np.ndarray)
+    if axis in [0, 'row']:
+        slicer = _even_chunk(arr, chunk_size)
+    elif axis in [1, 'column']:
+        slicer = _even_chunk(arr.T, chunk_size)
+    yield from slicer
+
+
+def _even_chunk_df(df, chunk_size, axis=0):
+    assert isinstance(df, pd.DataFrame)
+
+    if axis in [0, 'row']:
+        colnames = df.columns
+        zipped = zip(_even_chunk(df.index, chunk_size),
+                     _even_chunk(df.values, chunk_size))
+        slicer = (pd.DataFrame(row_arr, index=row_idx, columns=colnames)\
+                  for row_idx, row_arr in zipped)
+    elif axis in [1, 'column']:
+        rownames = df.index
+        zipped = zip(even_chunk(df.columns, chunk_size),
+                     even_chunk(df.values.T, chunk_size))
+        slicer = (pd.DataFrame(col_arr, index=col_idx, columns=rownames).T\
+                  for col_idx, col_arr in zipped)
+
+    yield from slicer
+
+
+def even_chunk(iterable, chunk_size, *args, **kwargs):
+
+    if isinstance(iterable, np.ndarray):
+        chunked = _even_chunk_arr(iterable, chunk_size *args, **kwargs)
+    elif isinstance(iterable, pd.DataFrame):
+        chunked = _even_chunk_df(iterable, chunk_size, *args, **kwargs)
+    else:
+        chunked = _even_chunk(iterable, chunk_size)
+
+    return chunked
+
+
 def pair_unique(*args):
 
     argsTuple = (*args, )
