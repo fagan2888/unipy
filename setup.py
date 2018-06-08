@@ -16,7 +16,7 @@ except ImportError:
     from distutils.core import setup, find_packages
 
 
-__version__ = '0.0.4.5'
+__version__ = '0.0.4.8'
 
 long_desc = """
 This is made for some specific environment.

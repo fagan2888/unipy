@@ -102,7 +102,7 @@ def _even_chunk_arr(arr, chunk_size, axis=0):
         slicer = _even_chunk(arr, chunk_size)
     elif axis in [1, 'column']:
         slicer = _even_chunk(arr.T, chunk_size)
-    yield from slicer
+    return slicer
 
 
 def _even_chunk_df(df, chunk_size, axis=0):
@@ -116,10 +116,22 @@ def _even_chunk_df(df, chunk_size, axis=0):
                   for row_idx, row_arr in zipped)
     elif axis in [1, 'column']:
         rownames = df.index
-        zipped = zip(even_chunk(df.columns, chunk_size),
-                     even_chunk(df.values.T, chunk_size))
+        zipped = zip(_even_chunk(df.columns, chunk_size),
+                     _even_chunk(df.values.T, chunk_size))
         slicer = (pd.DataFrame(col_arr, index=col_idx, columns=rownames).T\
                   for col_idx, col_arr in zipped)
+
+    yield from slicer
+
+
+def _even_chunk_series(series, chunk_size):
+    assert isinstance(series, pd.Series)
+
+    name = series.name
+    zipped = zip(_even_chunk(series.index, chunk_size),
+                 _even_chunk(series.values, chunk_size))
+    slicer = (pd.Series(val_arr, index=idx, name=name)\
+              for idx, val_arr in zipped)
 
     yield from slicer
 
@@ -127,9 +139,11 @@ def _even_chunk_df(df, chunk_size, axis=0):
 def even_chunk(iterable, chunk_size, *args, **kwargs):
 
     if isinstance(iterable, np.ndarray):
-        chunked = _even_chunk_arr(iterable, chunk_size *args, **kwargs)
+        chunked = _even_chunk_arr(iterable, chunk_size, *args, **kwargs)
     elif isinstance(iterable, pd.DataFrame):
         chunked = _even_chunk_df(iterable, chunk_size, *args, **kwargs)
+    elif isinstance(iterable, pd.Series):
+        chunked = _even_chunk_series(iterable, chunk_size)
     else:
         chunked = _even_chunk(iterable, chunk_size)
 
