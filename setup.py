@@ -16,7 +16,7 @@ except ImportError:
     from distutils.core import setup, find_packages
 
 
-__version__ = '0.0.4.9'
+__version__ = '0.0.4.10'
 
 long_desc = """
 This is made for some specific environment.
@@ -71,7 +71,7 @@ required_packages = [
 
 with open('REQUIREMENTS.txt', 'w') as f:
     header = '--index-url https://pypi.python.org/simple/'
-    pkg_ls = '\n'.join(required_packages).replace('>=', '==')
+    pkg_ls = '\n'.join(required_packages).replace('>=', '>=')
     f.write('\n'.join([header, pkg_ls]))
 
 
