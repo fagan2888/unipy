@@ -16,7 +16,7 @@ except ImportError:
     from distutils.core import setup, find_packages
 
 
-__version__ = '0.0.4.10'
+__version__ = '0.0.4.18'
 
 long_desc = """
 This is made for some specific environment.
@@ -62,7 +62,9 @@ required_packages = [
                      'pandasql >= 0.7.3',
                      'seaborn >= 0.8',
                      'scikit-image >= 0.13.0',
-                     #'pyqt5',
+                     'PyDrive >= 1.2.1',
+                     'oauth2client >= 4.1.2',
+                    #'pyqt5',
                      'mglearn >= 0.1.6',
                     # 'numba >= 0.34.0',
                     # 'nomkl',  # conda

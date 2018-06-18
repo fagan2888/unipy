@@ -41,5 +41,6 @@ unipy/unipy_test/test_hypothesis.py
 unipy/unipy_test/test_stats.py
 unipy/util/__init__.py
 unipy/util/api.py
+unipy/util/gdrive.py
 unipy/util/remote_ipyconnector.py
 unipy/util/wrapper.py
