@@ -6,18 +6,20 @@ Created on Thu Jan  5 20:55:26 2017
 """
 
 
-# Import dataset manager
-import unipy.dataset.api as dm
 
-# Extract Datasets for the first time
-dm.init()
+if __name__ == '__main__':
+    # Import dataset manager
+    import unipy.dataset.api as dm
 
-# Reset Datasets
-dm.reset()
+    # Extract Datasets for the first time
+    dm.init()
 
-# Get a Dataset list
-dm.ls()
+    # Reset Datasets
+    dm.reset()
 
-# Load Datasets
-data = dm.load('anscombe')
-data = dm.load(2)
+    # Get a Dataset list
+    dm.ls()
+
+    # Load Datasets
+    data = dm.load('anscombe')
+    data = dm.load(2)

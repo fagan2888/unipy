@@ -1,2 +1,2 @@
 
-from unipy.plot.api import *
+from unipy.plots.api import *

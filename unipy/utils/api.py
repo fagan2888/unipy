@@ -6,5 +6,4 @@ Created on Fri Jun  2 13:41:19 2017
 """
 
 
-from unipy.util import remote_ipyconnector
-from unipy.util.base import *
+from unipy.utils.wrapper import *

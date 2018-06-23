@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>unipy.stats package &#8212; unipy 0.0.4.19 documentation</title>
+    <title>unipy.stats package &#8212; unipy 0.0.4.20 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -85,6 +85,216 @@
 <ul class="simple">
 <li><cite>from_formula</cite> – R-style Formula Formatting.</li>
 </ul>
+<dl class="function">
+<dt id="unipy.stats.deviation">
+<code class="descclassname">unipy.stats.</code><code class="descname">deviation</code><span class="sig-paren">(</span><em>container</em>, <em>method='mean'</em>, <em>if_abs=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/metrics.html#deviation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.deviation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deviation.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.vif">
+<code class="descclassname">unipy.stats.</code><code class="descname">vif</code><span class="sig-paren">(</span><em>y</em>, <em>X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/metrics.html#vif"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.vif" title="Permalink to this definition">¶</a></dt>
+<dd><p>Variance inflation factor.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.mean_absolute_percentage_error">
+<code class="descclassname">unipy.stats.</code><code class="descname">mean_absolute_percentage_error</code><span class="sig-paren">(</span><em>measure</em>, <em>predict</em>, <em>thresh=3.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/metrics.html#mean_absolute_percentage_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.mean_absolute_percentage_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mean Absolute Percentage Error.
+It is a percent of errors.
+It measures the prediction accuracy of a forecasting method in Statistics
+with the real mesured values and the predicted values, for example in trend
+estimation.
+If MAPE is 5, it means this prediction method potentially has 5% error.
+It cannot be used if there are zero values,
+because there would be a division by zero.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.average_absolute_deviation">
+<code class="descclassname">unipy.stats.</code><code class="descname">average_absolute_deviation</code><span class="sig-paren">(</span><em>measure</em>, <em>predict</em>, <em>thresh=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/metrics.html#average_absolute_deviation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.average_absolute_deviation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average Absolute Deviation.
+It is …
+It measures the prediction accuracy of a forecasting method in Statistics
+with the real mesured values and the predicted values, for example in trend
+estimation.
+If MAD is 5, it means this prediction method potentially has…</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.median_absolute_deviation">
+<code class="descclassname">unipy.stats.</code><code class="descname">median_absolute_deviation</code><span class="sig-paren">(</span><em>measure</em>, <em>predict</em>, <em>thresh=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/metrics.html#median_absolute_deviation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.median_absolute_deviation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Median Absolute Deviation.
+It is …
+It measures the prediction accuracy of a forecasting method in Statistics
+with the real mesured values and the predicted values, for example in trend
+estimation.
+If MAD is 5, it means this prediction method potentially has…</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.calculate_interaction">
+<code class="descclassname">unipy.stats.</code><code class="descname">calculate_interaction</code><span class="sig-paren">(</span><em>rankTbl</em>, <em>pvTbl</em>, <em>target</em>, <em>ranknum=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/metrics.html#calculate_interaction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.calculate_interaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feature interaction calculation.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.f_test">
+<code class="descclassname">unipy.stats.</code><code class="descname">f_test</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>scale=1</em>, <em>alternative='two-sided'</em>, <em>conf_level=0.95</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/hypo_test.html#f_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.f_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>F-Test.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.f_test_formula">
+<code class="descclassname">unipy.stats.</code><code class="descname">f_test_formula</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>scale=1</em>, <em>alternative='two-sided'</em>, <em>conf_level=0.95</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/hypo_test.html#f_test_formula"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.f_test_formula" title="Permalink to this definition">¶</a></dt>
+<dd><p>F-Test by formula.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.anova_test">
+<code class="descclassname">unipy.stats.</code><code class="descname">anova_test</code><span class="sig-paren">(</span><em>formula</em>, <em>data=None</em>, <em>typ=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/hypo_test.html#anova_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.anova_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>ANOVA Test.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.anova_test_formula">
+<code class="descclassname">unipy.stats.</code><code class="descname">anova_test_formula</code><span class="sig-paren">(</span><em>formula</em>, <em>data=None</em>, <em>typ=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/hypo_test.html#anova_test_formula"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.anova_test_formula" title="Permalink to this definition">¶</a></dt>
+<dd><p>ANOVA Test by formula.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.chisq_test">
+<code class="descclassname">unipy.stats.</code><code class="descname">chisq_test</code><span class="sig-paren">(</span><em>data</em>, <em>x=None</em>, <em>y=None</em>, <em>correction=None</em>, <em>lambda_=None</em>, <em>margin=True</em>, <em>print_ok=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/hypo_test.html#chisq_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.chisq_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Chi-square Test.</p>
+<p><a href="#id3"><span class="problematic" id="id4">lambda_</span></a> gives the power in the Cressie-Read power divergence statistic.
+The default is 1.
+For convenience, <a href="#id5"><span class="problematic" id="id6">lambda_</span></a> may be assigned one of the following strings,
+in which case the corresponding numerical value is used:</p>
+<p>String              Value   Description</p>
+<dl class="docutils">
+<dt>“pearson”             1     Pearson’s chi-squared statistic.</dt>
+<dd>In this case, the function is
+equivalent to <cite>stats.chisquare</cite>.</dd>
+<dt>“log-likelihood”      0     Log-likelihood ratio. Also known as</dt>
+<dd>the G-test [R623].</dd>
+</dl>
+<p>“freeman-tukey”      -1/2   Freeman-Tukey statistic.
+“mod-log-likelihood” -1     Modified log-likelihood ratio.
+“neyman”             -2     Neyman’s statistic.
+“cressie-read”        2/3   The power recommended in [R625].</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.fisher_test">
+<code class="descclassname">unipy.stats.</code><code class="descname">fisher_test</code><span class="sig-paren">(</span><em>data</em>, <em>x=None</em>, <em>y=None</em>, <em>alternative='two-sided'</em>, <em>margin=True</em>, <em>print_ok=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/hypo_test.html#fisher_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.fisher_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fisher’s Exact Test.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.lasso_rank">
+<code class="descclassname">unipy.stats.</code><code class="descname">lasso_rank</code><span class="sig-paren">(</span><em>formula=None</em>, <em>X=None</em>, <em>y=None</em>, <em>data=None</em>, <em>alpha=array([1.00e-05</em>, <em>1.10e-04</em>, <em>2.10e-04</em>, <em>3.10e-04</em>, <em>4.10e-04</em>, <em>5.10e-04</em>, <em>6.10e-04</em>, <em>7.10e-04</em>, <em>8.10e-04</em>, <em>9.10e-04</em>, <em>1.01e-03</em>, <em>1.11e-03</em>, <em>1.21e-03</em>, <em>1.31e-03</em>, <em>1.41e-03</em>, <em>1.51e-03</em>, <em>1.61e-03</em>, <em>1.71e-03</em>, <em>1.81e-03</em>, <em>1.91e-03</em>, <em>2.01e-03</em>, <em>2.11e-03</em>, <em>2.21e-03</em>, <em>2.31e-03</em>, <em>2.41e-03</em>, <em>2.51e-03</em>, <em>2.61e-03</em>, <em>2.71e-03</em>, <em>2.81e-03</em>, <em>2.91e-03</em>, <em>3.01e-03</em>, <em>3.11e-03</em>, <em>3.21e-03</em>, <em>3.31e-03</em>, <em>3.41e-03</em>, <em>3.51e-03</em>, <em>3.61e-03</em>, <em>3.71e-03</em>, <em>3.81e-03</em>, <em>3.91e-03</em>, <em>4.01e-03</em>, <em>4.11e-03</em>, <em>4.21e-03</em>, <em>4.31e-03</em>, <em>4.41e-03</em>, <em>4.51e-03</em>, <em>4.61e-03</em>, <em>4.71e-03</em>, <em>4.81e-03</em>, <em>4.91e-03</em>, <em>5.01e-03</em>, <em>5.11e-03</em>, <em>5.21e-03</em>, <em>5.31e-03</em>, <em>5.41e-03</em>, <em>5.51e-03</em>, <em>5.61e-03</em>, <em>5.71e-03</em>, <em>5.81e-03</em>, <em>5.91e-03</em>, <em>6.01e-03</em>, <em>6.11e-03</em>, <em>6.21e-03</em>, <em>6.31e-03</em>, <em>6.41e-03</em>, <em>6.51e-03</em>, <em>6.61e-03</em>, <em>6.71e-03</em>, <em>6.81e-03</em>, <em>6.91e-03</em>, <em>7.01e-03</em>, <em>7.11e-03</em>, <em>7.21e-03</em>, <em>7.31e-03</em>, <em>7.41e-03</em>, <em>7.51e-03</em>, <em>7.61e-03</em>, <em>7.71e-03</em>, <em>7.81e-03</em>, <em>7.91e-03</em>, <em>8.01e-03</em>, <em>8.11e-03</em>, <em>8.21e-03</em>, <em>8.31e-03</em>, <em>8.41e-03</em>, <em>8.51e-03</em>, <em>8.61e-03</em>, <em>8.71e-03</em>, <em>8.81e-03</em>, <em>8.91e-03</em>, <em>9.01e-03</em>, <em>9.11e-03</em>, <em>9.21e-03</em>, <em>9.31e-03</em>, <em>9.41e-03</em>, <em>9.51e-03</em>, <em>9.61e-03</em>, <em>9.71e-03</em>, <em>9.81e-03</em>, <em>9.91e-03])</em>, <em>k=2</em>, <em>plot=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/feature_selection.html#lasso_rank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.lasso_rank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feature selection by LASSO regression.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>formula</strong> – R-style formula string</li>
+<li><strong>X</strong> (<em>list-like</em>) – Column values for X.</li>
+<li><strong>y</strong> (<em>list-like</em>) – A column value for y.</li>
+<li><strong>data</strong> (<em>pandas.DataFrame</em>) – A DataFrame.</li>
+<li><strong>alpha</strong> (<em>Iterable</em>) – An Iterable contains alpha values.</li>
+<li><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – Threshold of coefficient matrix</li>
+<li><strong>plot</strong> (<em>Boolean</em><em> (</em><em>default: False</em><em>)</em>) – True if want to plot the result.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>rankTbl</strong> (<em>pandas.DataFrame</em>) – Feature ranking by given <code class="docutils literal notranslate"><span class="pre">k</span></code>.</li>
+<li><strong>minIntercept</strong> (<em>pandas.DataFrame</em>) – The minimum intercept row in coefficient matrix.</li>
+<li><strong>coefMatrix</strong> (<em>pandas.DataFrame</em>) – A coefficient matrix.</li>
+<li><strong>kBest</strong> (<em>pandas.DataFrame</em>) – When Given <code class="docutils literal notranslate"><span class="pre">k</span></code>, The best intercept row in coefficient matrix.</li>
+<li><strong>kBestPredY</strong> (<em>dict</em>) – A predicted <code class="docutils literal notranslate"><span class="pre">Y</span></code> with <code class="docutils literal notranslate"><span class="pre">kBest</span></code> alpha.</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">unipy.dataset.api</span> <span class="k">as</span> <span class="nn">dm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dm</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="go">[&#39;cars&#39;, &#39;anscombe&#39;, &#39;iris&#39;, &#39;nutrients&#39;, &#39;german_credit_scoring_fars2008&#39;, &#39;winequality_red&#39;, &#39;winequality_white&#39;, &#39;titanic&#39;, &#39;car90&#39;, &#39;diabetes&#39;, &#39;adult&#39;, &#39;tips&#39;, &#39;births_big&#39;, &#39;breast_cancer&#39;, &#39;air_quality&#39;, &#39;births_small&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wine_red</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;winequality_red&#39;</span><span class="p">)</span>
+<span class="go">Dataset : winequality_red</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ranked</span><span class="p">,</span> <span class="n">best_by_intercept</span><span class="p">,</span> <span class="n">coefTbl</span><span class="p">,</span> <span class="n">kBest</span><span class="p">,</span> <span class="n">kBestPred</span> <span class="o">=</span> <span class="n">lasso_rank</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">wine_red</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;quality&#39;</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;quality&#39;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_red</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ranked</span>
+<span class="go">                  rank  lasso_coef  abs_coef</span>
+<span class="go">volatile_acidity     1   -0.675725  0.675725</span>
+<span class="go">alcohol              2    0.194865  0.194865</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">best_by_intercept</span>
+<span class="go">                      RSS  Intercept  fixed_acidity  volatile_acidity      alpha_0.00121  691.956364   3.134874       0.002374         -1.023793</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>citric_acid  residual_sugar  chlorides  free_sulfur_dioxide      alpha_0.00121          0.0             0.0  -0.272912                 -0.0</p>
+<p>total_sulfur_dioxide  density   pH  sulphates   alcohol      alpha_0.00121             -0.000963     -0.0 -0.0   0.505956  0.264552</p>
+<p>var_count</p>
+</div></blockquote>
+<p>alpha_0.00121          6
+&gt;&gt;&gt;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.feature_selection_vif">
+<code class="descclassname">unipy.stats.</code><code class="descname">feature_selection_vif</code><span class="sig-paren">(</span><em>data</em>, <em>thresh=5.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/feature_selection.html#feature_selection_vif"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.feature_selection_vif" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stepwise Feature Selection for multivariate analysis.</p>
+<p>It calculates OLS regressions and the variance inflation factors iterating
+all explanatory variables. If the maximum VIF of a variable is over the
+given threshold, It will be dropped. This process is repeated until all
+VIFs are lower than the given threshold.</p>
+<p>Recommended threshold is lower than 5, because if VIF is greater than 5,
+then the explanatory variable selected is highly collinear with the other
+explanatory variables, and the parameter estimates will have large standard
+errors because of this.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>DataFrame</em><em>, </em><em>(</em><em>rows: observed values</em><em>, </em><em>columns: multivariate variables</em><em>)</em>) – design dataframe with all explanatory variables, as for example used in
+regression</li>
+<li><strong>thresh</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – A threshold of VIF</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>Filtered_data</strong> (<em>DataFrame</em>) – A subset of the input DataFame</li>
+<li><strong>dropped_List</strong> (<em>DataFrame</em>) – ‘var’ column : dropped variable names from input data columns
+‘vif’ column : variance inflation factor of dropped variables</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This function does not save the auxiliary regression.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-func docutils literal notranslate"><span class="pre">statsmodels.stats.outliers_influence.variance_inflation_factor()</span></code></p>
+</div>
+<p class="rubric">References</p>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Variance_inflation_factor">http://en.wikipedia.org/wiki/Variance_inflation_factor</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.from_formula">
+<code class="descclassname">unipy.stats.</code><code class="descname">from_formula</code><span class="sig-paren">(</span><em>formula</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/formula.html#from_formula"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.from_formula" title="Permalink to this definition">¶</a></dt>
+<dd><p>R-style Formula Formatting.</p>
+</dd></dl>
+
 </div>
 </div>
 </div>
