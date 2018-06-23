@@ -1,0 +1,187 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>unipy.stats.feature_selection module &#8212; unipy 0.0.4.19 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-unipy.stats.feature_selection">
+<span id="unipy-stats-feature-selection-module"></span><h1>unipy.stats.feature_selection module<a class="headerlink" href="#module-unipy.stats.feature_selection" title="Permalink to this headline">¶</a></h1>
+<p>Feature selection.</p>
+<dl class="function">
+<dt id="unipy.stats.feature_selection.lasso_rank">
+<code class="descclassname">unipy.stats.feature_selection.</code><code class="descname">lasso_rank</code><span class="sig-paren">(</span><em>formula=None</em>, <em>X=None</em>, <em>y=None</em>, <em>data=None</em>, <em>alpha=array([1.00e-05</em>, <em>1.10e-04</em>, <em>2.10e-04</em>, <em>3.10e-04</em>, <em>4.10e-04</em>, <em>5.10e-04</em>, <em>6.10e-04</em>, <em>7.10e-04</em>, <em>8.10e-04</em>, <em>9.10e-04</em>, <em>1.01e-03</em>, <em>1.11e-03</em>, <em>1.21e-03</em>, <em>1.31e-03</em>, <em>1.41e-03</em>, <em>1.51e-03</em>, <em>1.61e-03</em>, <em>1.71e-03</em>, <em>1.81e-03</em>, <em>1.91e-03</em>, <em>2.01e-03</em>, <em>2.11e-03</em>, <em>2.21e-03</em>, <em>2.31e-03</em>, <em>2.41e-03</em>, <em>2.51e-03</em>, <em>2.61e-03</em>, <em>2.71e-03</em>, <em>2.81e-03</em>, <em>2.91e-03</em>, <em>3.01e-03</em>, <em>3.11e-03</em>, <em>3.21e-03</em>, <em>3.31e-03</em>, <em>3.41e-03</em>, <em>3.51e-03</em>, <em>3.61e-03</em>, <em>3.71e-03</em>, <em>3.81e-03</em>, <em>3.91e-03</em>, <em>4.01e-03</em>, <em>4.11e-03</em>, <em>4.21e-03</em>, <em>4.31e-03</em>, <em>4.41e-03</em>, <em>4.51e-03</em>, <em>4.61e-03</em>, <em>4.71e-03</em>, <em>4.81e-03</em>, <em>4.91e-03</em>, <em>5.01e-03</em>, <em>5.11e-03</em>, <em>5.21e-03</em>, <em>5.31e-03</em>, <em>5.41e-03</em>, <em>5.51e-03</em>, <em>5.61e-03</em>, <em>5.71e-03</em>, <em>5.81e-03</em>, <em>5.91e-03</em>, <em>6.01e-03</em>, <em>6.11e-03</em>, <em>6.21e-03</em>, <em>6.31e-03</em>, <em>6.41e-03</em>, <em>6.51e-03</em>, <em>6.61e-03</em>, <em>6.71e-03</em>, <em>6.81e-03</em>, <em>6.91e-03</em>, <em>7.01e-03</em>, <em>7.11e-03</em>, <em>7.21e-03</em>, <em>7.31e-03</em>, <em>7.41e-03</em>, <em>7.51e-03</em>, <em>7.61e-03</em>, <em>7.71e-03</em>, <em>7.81e-03</em>, <em>7.91e-03</em>, <em>8.01e-03</em>, <em>8.11e-03</em>, <em>8.21e-03</em>, <em>8.31e-03</em>, <em>8.41e-03</em>, <em>8.51e-03</em>, <em>8.61e-03</em>, <em>8.71e-03</em>, <em>8.81e-03</em>, <em>8.91e-03</em>, <em>9.01e-03</em>, <em>9.11e-03</em>, <em>9.21e-03</em>, <em>9.31e-03</em>, <em>9.41e-03</em>, <em>9.51e-03</em>, <em>9.61e-03</em>, <em>9.71e-03</em>, <em>9.81e-03</em>, <em>9.91e-03])</em>, <em>k=2</em>, <em>plot=False</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/feature_selection.html#lasso_rank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.feature_selection.lasso_rank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feature selection by LASSO regression.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>formula</strong> – R-style formula string</li>
+<li><strong>X</strong> (<em>list-like</em>) – Column values for X.</li>
+<li><strong>y</strong> (<em>list-like</em>) – A column value for y.</li>
+<li><strong>data</strong> (<em>pandas.DataFrame</em>) – A DataFrame.</li>
+<li><strong>alpha</strong> (<em>Iterable</em>) – An Iterable contains alpha values.</li>
+<li><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – Threshold of coefficient matrix</li>
+<li><strong>plot</strong> (<em>Boolean</em><em> (</em><em>default: False</em><em>)</em>) – True if want to plot the result.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>rankTbl</strong> (<em>pandas.DataFrame</em>) – Feature ranking by given <code class="docutils literal notranslate"><span class="pre">k</span></code>.</li>
+<li><strong>minIntercept</strong> (<em>pandas.DataFrame</em>) – The minimum intercept row in coefficient matrix.</li>
+<li><strong>coefMatrix</strong> (<em>pandas.DataFrame</em>) – A coefficient matrix.</li>
+<li><strong>kBest</strong> (<em>pandas.DataFrame</em>) – When Given <code class="docutils literal notranslate"><span class="pre">k</span></code>, The best intercept row in coefficient matrix.</li>
+<li><strong>kBestPredY</strong> (<em>dict</em>) – A predicted <code class="docutils literal notranslate"><span class="pre">Y</span></code> with <code class="docutils literal notranslate"><span class="pre">kBest</span></code> alpha.</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">unipy.dataset.api</span> <span class="k">as</span> <span class="nn">dm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dm</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="go">[&#39;cars&#39;, &#39;anscombe&#39;, &#39;iris&#39;, &#39;nutrients&#39;, &#39;german_credit_scoring_fars2008&#39;, &#39;winequality_red&#39;, &#39;winequality_white&#39;, &#39;titanic&#39;, &#39;car90&#39;, &#39;diabetes&#39;, &#39;adult&#39;, &#39;tips&#39;, &#39;births_big&#39;, &#39;breast_cancer&#39;, &#39;air_quality&#39;, &#39;births_small&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wine_red</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;winequality_red&#39;</span><span class="p">)</span>
+<span class="go">Dataset : winequality_red</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ranked</span><span class="p">,</span> <span class="n">best_by_intercept</span><span class="p">,</span> <span class="n">coefTbl</span><span class="p">,</span> <span class="n">kBest</span><span class="p">,</span> <span class="n">kBestPred</span> <span class="o">=</span> <span class="n">lasso_rank</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">wine_red</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;quality&#39;</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;quality&#39;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">wine_red</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ranked</span>
+<span class="go">                  rank  lasso_coef  abs_coef</span>
+<span class="go">volatile_acidity     1   -0.675725  0.675725</span>
+<span class="go">alcohol              2    0.194865  0.194865</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">best_by_intercept</span>
+<span class="go">                      RSS  Intercept  fixed_acidity  volatile_acidity      alpha_0.00121  691.956364   3.134874       0.002374         -1.023793</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>citric_acid  residual_sugar  chlorides  free_sulfur_dioxide      alpha_0.00121          0.0             0.0  -0.272912                 -0.0</p>
+<p>total_sulfur_dioxide  density   pH  sulphates   alcohol      alpha_0.00121             -0.000963     -0.0 -0.0   0.505956  0.264552</p>
+<p>var_count</p>
+</div></blockquote>
+<p>alpha_0.00121          6
+&gt;&gt;&gt;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.feature_selection.feature_selection_vif">
+<code class="descclassname">unipy.stats.feature_selection.</code><code class="descname">feature_selection_vif</code><span class="sig-paren">(</span><em>data</em>, <em>thresh=5.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/feature_selection.html#feature_selection_vif"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.feature_selection.feature_selection_vif" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stepwise Feature Selection for multivariate analysis.</p>
+<p>It calculates OLS regressions and the variance inflation factors iterating
+all explanatory variables. If the maximum VIF of a variable is over the
+given threshold, It will be dropped. This process is repeated until all
+VIFs are lower than the given threshold.</p>
+<p>Recommended threshold is lower than 5, because if VIF is greater than 5,
+then the explanatory variable selected is highly collinear with the other
+explanatory variables, and the parameter estimates will have large standard
+errors because of this.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>DataFrame</em><em>, </em><em>(</em><em>rows: observed values</em><em>, </em><em>columns: multivariate variables</em><em>)</em>) – design dataframe with all explanatory variables, as for example used in
+regression</li>
+<li><strong>thresh</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – A threshold of VIF</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
+<li><strong>Filtered_data</strong> (<em>DataFrame</em>) – A subset of the input DataFame</li>
+<li><strong>dropped_List</strong> (<em>DataFrame</em>) – ‘var’ column : dropped variable names from input data columns
+‘vif’ column : variance inflation factor of dropped variables</li>
+</ul>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This function does not save the auxiliary regression.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-func docutils literal notranslate"><span class="pre">statsmodels.stats.outliers_influence.variance_inflation_factor()</span></code></p>
+</div>
+<p class="rubric">References</p>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Variance_inflation_factor">http://en.wikipedia.org/wiki/Variance_inflation_factor</a></p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/unipy.stats.feature_selection.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Young Ju Kim.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/unipy.stats.feature_selection.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

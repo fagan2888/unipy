@@ -1,26 +1,29 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jan  8 03:46:03 2017
+"""Metric Functions.
 
-@author: Young Ju Kim
 """
 
 
 import numpy as np
 import pandas as pd
-import scipy.stats as st
 import statsmodels.api as sm
+import itertools as it
+import scipy.stats as st
+from sklearn.preprocessing import PolynomialFeatures as pnf
+
 
 __all__ = ['deviation',
            'vif',
            'mean_absolute_percentage_error',
            'average_absolute_deviation',
            'median_absolute_deviation',
-           'feature_selection_vif']
+           'calculate_interaction']
 
 
 def deviation(container, method='mean', if_abs=True):
 
+    """Deviation.
+
+    """
     if method == 'mean':
         center = np.nanmean(container)
     elif method == 'median':
@@ -28,7 +31,7 @@ def deviation(container, method='mean', if_abs=True):
 
     resIter = map(lambda x: x - center, container)
 
-    if if_abs == True:
+    if if_abs:
         resIter = map(np.absolute, resIter)
 
     res = np.fromiter(resIter, dtype=np.float)
@@ -36,9 +39,10 @@ def deviation(container, method='mean', if_abs=True):
     return res
 
 
-
 def vif(y, X):
+    """Variance inflation factor.
 
+    """
     assert isinstance(y, pd.Series)
     assert isinstance(X, pd.DataFrame)
 
@@ -100,105 +104,46 @@ def median_absolute_deviation(measure, predict, thresh=2):
     return mad
 
 
-def feature_selection_vif(data, thresh=5.0):
-    '''Stepwise Feature Selection for multivariate analysis.
+def calculate_interaction(rankTbl, pvTbl, target, ranknum=10):
+    """Feature interaction calculation.
 
-    It calculates OLS regressions and the variance inflation factors iterating
-    all explanatory variables. If the maximum VIF of a variable is over the
-    given threshold, It will be dropped. This process is repeated until all
-    VIFs are lower than the given threshold.
+    """
+    rankTop = rankTbl[:ranknum]
+    interPvt = pvTbl[rankTop['var_name']]
+    interAct = pnf(degree=2, interaction_only=True)
 
-    Recommended threshold is lower than 5, because if VIF is greater than 5,
-    then the explanatory variable selected is highly collinear with the other
-    explanatory variables, and the parameter estimates will have large standard
-    errors because of this.
+    interTbl = pd.DataFrame(interAct.fit_transform(interPvt),
+                            index=interPvt.index).iloc[:, 1:]
+    rankTop_col = list(rankTop['var_name'])
+    interAct_col = list(map(' xx '.join,
+                        list(it.combinations(rankTop['var_name'], 2))))
+    interTbl.columns = rankTop_col + interAct_col
 
-    Parameters
-    ----------
-    data : DataFrame, (rows: observed values, columns: multivariate variables)
-        design dataframe with all explanatory variables, as for example used in
-        regression
+    # Generate a Result Table
+    col = ['slope', 'intercept', 'corr_coef', 'p_value', 'std_err']
+    ind = interTbl.columns
+    regMatrix = pd.DataFrame(index=ind, columns=col)
 
-    thresh : int, float
-        A threshold of VIF
+    # Regression
+    Y = pvTbl[target]
+    for _ in range(interTbl.shape[1]):
+        x = interTbl.ix[:, _]
+        regMatrix.iloc[_, ] = st.linregress(x, Y)
 
-    Returns
-    -------
-    Filtered_data : DataFrame
-        A subset of the input DataFame
+    regMatrix['abs_corr_coef'] = abs(regMatrix['corr_coef'])
+    regMatrix.sort_values(by='p_value', ascending=True, inplace=True)
 
-    dropped_List : DataFrame
-        'var' column : dropped variable names from input data columns
-        'vif' column : variance inflation factor of dropped variables
+    rank = regMatrix[(regMatrix['p_value'] < .01) &
+                     (regMatrix['abs_corr_coef'] >= .3)]
 
-    Notes
-    -----
-    This function does not save the auxiliary regression.
+    rank = rank.reset_index()
+    rank['inter_name'] = rank['index']
+    rank = rank[rank['inter_name'].str.find(' xx ') != -1]
+    rank['rank'] = range(1, len(rank) + 1)
 
-    See Also
-    --------
-    statsmodels.stats.outliers_influence.variance_inflation_factor
+    rankCol = ['rank', 'inter_name', 'p_value',
+               'corr_coef', 'abs_corr_coef',
+               'std_err', 'slope', 'intercept']
+    rank = rank[rankCol]
 
-    References
-    ----------
-    http://en.wikipedia.org/wiki/Variance_inflation_factor
-
-    '''
-    assert isinstance(data, pd.DataFrame)
-
-    # Create Dropped variable list
-    dropped = pd.DataFrame(columns=['var', 'vif'])
-
-    # Startswith 'drop = True'(Assume that some variables will be dropped)
-    dropCondition = True
-
-    # Calculate a VIF & Drop columns(variables)
-    while dropCondition:
-
-        # 1. Calculate a VIF
-        vifDict = {col: vif(data.loc[:, col], data.loc[:, data.columns != col])
-                   for col in data.columns}
-
-        # Get the MAXIMUM VIF
-        maxVar = max(vifDict, key=vifDict.get)
-        maxVal = vifDict[maxVar]
-
-        # 2. IF VIF values are over the threshold, THEN drop it
-        if maxVal >= thresh:
-
-            # Keep it
-            dropped = dropped.append({'var': maxVar, 'vif': maxVal},
-                                     ignore_index=True)
-
-            # Drop it
-            data = data.drop(maxVar, axis=1)
-
-            # Print it
-            print("Dropping '" + str(maxVar) + "' " + " VIF: " + str(maxVal))
-
-            # Since a variable has been dropped, the assumption remains
-            dropCondition = True
-
-        else:
-
-            # No variable dropped, the assumption has been rejected
-            dropCondition = False
-
-    # Print Massages
-    remainsMsg = '# Remaining Variables '
-    msgWrapper = '-' * (len(remainsMsg)+1)
-
-    print('\n' + msgWrapper + '\n' + remainsMsg + '\n' + msgWrapper)
-    print(list(data.columns))
-    print('\n')
-
-    droppedMsg = '# Dropped Variables '
-    msgWrapper = '-' * (len(remainsMsg)+1)
-    print('\n' + msgWrapper + '\n' + droppedMsg + '\n' + msgWrapper)
-    print(list(dropped.loc[:, 'var']))
-    print('\n')
-
-    return data, dropped
-
-
-
+    return rank, regMatrix, interTbl

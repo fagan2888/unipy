@@ -1,14 +1,16 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jan  8 03:46:03 2017
+"""Image processing toolkit.
 
-@author: Young Ju Kim
+houghmatrix
+-----------
+- `rgb2gras` -- RGB to Grayscale.
+- `hough_transform` -- Hough Transformation.
+ 
 """
 
 
 from unipy.image import houghmatrix
-
 from unipy.image.houghmatrix import *
+
 
 __all__ = []
 __all__ += houghmatrix.__all__

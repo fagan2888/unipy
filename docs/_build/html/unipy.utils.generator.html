@@ -1,0 +1,409 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>unipy.utils.generator module &#8212; unipy 0.0.4.19 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-unipy.utils.generator">
+<span id="unipy-utils-generator-module"></span><h1>unipy.utils.generator module<a class="headerlink" href="#module-unipy.utils.generator" title="Permalink to this headline">¶</a></h1>
+<p>Docstring for <code class="docutils literal notranslate"><span class="pre">generator</span></code>.</p>
+<div class="section" id="versatile-generators">
+<h2>Versatile Generators<a class="headerlink" href="#versatile-generators" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="74%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="2">Productivity</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ReusableGenerator</td>
+<td>Reusable Generator.</td>
+</tr>
+<tr class="row-odd"><td>re_generator</td>
+<td>Functional API for <code class="docutils literal notranslate"><span class="pre">ReusableGenerator</span></code>.</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="74%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="2">Lazy Evaluation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>split_generator</td>
+<td>Split data by given size.</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="74%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="2">Range Generator</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>num_fromto_generator</td>
+<td>Range number string pairs by given term.</td>
+</tr>
+<tr class="row-odd"><td>dt_fromto_generator</td>
+<td>Range date format string pairs by given term.</td>
+</tr>
+<tr class="row-even"><td>tm_fromto_generator</td>
+<td>Range datetime format string pairs by given term.</td>
+</tr>
+<tr class="row-odd"><td>timestamp_generator</td>
+<td>Range timestamp string pairs by given term.</td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="unipy.utils.generator.ReusableGenerator">
+<em class="property">class </em><code class="descclassname">unipy.utils.generator.</code><code class="descname">ReusableGenerator</code><span class="sig-paren">(</span><em>generator</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/generator.html#ReusableGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.generator.ReusableGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Temporary Interface to re-use generator for convenience.</p>
+<p>Once assigned, It can be infinitely consumed
+<a href="#id1"><span class="problematic" id="id2">**</span></a>as long as an input generator remains un-exhausted.</p>
+<dl class="attribute">
+<dt id="unipy.utils.generator.ReusableGenerator._source">
+<code class="descname">_source</code><a class="headerlink" href="#unipy.utils.generator.ReusableGenerator._source" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>generator</em> – A source generator.</p>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">generator
+<code class="docutils literal notranslate"><span class="pre">itertools.tee</span></code></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">unipy.utils.generator</span> <span class="k">import</span> <span class="n">ReusableGenerator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gen</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gen</span>
+<span class="go">&lt;generator object &lt;genexpr&gt; at 0x11120ebf8&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regen</span> <span class="o">=</span> <span class="n">ReusableGenerator</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regen</span>
+<span class="go">&lt;unipy.utils.generator.ReusableGenerator object at 0x1061a97f0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">regen</span><span class="p">)</span>
+<span class="go">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">regen</span><span class="p">)</span>
+<span class="go">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>  <span class="c1"># If the source is used, copied one will be exhausted too.</span>
+<span class="go">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">regen</span><span class="p">)</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.utils.generator.re_generator">
+<code class="descclassname">unipy.utils.generator.</code><code class="descname">re_generator</code><span class="sig-paren">(</span><em>generator</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/generator.html#re_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.generator.re_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>A functional API for unipy.ReusableGenerator.</p>
+<p>Once assigned, It can be infinitely consumed
+<a href="#id3"><span class="problematic" id="id4">**</span></a>as long as an output generator is called at least one time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>generator</strong> (<em>generator</em>) – An generator to copy.
+This original generator should not be used anywhere else,
+until the copied one consumed at least once.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A generator to be used infinitely.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">generator</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">generator
+<code class="docutils literal notranslate"><span class="pre">itertools.tee</span></code></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">unipy.utils.generator</span> <span class="k">import</span> <span class="n">re_generator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gen</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gen</span>
+<span class="go">&lt;generator object &lt;genexpr&gt; at 0x11120ebf8&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regen</span> <span class="o">=</span> <span class="n">copy_generator</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regen</span>
+<span class="go">&lt;unipy.utils.generator.ReusableGenerator object at 0x1061a97f0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">regen</span><span class="p">)</span>
+<span class="go">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">regen</span><span class="p">)</span>
+<span class="go">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>  <span class="c1"># Once the copied one is used, the source will be exhausted.</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">regen</span><span class="p">)</span>
+<span class="go">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">regen</span><span class="p">)</span>
+<span class="go">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.utils.generator.split_generator">
+<code class="descclassname">unipy.utils.generator.</code><code class="descname">split_generator</code><span class="sig-paren">(</span><em>iterable</em>, <em>size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/generator.html#split_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.generator.split_generator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="unipy.utils.generator.num_fromto_generator">
+<code class="descclassname">unipy.utils.generator.</code><code class="descname">num_fromto_generator</code><span class="sig-paren">(</span><em>start</em>, <em>end</em>, <em>term</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/generator.html#num_fromto_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.generator.num_fromto_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>A range function yields pair chunks.</p>
+<p>It had made for time-formatting query.
+It yields a tuple of (start, start+(term-1)) pair, until start &gt; end.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – end or start, end[, term]
+It works like range function.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><em>tuple</em> – A tuple of (start, start+(term-1)) pair, until start &gt; end.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">yield</span></code></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">unipy.utils.generator</span> <span class="k">import</span> <span class="n">num_fromto_generator</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;BETWEEN </span><span class="si">{pre}</span><span class="s1"> AND </span><span class="si">{nxt}</span><span class="s1">;&#39;</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">query</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pre</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nxt</span><span class="o">=</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">... </span>          <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">num_fromto_generator</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">q_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">BETWEEN 1 AND 10;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">q_list</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">BETWEEN 11 AND 20;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.utils.generator.dt_fromto_generator">
+<code class="descclassname">unipy.utils.generator.</code><code class="descname">dt_fromto_generator</code><span class="sig-paren">(</span><em>start</em>, <em>end</em>, <em>day_term</em>, <em>tm_format='%Y%m%d'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/generator.html#dt_fromto_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.generator.dt_fromto_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>A range function yields datetime formats by pair.</p>
+<p>It had made for time-formatting query.
+It yields a tuple of (start, start+(term-1)) pair, until start &gt; end.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
+<li><strong>end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
+<li><strong>day_term</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – term of days.</li>
+<li><strong>tm_format</strong> (<em>(</em><em>default: '%Y%m%d'</em><em>)</em>) – datetime format string.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><em>tuple</em> – A tuple of (start, start+(term-1)) pair, until start &gt; end.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">yield</span></code></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">unipy.utils.generator</span> <span class="k">import</span> <span class="n">dt_fromto_generator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span>
+<span class="gp">... </span>           <span class="n">dt_fromto_generator</span><span class="p">(</span><span class="s1">&#39;20170101&#39;</span><span class="p">,</span><span class="s1">&#39;20170331&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt_list</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">[(&#39;20170101&#39;, &#39;20170110&#39;),</span>
+<span class="go"> (&#39;20170111&#39;, &#39;20170120&#39;),</span>
+<span class="go"> (&#39;20170121&#39;, &#39;20170130&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.utils.generator.tm_fromto_generator">
+<code class="descclassname">unipy.utils.generator.</code><code class="descname">tm_fromto_generator</code><span class="sig-paren">(</span><em>start, end, day_term, tm_string=['000000', '235959'], tm_format='%Y%m%d'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/generator.html#tm_fromto_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.generator.tm_fromto_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>A range function yields datetime formats by pair.</p>
+<p>It had made for time-formatting query.
+It yields a tuple of (start, start+(term-1)) pair, until start &gt; end.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
+<li><strong>end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
+<li><strong>day_term</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – term of days.</li>
+<li><strong>tm_string</strong> (list (default: <code class="docutils literal notranslate"><span class="pre">['000000',</span> <span class="pre">'235959']</span></code>)) – time strings to concatenate.</li>
+<li><strong>tm_format</strong> (<em>(</em><em>default: '%Y%m%d'</em><em>)</em>) – datetime format string.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><em>tuple</em> – A tuple of (start, start+(term-1)) pair, until start &gt; end.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">yield</span></code></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">unipy.utils.generator</span> <span class="k">import</span> <span class="n">tm_fromto_generator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tm_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span>
+<span class="gp">... </span>           <span class="n">tm_fromto_generator</span><span class="p">(</span><span class="s1">&#39;20170101&#39;</span><span class="p">,</span><span class="s1">&#39;20170331&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tm_list</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">[(&#39;20170101000000&#39;, &#39;20170110235959&#39;),</span>
+<span class="go"> (&#39;20170111000000&#39;, &#39;20170120235959&#39;),</span>
+<span class="go"> (&#39;20170121000000&#39;, &#39;20170130235959&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.utils.generator.timestamp_generator">
+<code class="descclassname">unipy.utils.generator.</code><code class="descname">timestamp_generator</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/generator.html#timestamp_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.generator.timestamp_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>A range function yields pair timestep strings.</p>
+<p>It had made for time-formatting query.
+It yields a tuple of (start, start+(term-1)) pair, until start &gt; end.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – end or start, end[, term]
+It works like range function.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><em>tuple</em> – A tuple of (start, start+(term-1)) pair, until start &gt; end.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">yield</span></code></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">unipy.utils.generator</span> <span class="k">import</span> <span class="n">timestamp_generator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timestamp_generator</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">&lt;generator object timestamp_generator at 0x10f519678&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">timestamp_generator</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">[(1, 5), (6, 10), (11, 15)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">begin</span><span class="p">,</span> <span class="n">fin</span><span class="p">,</span> <span class="n">period</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">timestamp_generator</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">fin</span><span class="p">,</span> <span class="n">period</span><span class="p">))</span>
+<span class="go">[(1, 3), (4, 6), (7, 9), (10, 12)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_sequence</span> <span class="o">=</span> <span class="n">timestamp_generator</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">fin</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time_msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{start:2}</span><span class="s2"> to </span><span class="si">{end:2}</span><span class="s2">, </span><span class="si">{term:2}</span><span class="s2"> days.&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">time</span> <span class="ow">in</span> <span class="n">time_sequence</span><span class="p">:</span>
+<span class="gp">... </span><span class="n">b</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">time</span>
+<span class="gp">... </span><span class="nb">print</span><span class="p">(</span><span class="n">time_msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">term</span><span class="o">=</span><span class="n">period</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="go"> 1 to  3,  3 days.</span>
+<span class="go"> 4 to  6,  3 days.</span>
+<span class="go"> 7 to  9,  3 days.</span>
+<span class="go">10 to 12,  3 days.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">unipy.utils.generator module</a><ul>
+<li><a class="reference internal" href="#versatile-generators">Versatile Generators</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/unipy.utils.generator.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Young Ju Kim.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/unipy.utils.generator.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

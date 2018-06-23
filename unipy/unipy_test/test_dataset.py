@@ -6,7 +6,7 @@ Created on Thu Jan  5 20:55:26 2017
 """
 
 
-#%% Sample datasets
+# Import dataset manager
 import unipy.dataset.api as dm
 
 # Extract Datasets for the first time
@@ -19,6 +19,5 @@ dm.reset()
 dm.ls()
 
 # Load Datasets
-wine1 = dm.load('winequality_red')
-wine2 = dm.load('winequality_white')
-
+data = dm.load('anscombe')
+data = dm.load(2)

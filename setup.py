@@ -16,7 +16,7 @@ except ImportError:
     from distutils.core import setup, find_packages
 
 
-__version__ = '0.0.4.18'
+__version__ = '0.0.4.19'
 
 long_desc = """
 This is made for some specific environment.
@@ -64,6 +64,7 @@ required_packages = [
                      'scikit-image >= 0.13.0',
                      'PyDrive >= 1.2.1',
                      'oauth2client >= 4.1.2',
+                     'google-auth-oauthlib >= 0.2.0',
                     #'pyqt5',
                      'mglearn >= 0.1.6',
                     # 'numba >= 0.34.0',
@@ -103,5 +104,3 @@ setup(name='unipy',
       zip_safe=False,
       package_data={'unipy': ['*.gz', 'dataset/resources.tar.gz']}
       )
-
-

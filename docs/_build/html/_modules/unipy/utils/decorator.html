@@ -1,0 +1,362 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>unipy.utils.decorator &#8212; unipy 0.0.4.19 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for unipy.utils.decorator</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Docstring for ``decorator``.</span>
+
+<span class="sd">========================</span>
+<span class="sd">Function Decorator</span>
+<span class="sd">========================</span>
+<span class="sd">==================== =========================================================</span>
+<span class="sd">Profiler</span>
+<span class="sd">==============================================================================</span>
+<span class="sd">time_profiler        Function running time command-line profiler.</span>
+<span class="sd">time_logger          Function running time log profiler.</span>
+<span class="sd">==================== =========================================================</span>
+<span class="sd">==================== =========================================================</span>
+<span class="sd">Commandline printout</span>
+<span class="sd">==============================================================================</span>
+<span class="sd">job_wrapper          Command-line line dragging tool.</span>
+<span class="sd">==================== =========================================================</span>
+<span class="sd">==================== =========================================================</span>
+<span class="sd">Code Translation</span>
+<span class="sd">==============================================================================</span>
+<span class="sd">Infix                Function to operator translator.</span>
+<span class="sd">infix                Functional API for ``Infix``.</span>
+<span class="sd">==================== =========================================================</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">dt</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">wraps</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;time_profiler&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;time_logger&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;job_wrapper&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;Infix&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;infix&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="time_profiler"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.utils.decorator.time_profiler">[docs]</a><span class="k">def</span> <span class="nf">time_profiler</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print wrapper for time profiling.</span>
+
+<span class="sd">    This wrapper prints out start, end and elapsed time.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func: Function</span>
+<span class="sd">        A function to profile.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Function</span>
+<span class="sd">        A wrapped function.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    ``functools.wraps``</span>
+<span class="sd">    ``decorator``</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import unipy as up</span>
+<span class="sd">    &gt;&gt;&gt; @up.time_profiler</span>
+<span class="sd">    ... def afunc(i):</span>
+<span class="sd">    ...     return len(list(range(i)))</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; res = afunc(58)</span>
+<span class="sd">    (afunc) Start   : 2018-06-20 22:11:35.511374</span>
+<span class="sd">    (afunc) End     : 2018-06-20 22:11:35.511424</span>
+<span class="sd">    (afunc) Elapsed :             0:00:00.000050</span>
+<span class="sd">    &gt;&gt;&gt; res</span>
+<span class="sd">    58</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">profiler</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="n">start_tm</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) Start   : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">start_tm</span><span class="p">))</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">end_tm</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) End     : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">end_tm</span><span class="p">))</span>
+
+        <span class="n">elapsed_tm</span> <span class="o">=</span> <span class="n">end_tm</span> <span class="o">-</span> <span class="n">start_tm</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) Elapsed : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">elapsed_tm</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">return</span> <span class="n">profiler</span></div>
+
+
+<div class="viewcode-block" id="time_logger"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.utils.decorator.time_logger">[docs]</a><span class="k">def</span> <span class="nf">time_logger</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Logging wrapper for time profiling.</span>
+
+<span class="sd">    This wrapper logs start, end and elapsed time.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func: Function</span>
+<span class="sd">        A function to profile.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Function</span>
+<span class="sd">        A wrapped function.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    ``functools.wraps``</span>
+<span class="sd">    ``decorator``</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import unipy as up</span>
+<span class="sd">    &gt;&gt;&gt; @up.time_logger</span>
+<span class="sd">    ... def afunc(i):</span>
+<span class="sd">    ...     return len(list(range(i)))</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; res = afunc(58)</span>
+<span class="sd">    (afunc) Start   : 2018-06-20 22:11:35.511374</span>
+<span class="sd">    (afunc) End     : 2018-06-20 22:11:35.511424</span>
+<span class="sd">    (afunc) Elapsed :             0:00:00.000050</span>
+<span class="sd">    &gt;&gt;&gt; res</span>
+<span class="sd">    58</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">logger</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="n">start_tm</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) Start   : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">start_tm</span><span class="p">))</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">end_tm</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) End     : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">end_tm</span><span class="p">))</span>
+
+        <span class="n">elapsed_tm</span> <span class="o">=</span> <span class="n">end_tm</span> <span class="o">-</span> <span class="n">start_tm</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) Elapsed : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">elapsed_tm</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">return</span> <span class="n">logger</span></div>
+
+
+<div class="viewcode-block" id="job_wrapper"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.utils.decorator.job_wrapper">[docs]</a><span class="k">def</span> <span class="nf">job_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print wrapper for time profiling.</span>
+
+<span class="sd">    This wrapper prints out start &amp; end line.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func: Function</span>
+<span class="sd">        A function to separate print-line job.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Function</span>
+<span class="sd">        A wrapped function.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    ``functools.wraps``</span>
+<span class="sd">    ``decorator``</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import unipy as up</span>
+<span class="sd">    &gt;&gt;&gt; @up.job_wrapper</span>
+<span class="sd">    ... def afunc(i):</span>
+<span class="sd">    ...     return len(list(range(i)))</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; afunc(458)</span>
+<span class="sd">    ----------- [afunc] START -----------</span>
+
+<span class="sd">    -----------  [afunc] END  -----------</span>
+
+<span class="sd">    afunc : 0:00:00.000023</span>
+
+<span class="sd">    458</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="c1"># Message Length = 40 + 2 (\n)</span>
+        <span class="n">dash_len</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="mi">40</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span> <span class="o">-</span> <span class="mi">12</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">start_msg</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="n">dash_len</span> <span class="o">+</span> <span class="s1">&#39; [</span><span class="si">{}</span><span class="s1">] START &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span> <span class="o">+</span> \
+                    <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="n">dash_len</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">start_msg</span><span class="p">)</span>
+        <span class="n">start_tm</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">end_tm</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">end_msg</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="n">dash_len</span> <span class="o">+</span> <span class="s1">&#39;  [</span><span class="si">{}</span><span class="s1">] END  &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span> <span class="o">+</span> \
+                  <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="n">dash_len</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">end_msg</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> :&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">),</span> <span class="n">end_tm</span> <span class="o">-</span> <span class="n">start_tm</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+<div class="viewcode-block" id="Infix"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.utils.decorator.Infix">[docs]</a><span class="k">class</span> <span class="nc">Infix</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper for define an operator.</span>
+
+<span class="sd">    This wrapper translates a function to an operator.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Function</span>
+<span class="sd">        A wrapped function.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    ``functools.partial``</span>
+<span class="sd">    ``decorator``</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; @Infix</span>
+<span class="sd">    ... def add(x, y):</span>
+<span class="sd">    ...     return x + y</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; 5 |add| 6</span>
+<span class="sd">    11</span>
+<span class="sd">    &gt;&gt;&gt; instanceof = Infix(isinstance)</span>
+<span class="sd">    &gt;&gt;&gt; 5 |instanceof| int</span>
+<span class="sd">    True</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;__init__ method.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        function: Function</span>
+<span class="sd">            A function to translate as an operator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+
+    <span class="k">def</span> <span class="nf">__or__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__ror__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Infix</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__rshift__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__rlshift__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Infix</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="infix"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.utils.decorator.infix">[docs]</a><span class="k">def</span> <span class="nf">infix</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A functional API for Infix decorator.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Function</span>
+<span class="sd">        A wrapped function.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    ``unipy.utils.wrapper.infix``</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; @infix</span>
+<span class="sd">    ... def add(x, y):</span>
+<span class="sd">    ...     return x + y</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; 5 |add| 6</span>
+<span class="sd">    11</span>
+<span class="sd">    &gt;&gt;&gt; instanceof = infix(isinstance)</span>
+<span class="sd">    &gt;&gt;&gt; 5 |instanceof| int</span>
+<span class="sd">    True</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Infix</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Young Ju Kim.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,189 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>unipy.stats.regression &#8212; unipy 0.0.4.19 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for unipy.stats.regression</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Sun Jan  8 03:46:03 2017</span>
+
+<span class="sd">@author: Young Ju Kim</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">Lasso</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lassoRegression&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;lasso_rank&#39;</span><span class="p">]</span>
+
+
+<span class="c1"># Defining a Lasso generic function</span>
+<div class="viewcode-block" id="lassoRegression"><a class="viewcode-back" href="../../../unipy.stats.html#unipy.lassoRegression">[docs]</a><span class="k">def</span> <span class="nf">lassoRegression</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">predictors</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+
+    <span class="c1"># Fit to the model</span>
+    <span class="n">lassoReg</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mf">1e5</span><span class="p">)</span>
+    <span class="n">lassoReg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">predictors</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+    <span class="n">yPredict</span> <span class="o">=</span> <span class="n">lassoReg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">predictors</span><span class="p">])</span>
+
+    <span class="c1"># Return the result in pre-defined format</span>
+    <span class="n">rss</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">yPredict</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[</span><span class="n">rss</span><span class="p">]</span>
+    <span class="n">ret</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">lassoReg</span><span class="o">.</span><span class="n">intercept_</span><span class="p">])</span>
+    <span class="n">ret</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">lassoReg</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ret</span><span class="p">,</span> <span class="n">yPredict</span></div>
+
+
+<div class="viewcode-block" id="lasso_rank"><a class="viewcode-back" href="../../../unipy.stats.html#unipy.lasso_rank">[docs]</a><span class="k">def</span> <span class="nf">lasso_rank</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    
+    <span class="c1"># Generate an alias list: [x_1, ..., x_n]</span>
+    <span class="n">colBackup</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">predictors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x_</span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+    <span class="n">dataAlias</span> <span class="o">=</span> <span class="n">predictors</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+    
+    <span class="c1"># Generate an alias-variable Match Table</span>
+    <span class="n">matchTbl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;alias&#39;</span><span class="p">:</span> <span class="n">dataAlias</span><span class="p">,</span> <span class="s1">&#39;var_name&#39;</span><span class="p">:</span> <span class="n">colBackup</span><span class="p">})</span>
+    
+    <span class="c1"># Change Columns to Alias</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">dataAlias</span>
+    
+    <span class="c1"># Generate Alphas for Lasso</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">.</span><span class="mi">00001</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">001</span><span class="p">)</span>
+    
+    <span class="c1"># Generate A Result Table</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;rss&#39;</span><span class="p">,</span> <span class="s1">&#39;intercept&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;coef_&#39;</span> <span class="o">+</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">predictors</span><span class="p">]</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;alpha_</span><span class="si">%.2g</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">alpha</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alpha</span><span class="p">))]</span>
+    <span class="n">coefMatrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">ind</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">predict</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="c1"># Defining a Lasso generic function</span>
+    <span class="k">def</span> <span class="nf">lassoRegression</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">predictors</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+    
+        <span class="c1"># Fit to the model</span>
+        <span class="n">lassoReg</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mf">1e5</span><span class="p">)</span>
+        <span class="n">lassoReg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">predictors</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+        <span class="n">yPredict</span> <span class="o">=</span> <span class="n">lassoReg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">predictors</span><span class="p">])</span>
+    
+        <span class="c1"># Return the result in pre-defined format</span>
+        <span class="n">rss</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">yPredict</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[</span><span class="n">rss</span><span class="p">]</span>
+        <span class="n">ret</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">lassoReg</span><span class="o">.</span><span class="n">intercept_</span><span class="p">])</span>
+        <span class="n">ret</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">lassoReg</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+    
+        <span class="k">return</span> <span class="n">ret</span><span class="p">,</span> <span class="n">yPredict</span>
+    
+    <span class="c1"># Iterate over the alpha values</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alpha</span><span class="p">)):</span>
+        <span class="n">coefMatrix</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">_</span><span class="p">,</span> <span class="p">],</span> <span class="n">pred</span> <span class="o">=</span> <span class="n">lassoRegression</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">predictors</span><span class="p">,</span> <span class="n">alpha</span><span class="p">[</span><span class="n">_</span><span class="p">])</span>
+        <span class="n">predict</span><span class="p">[</span><span class="n">ind</span><span class="p">[</span><span class="n">_</span><span class="p">]]</span> <span class="o">=</span> <span class="n">pred</span>
+        
+    <span class="n">coefMatrix</span><span class="p">[</span><span class="s1">&#39;var_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coefMatrix</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span>
+    
+    <span class="c1"># Filter by thresh &gt;= var_count</span>
+    <span class="n">filtered</span> <span class="o">=</span> <span class="n">coefMatrix</span><span class="p">[</span><span class="n">coefMatrix</span><span class="p">[</span><span class="s1">&#39;var_count&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">thresh</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Get Predicted Y value</span>
+    <span class="n">alphaVal</span> <span class="o">=</span> <span class="n">filtered</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">predictedY</span> <span class="o">=</span> <span class="n">predict</span><span class="p">[</span><span class="n">alphaVal</span><span class="p">]</span>
+    
+    <span class="c1"># Get a Rank Table</span>
+    <span class="n">lassoVal</span> <span class="o">=</span> <span class="n">filtered</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">filtered</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()][</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">filteredTbl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;lasso_coef&#39;</span><span class="p">:</span> <span class="n">lassoVal</span><span class="p">,</span>
+                                <span class="s1">&#39;abs_coef&#39;</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">lassoVal</span><span class="p">)})</span>
+    <span class="n">filteredTbl</span> <span class="o">=</span> <span class="n">filteredTbl</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;abs_coef&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">filteredTbl</span> <span class="o">=</span> <span class="n">filteredTbl</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">filteredTbl</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filteredTbl</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span>
+    
+    <span class="n">filteredTbl</span> <span class="o">=</span> <span class="n">filteredTbl</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">matchTbl</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;alias&#39;</span><span class="p">)</span>
+    <span class="n">filteredTbl</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">filteredTbl</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">rankTbl</span> <span class="o">=</span> <span class="n">filteredTbl</span><span class="p">[[</span><span class="s1">&#39;rank&#39;</span><span class="p">,</span> <span class="s1">&#39;var_name&#39;</span><span class="p">,</span> <span class="s1">&#39;lasso_coef&#39;</span><span class="p">,</span> <span class="s1">&#39;abs_coef&#39;</span><span class="p">]]</span>
+    
+    <span class="c1"># Plots</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Top </span><span class="si">{}</span><span class="s1"> variables : absolute coefficient by Lasso&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">filteredTbl</span><span class="p">))</span>
+    <span class="n">rankTbl</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;var_name&#39;</span><span class="p">)[</span><span class="s1">&#39;abs_coef&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;barh&#39;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">rankTbl</span><span class="p">,</span> <span class="n">coefMatrix</span><span class="p">,</span> <span class="n">matchTbl</span><span class="p">,</span> <span class="n">predictedY</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1">#ranked, lsCoef, prmTbl, predicted = lasso(pvTbl)</span>
+    <span class="k">pass</span>    
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Young Ju Kim.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

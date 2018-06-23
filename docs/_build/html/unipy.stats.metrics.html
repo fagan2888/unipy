@@ -1,0 +1,141 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>unipy.stats.metrics module &#8212; unipy 0.0.4.19 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-unipy.stats.metrics">
+<span id="unipy-stats-metrics-module"></span><h1>unipy.stats.metrics module<a class="headerlink" href="#module-unipy.stats.metrics" title="Permalink to this headline">¶</a></h1>
+<p>Metric Functions.</p>
+<dl class="function">
+<dt id="unipy.stats.metrics.deviation">
+<code class="descclassname">unipy.stats.metrics.</code><code class="descname">deviation</code><span class="sig-paren">(</span><em>container</em>, <em>method='mean'</em>, <em>if_abs=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/metrics.html#deviation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.metrics.deviation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deviation.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.metrics.vif">
+<code class="descclassname">unipy.stats.metrics.</code><code class="descname">vif</code><span class="sig-paren">(</span><em>y</em>, <em>X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/metrics.html#vif"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.metrics.vif" title="Permalink to this definition">¶</a></dt>
+<dd><p>Variance inflation factor.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.metrics.mean_absolute_percentage_error">
+<code class="descclassname">unipy.stats.metrics.</code><code class="descname">mean_absolute_percentage_error</code><span class="sig-paren">(</span><em>measure</em>, <em>predict</em>, <em>thresh=3.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/metrics.html#mean_absolute_percentage_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.metrics.mean_absolute_percentage_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mean Absolute Percentage Error.
+It is a percent of errors.
+It measures the prediction accuracy of a forecasting method in Statistics
+with the real mesured values and the predicted values, for example in trend
+estimation.
+If MAPE is 5, it means this prediction method potentially has 5% error.
+It cannot be used if there are zero values,
+because there would be a division by zero.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.metrics.average_absolute_deviation">
+<code class="descclassname">unipy.stats.metrics.</code><code class="descname">average_absolute_deviation</code><span class="sig-paren">(</span><em>measure</em>, <em>predict</em>, <em>thresh=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/metrics.html#average_absolute_deviation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.metrics.average_absolute_deviation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average Absolute Deviation.
+It is …
+It measures the prediction accuracy of a forecasting method in Statistics
+with the real mesured values and the predicted values, for example in trend
+estimation.
+If MAD is 5, it means this prediction method potentially has…</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.metrics.median_absolute_deviation">
+<code class="descclassname">unipy.stats.metrics.</code><code class="descname">median_absolute_deviation</code><span class="sig-paren">(</span><em>measure</em>, <em>predict</em>, <em>thresh=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/metrics.html#median_absolute_deviation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.metrics.median_absolute_deviation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Median Absolute Deviation.
+It is …
+It measures the prediction accuracy of a forecasting method in Statistics
+with the real mesured values and the predicted values, for example in trend
+estimation.
+If MAD is 5, it means this prediction method potentially has…</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.stats.metrics.calculate_interaction">
+<code class="descclassname">unipy.stats.metrics.</code><code class="descname">calculate_interaction</code><span class="sig-paren">(</span><em>rankTbl</em>, <em>pvTbl</em>, <em>target</em>, <em>ranknum=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/metrics.html#calculate_interaction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.metrics.calculate_interaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feature interaction calculation.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/unipy.stats.metrics.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Young Ju Kim.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/unipy.stats.metrics.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

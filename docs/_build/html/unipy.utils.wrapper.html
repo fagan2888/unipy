@@ -1,0 +1,196 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>unipy.utils.wrapper module &#8212; unipy 0.0.4.19 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-unipy.utils.wrapper">
+<span id="unipy-utils-wrapper-module"></span><h1>unipy.utils.wrapper module<a class="headerlink" href="#module-unipy.utils.wrapper" title="Permalink to this headline">¶</a></h1>
+<p>Docstring for <code class="docutils literal notranslate"><span class="pre">wrapper</span></code>.</p>
+<div class="section" id="high-level-code-wrapper">
+<h2>High-level Code Wrapper<a class="headerlink" href="#high-level-code-wrapper" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="74%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="2">Operation Wrapper</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>multiprocessor</td>
+<td>Functional wrapper for multiprocessing.</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="74%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head" colspan="2">Interfaces</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>uprint</td>
+<td>Print option interface within a function.</td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="unipy.utils.wrapper.multiprocessor">
+<code class="descclassname">unipy.utils.wrapper.</code><code class="descname">multiprocessor</code><span class="sig-paren">(</span><em>func</em>, <em>worker=2</em>, <em>arg_zip=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/wrapper.html#multiprocessor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.wrapper.multiprocessor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use multiprocessing as a function.</p>
+<p>Just for convenience.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>func</strong> (<em>Function</em>) – Any function without <code class="docutils literal notranslate"><span class="pre">lambda</span></code>.</li>
+<li><strong>worker</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em> (</em><em>default: 2</em><em>)</em>) – A number of processes.</li>
+<li><strong>arg_zip</strong> (<em>zip</em><em> (</em><em>default: None</em><em>)</em>) – A <code class="docutils literal notranslate"><span class="pre">zip</span></code> instance.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list contains results of each processes.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.6)">list</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">multiprocessing.pool</span></code></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">unipy.utils.wrapper</span> <span class="k">import</span> <span class="n">multiprocessor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blist</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">afunc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">multiprocessor</span><span class="p">(</span><span class="n">afunc</span><span class="p">,</span> <span class="n">arg_zip</span><span class="o">=</span><span class="nb">zip</span><span class="p">(</span><span class="n">alist</span><span class="p">,</span> <span class="n">blist</span><span class="p">))</span>
+<span class="go">[0, 0, 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">bfunc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">multiprocessor</span><span class="p">(</span><span class="n">bfunc</span><span class="p">,</span> <span class="n">arg_zip</span><span class="o">=</span><span class="nb">zip</span><span class="p">(</span><span class="n">alist</span><span class="p">))</span>
+<span class="go">[3, 4, 5]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.utils.wrapper.uprint">
+<code class="descclassname">unipy.utils.wrapper.</code><code class="descname">uprint</code><span class="sig-paren">(</span><em>*args</em>, <em>print_ok=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/wrapper.html#uprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.wrapper.uprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print option interface.</p>
+<p>This function is equal to <code class="docutils literal notranslate"><span class="pre">print</span></code> function but added <code class="docutils literal notranslate"><span class="pre">print_ok</span></code>
+option. This allows you to control printing in a function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>*args</strong> (whatever <code class="docutils literal notranslate"><span class="pre">print</span></code> allows.) – It is same as <code class="docutils literal notranslate"><span class="pre">print</span></code> does.</li>
+<li><strong>print_ok</strong> (<em>Boolean</em><em> (</em><em>default: True</em><em>)</em>) – An option whether you want to print something out or not.</li>
+<li><strong>arg_zip</strong> (<em>zip</em><em> (</em><em>default: None</em><em>)</em>) – A <code class="docutils literal notranslate"><span class="pre">zip</span></code> instance.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">unipy.utils.wrapper module</a><ul>
+<li><a class="reference internal" href="#high-level-code-wrapper">High-level Code Wrapper</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/unipy.utils.wrapper.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Young Ju Kim.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/unipy.utils.wrapper.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

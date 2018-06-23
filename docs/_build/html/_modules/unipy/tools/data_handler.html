@@ -1,0 +1,869 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>unipy.tools.data_handler &#8212; unipy 0.0.4.19 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for unipy.tools.data_handler</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Data manipulation tools.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">glob</span> <span class="k">import</span> <span class="n">glob</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">it</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<span class="c1"># Split an iterable by equal length</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;exc&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;splitter&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;even_chunk&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;pair_unique&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;df_pair_unique&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;map_to_tuple&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;map_to_list&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;merge_csv&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;nancumsum&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;depth&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;zero_padder_2d&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;zero_padder_3d&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="exc"><a class="viewcode-back" href="../../../unipy.tools.data_handler.html#unipy.tools.exc">[docs]</a><span class="k">def</span> <span class="nf">exc</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">blacklist</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get items except the given list.</span>
+
+<span class="sd">    This function splits an Iterable into the given size of multiple chunks.</span>
+<span class="sd">    The items of An iterable should be the same type.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    source: Iterable</span>
+<span class="sd">        An Iterable to filter.</span>
+
+<span class="sd">    blacklist: Iterable</span>
+<span class="sd">        A list contains items to eliminate.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        A filtered list.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    ``Infix Operator``</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import unipy as up</span>
+<span class="sd">    &gt;&gt;&gt; up.splitter(list(range(10)), how=&#39;equal&#39;, size=3)</span>
+<span class="sd">    [(0, 1, 2, 3), (4, 5, 6), (7, 8, 9)]</span>
+
+<span class="sd">    &gt;&gt;&gt; up.splitter(list(range(10)), how=&#39;remaining&#39;, size=3)</span>
+<span class="sd">    [(0, 1, 2), (3, 4, 5), (6, 7, 8), (9,)]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">source</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">blacklist</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">res</span></div>
+
+
+<span class="c1"># A Function to split an Iterable into smaller chunks</span>
+<div class="viewcode-block" id="splitter"><a class="viewcode-back" href="../../../unipy.tools.data_handler.html#unipy.tools.splitter">[docs]</a><span class="k">def</span> <span class="nf">splitter</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Split data with given size.</span>
+
+<span class="sd">    This function splits an Iterable into the given size of multiple chunks.</span>
+<span class="sd">    The items of An iterable should be the same type.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    iterable: Iterable</span>
+<span class="sd">        An Iterable to split.</span>
+
+<span class="sd">    how: {&#39;equal&#39;, &#39;remaining&#39;}</span>
+<span class="sd">        The method to split.</span>
+<span class="sd">        &#39;equal&#39; is to split chunks with the approximate length</span>
+<span class="sd">        within the given size.</span>
+<span class="sd">        &#39;remaining&#39; is to split chunks with the given size,</span>
+<span class="sd">        and the remains are bound as the last chunk.</span>
+
+<span class="sd">    size: int</span>
+<span class="sd">        The number of chunks.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        A list of chunks.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    numpy.array_split</span>
+<span class="sd">    itertools.islice</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import unipy as up</span>
+<span class="sd">    &gt;&gt;&gt; up.splitter(list(range(10)), how=&#39;equal&#39;, size=3)</span>
+<span class="sd">    [(0, 1, 2, 3), (4, 5, 6), (7, 8, 9)]</span>
+
+<span class="sd">    &gt;&gt;&gt; up.splitter(list(range(10)), how=&#39;remaining&#39;, size=3)</span>
+<span class="sd">    [(0, 1, 2), (3, 4, 5), (6, 7, 8), (9,)]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span>
+    <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;size&#39; must be greater than 0&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">how</span> <span class="o">==</span> <span class="s1">&#39;equal&#39;</span><span class="p">:</span>
+            <span class="n">splitted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span> <span class="o">/</span> <span class="n">size</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">resList</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span> <span class="k">for</span> <span class="n">chunks</span> <span class="ow">in</span> <span class="n">splitted</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">resList</span>
+
+        <span class="k">elif</span> <span class="n">how</span> <span class="o">==</span> <span class="s1">&#39;remaining&#39;</span><span class="p">:</span>
+            <span class="n">tmpIterator</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+            <span class="n">splitted</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">tmpIterator</span><span class="p">,</span> <span class="n">size</span><span class="p">)),</span> <span class="p">())</span>
+            <span class="n">resList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">splitted</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">resList</span></div>
+
+
+<span class="k">def</span> <span class="nf">_even_chunk</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span>
+    <span class="n">iterator</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+    <span class="n">slicer</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">iterator</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)),</span> <span class="p">[])</span>
+    <span class="k">yield from</span> <span class="n">slicer</span>
+
+
+<span class="k">def</span> <span class="nf">_even_chunk_arr</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">axis</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;row&#39;</span><span class="p">]:</span>
+        <span class="n">slicer</span> <span class="o">=</span> <span class="n">_even_chunk</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">axis</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">]:</span>
+        <span class="n">slicer</span> <span class="o">=</span> <span class="n">_even_chunk</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">slicer</span>
+
+
+<span class="k">def</span> <span class="nf">_even_chunk_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">axis</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;row&#39;</span><span class="p">]:</span>
+        <span class="n">colnames</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+        <span class="n">zipped</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">_even_chunk</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">),</span>
+                     <span class="n">_even_chunk</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">))</span>
+        <span class="n">slicer</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">row_arr</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">row_idx</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">colnames</span><span class="p">)</span>
+                  <span class="k">for</span> <span class="n">row_idx</span><span class="p">,</span> <span class="n">row_arr</span> <span class="ow">in</span> <span class="n">zipped</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">axis</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">]:</span>
+        <span class="n">rownames</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span>
+        <span class="n">zipped</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">_even_chunk</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">),</span>
+                     <span class="n">_even_chunk</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">))</span>
+        <span class="n">slicer</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">col_arr</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">col_idx</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">rownames</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+                  <span class="k">for</span> <span class="n">col_idx</span><span class="p">,</span> <span class="n">col_arr</span> <span class="ow">in</span> <span class="n">zipped</span><span class="p">)</span>
+
+    <span class="k">yield from</span> <span class="n">slicer</span>
+
+
+<span class="k">def</span> <span class="nf">_even_chunk_series</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">zipped</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">_even_chunk</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">),</span>
+                 <span class="n">_even_chunk</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">))</span>
+    <span class="n">slicer</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">val_arr</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+              <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">val_arr</span> <span class="ow">in</span> <span class="n">zipped</span><span class="p">)</span>
+
+    <span class="k">yield from</span> <span class="n">slicer</span>
+
+
+<div class="viewcode-block" id="even_chunk"><a class="viewcode-back" href="../../../unipy.tools.data_handler.html#unipy.tools.even_chunk">[docs]</a><span class="k">def</span> <span class="nf">even_chunk</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Split data into even size.</span>
+
+<span class="sd">    This function splits an Iterable into the given size of multiple chunks.</span>
+<span class="sd">    The items of An iterable should be the same type.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    iterable: Iterable</span>
+<span class="sd">        An Iterable to split. If N-dimensional, It is chunked by 1st dimension.</span>
+
+<span class="sd">    chunk_size: ``int``</span>
+<span class="sd">        The length of each chunks.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    generator</span>
+<span class="sd">        A generator yields a list of chunks. The data type of the elements</span>
+<span class="sd">        in a list are equal to the source data type.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    ``itertools.islice``</span>
+<span class="sd">    ``yield from``</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; from unipy.tools.data_handler import even_chunk</span>
+<span class="sd">    &gt;&gt;&gt; data = list(range(7))  # list, 1D</span>
+<span class="sd">    &gt;&gt;&gt; print(data)</span>
+<span class="sd">    [0, 1, 2, 3, 4, 5, 6]</span>
+<span class="sd">    &gt;&gt;&gt; chunked_gen = even_chunk(data, 3)</span>
+<span class="sd">    &gt;&gt;&gt; print(chunked_gen)</span>
+<span class="sd">    &lt;generator object even_chunk at 0x7fc4924897d8&gt;</span>
+<span class="sd">    &gt;&gt;&gt; next(chunked_gen)</span>
+<span class="sd">    [0, 1, 2]</span>
+<span class="sd">    &gt;&gt;&gt; chunked = list(even_chunk(data, 3))</span>
+<span class="sd">    &gt;&gt;&gt; print(chunked)</span>
+<span class="sd">    [[0, 1, 2], [3, 4, 5], [6]]</span>
+<span class="sd">    &gt;&gt;&gt; data = np.arange(30).reshape(-1, 3)  # np.ndarray, 2D</span>
+<span class="sd">    &gt;&gt;&gt; print(data)</span>
+<span class="sd">    array([[ 0,  1,  2],</span>
+<span class="sd">           [ 3,  4,  5],</span>
+<span class="sd">           [ 6,  7,  8],</span>
+<span class="sd">           [ 9, 10, 11],</span>
+<span class="sd">           [12, 13, 14],</span>
+<span class="sd">           [15, 16, 17],</span>
+<span class="sd">           [18, 19, 20],</span>
+<span class="sd">           [21, 22, 23],</span>
+<span class="sd">           [24, 25, 26],</span>
+<span class="sd">           [27, 28, 29]])</span>
+<span class="sd">    &gt;&gt;&gt; chunked_gen = even_chunk(data, 4)</span>
+<span class="sd">    &gt;&gt;&gt; next(chunked_gen)</span>
+<span class="sd">    [array([0, 1, 2]), array([3, 4, 5]), array([6, 7, 8]), array([ 9, 10, 11])]</span>
+<span class="sd">    &gt;&gt;&gt; next(chunked_gen)</span>
+<span class="sd">    [array([12, 13, 14]),</span>
+<span class="sd">     array([15, 16, 17]),</span>
+<span class="sd">     array([18, 19, 20]),</span>
+<span class="sd">     array([21, 22, 23])]</span>
+<span class="sd">    &gt;&gt;&gt; next(chunked_gen)</span>
+<span class="sd">    [array([24, 25, 26]), array([27, 28, 29])]</span>
+<span class="sd">    &gt;&gt;&gt; next(chunked_gen)</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">    File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span>
+<span class="sd">    StopIteration</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">chunked</span> <span class="o">=</span> <span class="n">_even_chunk_arr</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="n">chunked</span> <span class="o">=</span> <span class="n">_even_chunk_df</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+        <span class="n">chunked</span> <span class="o">=</span> <span class="n">_even_chunk_series</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">chunked</span> <span class="o">=</span> <span class="n">_even_chunk</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">chunked</span></div>
+
+
+<div class="viewcode-block" id="pair_unique"><a class="viewcode-back" href="../../../unipy.tools.data_handler.html#unipy.tools.pair_unique">[docs]</a><span class="k">def</span> <span class="nf">pair_unique</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get Unique pairsets.</span>
+
+<span class="sd">    This function gets an unique pair-sets of given data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    iterable: Iterable</span>
+<span class="sd">        Iterables having an equal length.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        A list of tuples. Each tuple is an unique pair of values.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If the lengths of argments are not equal.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    ``zip``</span>
+<span class="sd">    ``set``</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from unipy.tools.data_handler import pair_unique</span>
+<span class="sd">    &gt;&gt;&gt; data = dm.load(&#39;titanic&#39;)</span>
+<span class="sd">    Dataset : titanic</span>
+<span class="sd">    &gt;&gt;&gt; data.head()</span>
+<span class="sd">      Class     Sex    Age Survived  Freq</span>
+<span class="sd">    0   1st    Male  Child       No     0</span>
+<span class="sd">    1   2nd    Male  Child       No     0</span>
+<span class="sd">    2   3rd    Male  Child       No    35</span>
+<span class="sd">    3  Crew    Male  Child       No     0</span>
+<span class="sd">    4   1st  Female  Child       No     0</span>
+<span class="sd">    &gt;&gt;&gt; pair_unique(data.iloc[:, 0], data.iloc[:, 1])</span>
+<span class="sd">    [(5, &#39;1st&#39;), (19, &#39;3rd&#39;), (29, &#39;1st&#39;), (20, &#39;Crew&#39;),</span>
+<span class="sd">     (21, &#39;1st&#39;), (3, &#39;3rd&#39;), (16, &#39;Crew&#39;), (26, &#39;2nd&#39;),</span>
+<span class="sd">     (23, &#39;3rd&#39;), (10, &#39;2nd&#39;), (24, &#39;Crew&#39;), (7, &#39;3rd&#39;),</span>
+<span class="sd">     (4, &#39;Crew&#39;), (27, &#39;3rd&#39;), (18, &#39;2nd&#39;), (28, &#39;Crew&#39;),</span>
+<span class="sd">     (30, &#39;2nd&#39;), (11, &#39;3rd&#39;), (2, &#39;2nd&#39;), (1, &#39;1st&#39;),</span>
+<span class="sd">     (14, &#39;2nd&#39;), (31, &#39;3rd&#39;), (22, &#39;2nd&#39;), (17, &#39;1st&#39;),</span>
+<span class="sd">     (8, &#39;Crew&#39;), (9, &#39;1st&#39;), (32, &#39;Crew&#39;), (15, &#39;3rd&#39;),</span>
+<span class="sd">     (6, &#39;2nd&#39;), (12, &#39;Crew&#39;), (13, &#39;1st&#39;), (25, &#39;1st&#39;)]</span>
+<span class="sd">    &gt;&gt;&gt; idx1 = [1, 2, 3]</span>
+<span class="sd">    &gt;&gt;&gt; idx2 = [0, 9, 8, 4]</span>
+<span class="sd">    &gt;&gt;&gt; pair_unique(idx1, idx2)</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">      File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span>
+<span class="sd">    ValueError: All argments should have the same length.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">args_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="p">)</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">args_tuple</span><span class="p">)):</span>
+        <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span>
+    <span class="n">len_args</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args_tuple</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">len_args</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;All argments should have the same length.&#39;</span><span class="p">)</span>
+
+    <span class="n">res_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">res_list</span></div>
+
+
+<span class="c1"># Unique Pair List Creator For DataFrame</span>
+<div class="viewcode-block" id="df_pair_unique"><a class="viewcode-back" href="../../../unipy.tools.data_handler.html#unipy.tools.df_pair_unique">[docs]</a><span class="k">def</span> <span class="nf">df_pair_unique</span><span class="p">(</span><span class="n">data_frame</span><span class="p">,</span> <span class="n">col_list</span><span class="p">,</span> <span class="n">to_frame</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get unique pairsets in pandas.DataFrame.</span>
+
+<span class="sd">    This function gets an unique pair-sets of given columns.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_frame: pandas.DataFrame</span>
+<span class="sd">        DataFrame to get unique-pairs.</span>
+
+<span class="sd">    col_list: pandas.Index, list, tuple</span>
+<span class="sd">        Column names of given DataFrame.</span>
+
+<span class="sd">    to_frame: Boolean (default: False)</span>
+<span class="sd">        Choose output type.</span>
+<span class="sd">        If True, It returns pandas.DataFrame as an output.</span>
+<span class="sd">        If False, It returns a list of tuples.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        If to_frame=False, A list of tuples is returned.</span>
+<span class="sd">        Each tuple is an unique pair of values.</span>
+
+<span class="sd">    pandas.DataFrame</span>
+<span class="sd">        If to_frame=True, pandas.DataFrame is returned.</span>
+<span class="sd">        Each row is an unique pair of values.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    pandas.DataFrame.itertuples</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from unipy.tools.data_handler import df_pair_unique</span>
+<span class="sd">    &gt;&gt;&gt; data = dm.load(&#39;titanic&#39;)</span>
+<span class="sd">    Dataset : titanic</span>
+<span class="sd">    &gt;&gt;&gt; data.head()</span>
+<span class="sd">      Class     Sex    Age Survived  Freq</span>
+<span class="sd">    0   1st    Male  Child       No     0</span>
+<span class="sd">    1   2nd    Male  Child       No     0</span>
+<span class="sd">    2   3rd    Male  Child       No    35</span>
+<span class="sd">    3  Crew    Male  Child       No     0</span>
+<span class="sd">    4   1st  Female  Child       No     0</span>
+<span class="sd">    &gt;&gt;&gt; df_pair_unique(data, [&#39;Class&#39;, &#39;Sex&#39;])</span>
+<span class="sd">    [(&#39;3rd&#39;, &#39;Male&#39;), (&#39;2nd&#39;, &#39;Male&#39;), (&#39;2nd&#39;, &#39;Female&#39;), (&#39;1st&#39;, &#39;Female&#39;),</span>
+<span class="sd">     (&#39;Crew&#39;, &#39;Male&#39;), (&#39;1st&#39;, &#39;Male&#39;), (&#39;Crew&#39;, &#39;Female&#39;), (&#39;3rd&#39;, &#39;Female&#39;)]</span>
+<span class="sd">    &gt;&gt;&gt; df_pair_unique(data, [&#39;Class&#39;, &#39;Sex&#39;], to_frame=True)</span>
+<span class="sd">      Class     Sex</span>
+<span class="sd">    0   3rd    Male</span>
+<span class="sd">    1   2nd    Male</span>
+<span class="sd">    2   2nd  Female</span>
+<span class="sd">    3   1st  Female</span>
+<span class="sd">    4  Crew    Male</span>
+<span class="sd">    5   1st    Male</span>
+<span class="sd">    6  Crew  Female</span>
+<span class="sd">    7   3rd  Female</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">args_tuple_map</span> <span class="o">=</span> <span class="n">data_frame</span><span class="p">[</span><span class="n">col_list</span><span class="p">]</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">res_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">args_tuple_map</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">to_frame</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">res_list</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">col_list</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">res_list</span></div>
+
+
+<span class="c1"># %% Item Transformator</span>
+<div class="viewcode-block" id="map_to_tuple"><a class="viewcode-back" href="../../../unipy.tools.data_handler.html#unipy.tools.map_to_tuple">[docs]</a><span class="k">def</span> <span class="nf">map_to_tuple</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Only for some specific reason.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+        <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterator</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">item</span><span class="p">),</span> <span class="n">iterable</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="map_to_list"><a class="viewcode-back" href="../../../unipy.tools.data_handler.html#unipy.tools.map_to_list">[docs]</a><span class="k">def</span> <span class="nf">map_to_list</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Only for some specific reason.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+        <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterator</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">item</span><span class="p">),</span> <span class="n">iterable</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">res</span></div>
+
+
+<span class="c1"># %% Data Concatenator within a Folder</span>
+<div class="viewcode-block" id="merge_csv"><a class="viewcode-back" href="../../../unipy.tools.data_handler.html#unipy.tools.merge_csv">[docs]</a><span class="k">def</span> <span class="nf">merge_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;*.csv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span>
+              <span class="n">if_save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Merge seperated csv type datasets into one dataset.</span>
+<span class="sd">    Summary</span>
+
+<span class="sd">    This function get separated data files together.</span>
+<span class="sd">    When merged, the file is sorted by its name in ascending order.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file_path: str</span>
+<span class="sd">        A directory path of source files.</span>
+
+<span class="sd">    pattern: str</span>
+<span class="sd">        A File extension with conditional naming. (default: &#39;*.csv&#39;)</span>
+
+<span class="sd">    sep: int</span>
+<span class="sd">        A symbol seperating data columns.</span>
+
+<span class="sd">    if_save: Boolean (Optional, default: True)</span>
+<span class="sd">        False if you don&#39;t want to save the result.</span>
+
+<span class="sd">    save_name: str</span>
+<span class="sd">        A filename to save the result.</span>
+<span class="sd">        It should be given if if_save=True.</span>
+<span class="sd">        If inappropriate name is given, the first name of file list is used.</span>
+
+<span class="sd">    low_memory: Boolean (Optional, default: True)</span>
+<span class="sd">        It is used for pandas.read_csv() option only.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pandas.DataFrame</span>
+<span class="sd">        A concatenated DataFrame.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from unipy.tools.data_handler import merge_csv</span>
+<span class="sd">    &gt;&gt;&gt; data = dm.load(&#39;titanic&#39;)</span>
+<span class="sd">    Dataset : titanic</span>
+<span class="sd">    &gt;&gt;&gt; data.head(9)</span>
+<span class="sd">      Class     Sex    Age Survived  Freq</span>
+<span class="sd">    0   1st    Male  Child       No     0</span>
+<span class="sd">    1   2nd    Male  Child       No     0</span>
+<span class="sd">    2   3rd    Male  Child       No    35</span>
+<span class="sd">    3  Crew    Male  Child       No     0</span>
+<span class="sd">    4   1st  Female  Child       No     0</span>
+<span class="sd">    5   2nd  Female  Child       No     0</span>
+<span class="sd">    6   3rd  Female  Child       No    17</span>
+<span class="sd">    7  Crew  Female  Child       No     0</span>
+<span class="sd">    8   1st    Male  Adult       No   118</span>
+<span class="sd">    &gt;&gt;&gt; data.iloc[:2, :].to_csv(&#39;tmp1.csv&#39;, header=True, index=False)</span>
+<span class="sd">    &gt;&gt;&gt; data.iloc[2:4, :].to_csv(&#39;tmp2.csv&#39;, header=True, index=False)</span>
+<span class="sd">    &gt;&gt;&gt; data.iloc[4:9, :].to_csv(&#39;tmp3.csv&#39;, header=True, index=False)</span>
+<span class="sd">    &gt;&gt;&gt; merged = merge_csv(&#39;./&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; merged</span>
+<span class="sd">      Class     Sex    Age Survived  Freq</span>
+<span class="sd">    0   1st    Male  Child       No     0</span>
+<span class="sd">    1   2nd    Male  Child       No     0</span>
+<span class="sd">    2   3rd    Male  Child       No    35</span>
+<span class="sd">    3  Crew    Male  Child       No     0</span>
+<span class="sd">    4   1st  Female  Child       No     0</span>
+<span class="sd">    5   2nd  Female  Child       No     0</span>
+<span class="sd">    6   3rd  Female  Child       No    17</span>
+<span class="sd">    7  Crew  Female  Child       No     0</span>
+<span class="sd">    8   1st    Male  Adult       No   118</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">file_path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">file_path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span>
+    <span class="n">file_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="n">file_path</span> <span class="o">+</span> <span class="n">pattern</span><span class="p">))</span>
+
+    <span class="n">res_frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">file_list</span><span class="p">:</span>
+        <span class="n">file</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="n">sep</span><span class="p">,</span> <span class="n">low_memory</span><span class="o">=</span><span class="n">low_memory</span><span class="p">)</span>
+        <span class="n">res_frame</span> <span class="o">=</span> <span class="n">res_frame</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Concat Compelete.&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">if_save</span><span class="p">:</span>
+        <span class="n">save_msg</span> <span class="o">=</span> <span class="s2">&quot;Saving it to &#39;</span><span class="si">{save_name}</span><span class="s2">&#39;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">save_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">save_name</span> <span class="o">=</span> <span class="n">file_path</span> <span class="o">+</span> <span class="n">save_name</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">save_msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">save_name</span><span class="o">=</span><span class="n">save_name</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sample_name</span> <span class="o">=</span> <span class="n">file_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">ext</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">sample_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">save_name</span> <span class="o">=</span> <span class="n">sample_name</span><span class="p">[:</span><span class="o">-</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ext</span><span class="p">))]</span> <span class="o">+</span> <span class="s1">&#39;_concat&#39;</span> <span class="o">+</span> <span class="n">ext</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&#39;save_name&#39; is inappropriate: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">save_name</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">save_msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">save_name</span><span class="o">=</span><span class="n">save_name</span><span class="p">))</span>
+
+        <span class="n">res_frame</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">save_name</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">res_frame</span></div>
+
+
+<div class="viewcode-block" id="nancumsum"><a class="viewcode-back" href="../../../unipy.tools.data_handler.html#unipy.tools.nancumsum">[docs]</a><span class="k">def</span> <span class="nf">nancumsum</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A cumulative sum function.</span>
+
+<span class="sd">    A cumulative sum function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    iterable: Iterable</span>
+<span class="sd">        Iterables to calculate cumulative sum.</span>
+
+<span class="sd">    Yields</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        A cumulative summed value.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    numpy.isnan</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from unipy.tools.data_handler import nancumsum</span>
+<span class="sd">    &gt;&gt;&gt; tmp = [1, 2, 4]</span>
+<span class="sd">    &gt;&gt;&gt; nancumsum(tmp)</span>
+<span class="sd">    &lt;generator object nancumsum at 0x1084553b8&gt;</span>
+<span class="sd">    &gt;&gt;&gt; list(nancumsum(tmp))</span>
+<span class="sd">    [1, 3, 7]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">iterator</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+    <span class="n">prev</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">prev</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
+        <span class="k">if</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">prev</span> <span class="o">+</span> <span class="n">item</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="n">res</span>
+        <span class="k">yield</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="depth"><a class="viewcode-back" href="../../../unipy.tools.data_handler.html#unipy.tools.depth">[docs]</a><span class="k">def</span> <span class="nf">depth</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get dimension depth.</span>
+
+<span class="sd">    Get a dimension depth number of a nested iterable.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    iterable: iterable</span>
+<span class="sd">        An Iterable to get a dimension depth number.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        A dimension depth number.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    collections.Iterable</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from unipy.tools.data_handler import depth</span>
+<span class="sd">    &gt;&gt;&gt; tmp = [(1, 3), (4, 6), (7, 9), (10, 12)]</span>
+<span class="sd">    &gt;&gt;&gt; depth(tmp)</span>
+<span class="sd">    2</span>
+<span class="sd">    &gt;&gt;&gt; tmp3d = [[np.arange(i) + i for i in range(2, j)]</span>
+<span class="sd">    ...          for j in range(5, 10)]</span>
+<span class="sd">    &gt;&gt;&gt; depth(tmp3d)</span>
+<span class="sd">    3</span>
+<span class="sd">    &gt;&gt;&gt; # It can handle dict type (considering values only).</span>
+<span class="sd">    &gt;&gt;&gt; tmp3d_dict = [{&#39;key&#39; + str(i): np.arange(i) + i for i in range(2, j)}</span>
+<span class="sd">    ...               for j in range(5, 10)]</span>
+<span class="sd">    &gt;&gt;&gt; depth(tmp3d_dict)</span>
+<span class="sd">    3</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">),</span> <span class="s1">&#39;Not an Iterable.&#39;</span>
+    <span class="n">container</span> <span class="o">=</span> <span class="n">iterable</span>
+    <span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">container</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">container</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">depth</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">container</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+            <span class="n">element</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">container</span><span class="p">)</span>
+            <span class="n">depth</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">container</span> <span class="o">=</span> <span class="n">element</span>
+
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">depth</span></div>
+
+
+<div class="viewcode-block" id="zero_padder_2d"><a class="viewcode-back" href="../../../unipy.tools.data_handler.html#unipy.tools.zero_padder_2d">[docs]</a><span class="k">def</span> <span class="nf">zero_padder_2d</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;backward&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Zero-padding for fixed-length inputs(2D).</span>
+
+<span class="sd">    Zero-padding Function with nested sequence.</span>
+<span class="sd">    Each elements of a given sequence is padded fixed-length.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    arr: Iterable</span>
+<span class="sd">        A nested sequence containing 1-Dimensional numpy.ndarray.</span>
+
+<span class="sd">    max_len: int (default: None)</span>
+<span class="sd">        A required fixed-length of each sequences.</span>
+<span class="sd">        If None, It calculates the max length of elements as max_len.</span>
+
+<span class="sd">    method: {&#39;forward&#39;, &#39;backward&#39;} (default: &#39;backward&#39;)</span>
+<span class="sd">        where to pad.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        A list containing 3-Dimensional numpy.ndarray with fixed-length 2D.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    unipy.depth</span>
+<span class="sd">    numpy.pad</span>
+<span class="sd">    numpy.stack</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from unipy.tools.data_handler import zero_padder_2d</span>
+<span class="sd">    &gt;&gt;&gt; tmp = [np.arange(i) + i for i in range(2, 5)]</span>
+<span class="sd">    &gt;&gt;&gt; tmp</span>
+<span class="sd">    [array([2, 3]), array([3, 4, 5]), array([4, 5, 6, 7])]</span>
+<span class="sd">    &gt;&gt;&gt; zero_padder_2d(tmp)</span>
+<span class="sd">    array([[2, 3, 0, 0],</span>
+<span class="sd">           [3, 4, 5, 0],</span>
+<span class="sd">           [4, 5, 6, 7]])</span>
+<span class="sd">    &gt;&gt;&gt; zero_padder_2d(tmp, max_len=6)</span>
+<span class="sd">    array([[2, 3, 0, 0, 0, 0],</span>
+<span class="sd">           [3, 4, 5, 0, 0, 0],</span>
+<span class="sd">           [4, 5, 6, 7, 0, 0]])</span>
+<span class="sd">     &gt;&gt;&gt; zero_padder_2d(tmp, max_len=5, method=&#39;forward&#39;)</span>
+<span class="sd">    array([[0, 0, 0, 2, 3],</span>
+<span class="sd">           [0, 0, 3, 4, 5],</span>
+<span class="sd">           [0, 4, 5, 6, 7]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">depth</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Not 2-Dimensional.&#39;</span>
+    <span class="k">assert</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;forward&#39;</span><span class="p">,</span> <span class="s1">&#39;backward&#39;</span><span class="p">]</span>
+    <span class="n">arr_max_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">arr</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">max_len</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">max_len</span> <span class="o">=</span> <span class="n">arr_max_len</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">max_len</span> <span class="o">&gt;=</span> <span class="n">arr_max_len</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;forward&#39;</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">(</span><span class="n">max_len</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">),</span> <span class="mi">0</span><span class="p">),</span>
+                      <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">,</span>
+                      <span class="n">constant_values</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+               <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;backward&#39;</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_len</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)),</span>
+                      <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">,</span>
+                      <span class="n">constant_values</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+               <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="c1"># return np.asarray(res)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">res</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="zero_padder_3d"><a class="viewcode-back" href="../../../unipy.tools.data_handler.html#unipy.tools.zero_padder_3d">[docs]</a><span class="k">def</span> <span class="nf">zero_padder_3d</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;backward&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Zero-padding for fixed-length inputs(3D).</span>
+
+<span class="sd">    Zero-padding Function with nested sequence.</span>
+<span class="sd">    Each elements of a given sequence is padded fixed-length.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    arr: Iterable</span>
+<span class="sd">        A nested sequence containing 2-Dimensional numpy.ndarray.</span>
+
+<span class="sd">    max_len: int (default: None)</span>
+<span class="sd">        A required fixed-length of each sequences.</span>
+<span class="sd">        If None, It calculates the max length of elements as max_len.</span>
+
+<span class="sd">    method: {&#39;forward&#39;, &#39;backward&#39;} (default: &#39;backward&#39;)</span>
+<span class="sd">        where to pad.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        A list containing 3-Dimensional numpy.ndarray with fixed-length 2D.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        All 3D shape of inner numpy.ndarray is not equal.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    unipy.depth</span>
+<span class="sd">    numpy.pad</span>
+<span class="sd">    numpy.stack</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from unipy.tools.data_handler import zero_padder_3d</span>
+<span class="sd">    &gt;&gt;&gt; tmp3d = [np.arange(i * 2).reshape(-1, 2) for i in range(1, 5)]</span>
+<span class="sd">    &gt;&gt;&gt; tmp3d</span>
+<span class="sd">    [array([[0, 1]]),</span>
+<span class="sd">     array([[0, 1],</span>
+<span class="sd">            [2, 3]]),</span>
+<span class="sd">     array([[0, 1],</span>
+<span class="sd">            [2, 3],</span>
+<span class="sd">            [4, 5]]),</span>
+<span class="sd">     array([[0, 1],</span>
+<span class="sd">            [2, 3],</span>
+<span class="sd">            [4, 5],</span>
+<span class="sd">            [6, 7]])]</span>
+<span class="sd">    &gt;&gt;&gt; zero_padder_3d(tmp3d)</span>
+<span class="sd">    array([[[0, 1],</span>
+<span class="sd">            [0, 0],</span>
+<span class="sd">            [0, 0],</span>
+<span class="sd">            [0, 0]],</span>
+
+<span class="sd">           [[0, 1],</span>
+<span class="sd">            [2, 3],</span>
+<span class="sd">            [0, 0],</span>
+<span class="sd">            [0, 0]],</span>
+
+<span class="sd">           [[0, 1],</span>
+<span class="sd">            [2, 3],</span>
+<span class="sd">            [4, 5],</span>
+<span class="sd">            [0, 0]],</span>
+
+<span class="sd">           [[0, 1],</span>
+<span class="sd">            [2, 3],</span>
+<span class="sd">            [4, 5],</span>
+<span class="sd">            [6, 7]]])</span>
+<span class="sd">    &gt;&gt;&gt; tmp3d_eye</span>
+<span class="sd">    [array([[1.]]),</span>
+<span class="sd">     array([[1., 0.],</span>
+<span class="sd">            [0., 1.]]),</span>
+<span class="sd">     array([[1., 0., 0.],</span>
+<span class="sd">            [0., 1., 0.],</span>
+<span class="sd">            [0., 0., 1.]]),</span>
+<span class="sd">     array([[1., 0., 0., 0.],</span>
+<span class="sd">            [0., 1., 0., 0.],</span>
+<span class="sd">            [0., 0., 1., 0.],</span>
+<span class="sd">            [0., 0., 0., 1.]])]</span>
+<span class="sd">    &gt;&gt;&gt; zero_padder_3d(tmp3d_eye)</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">      File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span>
+<span class="sd">      File &quot;&lt;stdin&gt;&quot;, line 24, in zero_padder_3d</span>
+<span class="sd">    ValueError: 3D shape should be equal.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">depth</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Not 3-Dimensional.&#39;</span>
+    <span class="k">assert</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;forward&#39;</span><span class="p">,</span> <span class="s1">&#39;backward&#39;</span><span class="p">]</span>
+    <span class="n">arr_max_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">arr</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">max_len</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">max_len</span> <span class="o">=</span> <span class="n">arr_max_len</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">max_len</span> <span class="o">&gt;=</span> <span class="n">arr_max_len</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;forward&#39;</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">((</span><span class="n">max_len</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">),</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+                          <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">,</span>
+                          <span class="n">constant_values</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                   <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;backward&#39;</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_len</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+                          <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">,</span>
+                          <span class="n">constant_values</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                   <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;3D shape should be equal.&#39;</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Young Ju Kim.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

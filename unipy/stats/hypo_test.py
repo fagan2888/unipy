@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jan  8 03:46:03 2017
+"""Statistical Hypothesis Tests.
 
-@author: Young Ju Kim
 """
 
 
@@ -22,9 +19,11 @@ __all__ = ['f_test',
            'fisher_test']
 
 
+def f_test(a, b, scale=1, alternative='two-sided',
+           conf_level=.95, *args, **kwargs):
+    """F-Test.
 
-def f_test(a, b, scale=1, alternative='two-sided', conf_level=.95, *args, **kwargs):
-    
+    """
     assert 0 < scale <= 1
     assert 0 < conf_level <= 1
 
@@ -44,13 +43,12 @@ def f_test(a, b, scale=1, alternative='two-sided', conf_level=.95, *args, **kwar
             f_statistics = np.array(a).var() / np.array(b).var()
         except ZeroDivisionError:
             f_statistics = np.nan
- 
+
         p_value = st.f.cdf(np.abs(f_statistics), dfn, dfd, scale=scale)
-        #p_value = distributions.t.sf(np.abs(t), df)
+        # p_value = distributions.t.sf(np.abs(t), df)
 
         conf_interval = st.f.interval(conf_level, dfn, dfd, scale=scale)
         conf_min, conf_max = np.multiply(f_statistics, conf_interval)
-
 
         if alternative == 'two-sided':
             p_value = 2 * np.min([p_value, 1-p_value])
@@ -62,27 +60,29 @@ def f_test(a, b, scale=1, alternative='two-sided', conf_level=.95, *args, **kwar
         elif alternative == 'less':
             conf_min, conf_max = 0, conf_max
 
+    # print('F-Statistics: %.4g' % f_statistics)
+    # print('dfn, dfd: %d %d' % (dfn, dfd) )
+    # print('Hypothesized Scale: %d' % scale)
+    # print('Confidence Level: %.3g' % conf_level)
+    # print('Confidence Interval: %.4g, %.4g' % (conf_min, conf_max))
+    # print('P-value: %.4g' % p_value)
 
-    #print('F-Statistics: %.4g' % f_statistics)
-    #print('dfn, dfd: %d %d' % (dfn, dfd) )
-    #print('Hypothesized Scale: %d' % scale)
-    #print('Confidence Level: %.3g' % conf_level)
-    #print('Confidence Interval: %.4g, %.4g' % (conf_min, conf_max))
-    #print('P-value: %.4g' % p_value)
-
-    res = pd.Series( {'f_statistics': f_statistics,
-                      'dfn': dfn,
-                      'dfd': dfd,
-                      'hypo_scale': scale,
-                      'conf_level': conf_level,
-                      'conf_interval': (conf_min, conf_max),
-                      'p_value': p_value} )
+    res = pd.Series({'f_statistics': f_statistics,
+                     'dfn': dfn,
+                     'dfd': dfd,
+                     'hypo_scale': scale,
+                     'conf_level': conf_level,
+                     'conf_interval': (conf_min, conf_max),
+                     'p_value': p_value})
 
     return res
 
 
-def f_test_formula(a, b, scale=1, alternative='two-sided', conf_level=.95, *args, **kwargs):
-    
+def f_test_formula(a, b, scale=1, alternative='two-sided',
+                   conf_level=.95, *args, **kwargs):
+    """F-Test by formula.
+
+    """
     assert 0 < scale <= 1
     assert 0 < conf_level <= 1
 
@@ -102,13 +102,12 @@ def f_test_formula(a, b, scale=1, alternative='two-sided', conf_level=.95, *args
             f_statistics = np.array(a).var() / np.array(b).var()
         except ZeroDivisionError:
             f_statistics = np.nan
- 
+
         p_value = st.f.cdf(np.abs(f_statistics), dfn, dfd, scale=scale)
-        #p_value = distributions.t.sf(np.abs(t), df)
+        # p_value = distributions.t.sf(np.abs(t), df)
 
         conf_interval = st.f.interval(conf_level, dfn, dfd, scale=scale)
         conf_min, conf_max = np.multiply(f_statistics, conf_interval)
-
 
         if alternative == 'two-sided':
             p_value = 2 * np.min([p_value, 1-p_value])
@@ -121,26 +120,28 @@ def f_test_formula(a, b, scale=1, alternative='two-sided', conf_level=.95, *args
             conf_min, conf_max = 0, conf_max
 
 
-    #print('F-Statistics: %.4g' % f_statistics)
-    #print('dfn, dfd: %d %d' % (dfn, dfd) )
-    #print('Hypothesized Scale: %d' % scale)
-    #print('Confidence Level: %.3g' % conf_level)
-    #print('Confidence Interval: %.4g, %.4g' % (conf_min, conf_max))
-    #print('P-value: %.4g' % p_value)
+    # print('F-Statistics: %.4g' % f_statistics)
+    # print('dfn, dfd: %d %d' % (dfn, dfd) )
+    # print('Hypothesized Scale: %d' % scale)
+    # print('Confidence Level: %.3g' % conf_level)
+    # print('Confidence Interval: %.4g, %.4g' % (conf_min, conf_max))
+    # print('P-value: %.4g' % p_value)
 
-    res = pd.Series( {'f_statistics': f_statistics,
-                      'dfn': dfn,
-                      'dfd': dfd,
-                      'hypo_scale': scale,
-                      'conf_level': conf_level,
-                      'conf_interval': (conf_min, conf_max),
-                      'p_value': p_value} )
+    res = pd.Series({'f_statistics': f_statistics,
+                     'dfn': dfn,
+                     'dfd': dfd,
+                     'hypo_scale': scale,
+                     'conf_level': conf_level,
+                     'conf_interval': (conf_min, conf_max),
+                     'p_value': p_value})
 
     return res
 
 
 def anova_test(formula, data=None, typ=1):
+    """ANOVA Test.
 
+    """
     lin_model = smf.ols(formula, data=data).fit()
     res_anova = smt.anova_lm(lin_model, typ=typ)
 
@@ -148,15 +149,19 @@ def anova_test(formula, data=None, typ=1):
 
 
 def anova_test_formula(formula, data=None, typ=1):
+    """ANOVA Test by formula.
 
+    """
     lin_model = smf.ols(formula, data=data).fit()
     res_anova = smt.anova_lm(lin_model, typ=typ)
 
     return res_anova, lin_model
 
 
-def chisq_test(data, x=None, y=None, correction=None, lambda_=None, margin=True, print_ok=True):
-    """
+def chisq_test(data, x=None, y=None, correction=None,
+               lambda_=None, margin=True, print_ok=True):
+    """Chi-square Test.
+
     lambda_ gives the power in the Cressie-Read power divergence statistic.
     The default is 1.
     For convenience, lambda_ may be assigned one of the following strings,
@@ -175,30 +180,42 @@ def chisq_test(data, x=None, y=None, correction=None, lambda_=None, margin=True,
     "cressie-read"        2/3   The power recommended in [R625]_.
 
     """
-
     dataChi = data[[x, y]].dropna()
     crossT = pd.crosstab(dataChi[x], dataChi[y], margins=margin)
 
-    if margin == True:
+    if margin:
         crossT_raw = crossT.iloc[:-1, :-1]
-        chiSqr, pValue, freeDeg, expectedV_raw = st.chi2_contingency(crossT_raw, correction=correction, lambda_=lambda_)
-        expectedV_raw = pd.DataFrame(expectedV_raw, index=crossT_raw.index, columns=crossT_raw.columns)
-        
+        (chiSqr,
+         pValue,
+         freeDeg,
+         expectedV_raw) = st.chi2_contingency(crossT_raw,
+                                              correction=correction,
+                                              lambda_=lambda_)
+        expectedV_raw = pd.DataFrame(expectedV_raw,
+                                     index=crossT_raw.index,
+                                     columns=crossT_raw.columns)
+
         expectedV = expectedV_raw.copy()
         expectedV['All'] = expectedV.sum(axis=1)
         expectedV = expectedV.append(expectedV.sum(axis=0).rename('All'))
-        
-    elif margin == False:
-        chiSqr, pValue, freeDeg, expectedV_raw = st.chi2_contingency(crossT, correction=correction, lambda_=lambda_)
-        expectedV_raw = pd.DataFrame(expectedV_raw, index=crossT.index, columns=crossT.columns)
+
+    else:
+        (chiSqr,
+         pValue,
+         freeDeg,
+         expectedV_raw) = st.chi2_contingency(crossT,
+                                              correction=correction,
+                                              lambda_=lambda_)
+        expectedV_raw = pd.DataFrame(expectedV_raw,
+                                     index=crossT.index,
+                                     columns=crossT.columns)
 
         expectedV = expectedV_raw
-        
 
-    check_chisq_rule = expectedV_raw[expectedV_raw <= 5].count().sum() <= (expectedV_raw.shape[0] * expectedV_raw.shape[1]) * .2
-    
-    
-    if print_ok == True:
+    check_chisq_rule = (expectedV_raw[expectedV_raw <= 5].count().sum() <=
+                        (expectedV_raw.shape[0] * expectedV_raw.shape[1]) * .2)
+
+    if print_ok:
         print('#'*20 + ' Chi-Square Test ' + '#'*20 + '\n')
         print('x : ' + x)
         print('y : ' + y)
@@ -213,33 +230,42 @@ def chisq_test(data, x=None, y=None, correction=None, lambda_=None, margin=True,
 ## Degrees of Freedom : {}
 """
 
-        print(msg.format( chiSqr, pValue, freeDeg ) )
+        print(msg.format(chiSqr, pValue, freeDeg))
         print('\n' + '## Expected Values')
         print('-'*60)
-        print( expectedV )
+        print(expectedV)
         print('-'*60 + '\n')
-    
-    if check_chisq_rule == False:
-        warnings.warn('Warning: The precondition of Chi-Square was not implemented.')
-        warnings.warn('Chi-squared approximation may be incorrect')
 
-    return pd.Series({'cross_t': crossT, 'chisq-stat': chiSqr, 'p_value': pValue, 'df': freeDeg, 'expected': expectedV})
+    if not check_chisq_rule:
+        w_msg1 = 'Warning: The precondition of Chi-Square was not implemented.'
+        w_msg2 = 'Chi-squared approximation may be incorrect.'
+        w_msg = '\n'.join([w_msg1, w_msg2])
+        warnings.warn(w_msg)
+
+    return pd.Series({'cross_t': crossT,
+                      'chisq-stat': chiSqr,
+                      'p_value': pValue,
+                      'df': freeDeg,
+                      'expected': expectedV})
 
 
-def fisher_test(data, x=None, y=None, alternative='two-sided', margin=True, print_ok=True):
+def fisher_test(data, x=None, y=None, alternative='two-sided',
+                margin=True, print_ok=True):
+    """Fisher's Exact Test.
 
+    """
     dataChi = data[[x, y]].dropna()
     crossT = pd.crosstab(dataChi[x], dataChi[y], margins=margin)
 
-    if margin == True:
+    if margin:
         crossT_raw = crossT.iloc[:-1, :-1]
-        odds_ratio, p_value = st.fisher_exact(crossT_raw, alternative=alternative)
-    
-    elif margin == False:
-        odds_ratio, p_value = st.fisher_exact(crossT, alternative=alternative)
-        
+        odds_ratio, p_value = st.fisher_exact(crossT_raw,
+                                              alternative=alternative)
+    else:
+        odds_ratio, p_value = st.fisher_exact(crossT,
+                                              alternative=alternative)
 
-    if print_ok == True:
+    if print_ok:
         print('#'*20 + ' Fisher\'s Exact Test ' + '#'*20 + '\n')
         print('x : ' + x)
         print('y : ' + y)
@@ -254,7 +280,7 @@ def fisher_test(data, x=None, y=None, alternative='two-sided', margin=True, prin
 ## Alternative Hypothesis : {}
 """
 
-        print(msg.format( odds_ratio, p_value, alternative ) )
+        print(msg.format(odds_ratio, p_value, alternative))
         print('-'*60 + '\n')
 
     return pd.Series({'odds_ratio': odds_ratio, 'p_value': p_value})
@@ -270,4 +296,3 @@ if __name__ == '__main__':
     f_test(a, b)
     f_test(a, b, alternative='greater')
     f_test(a, b, alternative='less')
-

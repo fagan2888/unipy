@@ -1,20 +1,34 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jan  4 20:33:37 2017
+"""Geometrical toolkit.
 
-@author: Young Ju Kim
 """
 
 
 import math
 import pandas as pd
 
+
 __all__ = ['Ellipse']
 
+
 class Ellipse:
-    
+    """Create an ellipse.
+
+    Attributes
+    ----------
+    diameter
+    radius
+    center
+    angle
+
+    """    
     def __init__(self, diameter):
+        """
         
+        Parameters
+        ----------
+        diameter
+
+        """        
         assert isinstance(diameter, tuple) == True
         assert len(diameter) == 2
         self.diameter = diameter

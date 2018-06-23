@@ -10,8 +10,10 @@ __all__ = ['from_formula']
 
 
 def from_formula(formula):
+    """R-style Formula Formatting.
 
+    """
     yCol = formula.replace(' ', '').split('~')[0].strip()
     xCol = formula.replace(' ', '').split('~')[1].strip().split('+')
-    
+
     return xCol, yCol
