@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. image:: https://github.com/pydemia/unipy/blob/master/docs/images/unipy_logos/png/logo_white_background.svg
+.. image:: images/unipy_logos/svg/logo_white_background.svg
     :width: 400px
     :alt: unipy logo
     :align: center

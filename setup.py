@@ -20,15 +20,11 @@ except ImportError:
 from distutils.cmd import Command
 
 
-__version__ = '0.0.4.29'
+__version__ = '0.1.1'
 
 with open('README.rst', 'r') as readme_file:
     long_desc = readme_file.read()
 
-long_desc = """
-This is made for some specific environment.
-This contains codes for data manipulation and Analysis tools.
-"""
 
 class SphinxCommand(Command):
     """Documentation Command"""
