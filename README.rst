@@ -10,7 +10,7 @@ unipy
     :align: center
 
 .. image:: https://github.com/pydemia/unipy/blob/master/docs/images/unipy_logos/jpg/logo_white_background.jpg
-    :height: 40px
+    :width: 400px
     :alt: unipy logo
     :align: center
 
