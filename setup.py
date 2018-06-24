@@ -20,13 +20,15 @@ except ImportError:
 from distutils.cmd import Command
 
 
-__version__ = '0.0.4.27'
+__version__ = '0.0.4.28'
+
+with open('README.rst', 'r') as readme_file:
+    long_desc = readme_file.read()
 
 long_desc = """
 This is made for some specific environment.
 This contains codes for data manipulation and Analysis tools.
 """
-
 
 class SphinxCommand(Command):
     """Documentation Command"""
@@ -100,18 +102,19 @@ required_packages = [
                     # 'nomkl',  # conda
                     ]
 
-
-with open('requirements.txt', 'w') as f:
-    header = '--index-url https://pypi.python.org/simple/'
-    pkg_ls = '\n'.join(required_packages).replace('>=', '>=')
-    f.write('\n'.join([header, pkg_ls]))
-
+# REQUIREMENTS.txt for [`Travis CI`, `readthedocs`]
+for requirement_file in ['REQUIREMENTS.txt', 'requirements.txt']:
+    with open(requirement_file, 'w') as f:
+        header = '--index-url https://pypi.python.org/simple/'
+        pkg_ls = '\n'.join(required_packages).replace('>=', '>=')
+        f.write('\n'.join([header, pkg_ls]))
 
 setup(name='unipy',
       version=__version__,
       description='Useful tools for Data Scientists',
       long_description=long_desc,
-      url='http://github.com/pydemia/unipy',
+      url='https://unipy.readthedocs.io/en/latest/index.html',
+      download_url='http://github.com/pydemia/unipy',
       author='Young Ju Kim',
       author_email='pydemia@gmail.com',
       license='MIT License',
