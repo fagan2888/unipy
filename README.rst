@@ -4,7 +4,7 @@
 unipy
 =====
 
-.. image:: https://github.com/pydemia/unipy/blob/master/docs/images/unipy_logos/jpg/logo_white_background.jpg
+.. image:: https://github.com/pydemia/unipy/blob/master/docs/images/unipy_logos/jpg/logo_white_background_400x223.jpg
     :height: 40px
     :alt: unipy logo
     :align: center
