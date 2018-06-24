@@ -1,7 +1,7 @@
 .. image:: https://unipy.readthedocs.io/en/latest/_images/logo_white_background.svg
     :width: 400px
     :alt: unipy logo
-    :align: left
+    :align: center
 
 
 |Travis|_  |AppVeyor|_  |Coveralls|_  |Readthedocs|_   
