@@ -43,7 +43,7 @@ Documentation
 Features
 ========
 
-- database connection:
+- ~~database connection:~~
 
   - get ``pandas.DataFrame`` from:
   
