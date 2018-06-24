@@ -162,22 +162,26 @@ def chisq_test(data, x=None, y=None, correction=None,
                lambda_=None, margin=True, print_ok=True):
     """Chi-square Test.
 
-    lambda_ gives the power in the Cressie-Read power divergence statistic.
+    ``lambda_`` gives the power in the Cressie-Read power divergence statistic.
     The default is 1.
     For convenience, lambda_ may be assigned one of the following strings,
     in which case the corresponding numerical value is used:
 
-    String              Value   Description
+    Parameters
+    ----------
+    data: pandas.DataFrame
 
-    "pearson"             1     Pearson's chi-squared statistic.
-                                In this case, the function is
-                                equivalent to `stats.chisquare`.
-    "log-likelihood"      0     Log-likelihood ratio. Also known as
-                                the G-test [R623]_.
-    "freeman-tukey"      -1/2   Freeman-Tukey statistic.
-    "mod-log-likelihood" -1     Modified log-likelihood ratio.
-    "neyman"             -2     Neyman's statistic.
-    "cressie-read"        2/3   The power recommended in [R625]_.
+    x: str (default: None)
+
+    y: str (default: None)
+
+    correction: (default: None)
+
+    lambda_: lambda (default: None)
+
+    margin: Boolean (default: True)
+
+    print_ok: Boolean (default: True)
 
     """
     dataChi = data[[x, y]].dropna()

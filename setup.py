@@ -16,7 +16,7 @@ except ImportError:
     from distutils.core import setup, find_packages
 
 
-__version__ = '0.0.4.20'
+__version__ = '0.0.4.21'
 
 long_desc = """
 This is made for some specific environment.
@@ -54,6 +54,7 @@ def package_data_listup():
 required_packages = [
                      'pandas >= 0.20.1',
                      'numpy >= 1.13.1',
+                     'numpydoc >= 0.7.0',
                      'scipy >= 0.19.1',
                      'scikit-learn >= 0.18.0',
                      'statsmodels >= 0.8.0',
@@ -72,7 +73,7 @@ required_packages = [
                     ]
 
 
-with open('REQUIREMENTS.txt', 'w') as f:
+with open('requirements.txt', 'w') as f:
     header = '--index-url https://pypi.python.org/simple/'
     pkg_ls = '\n'.join(required_packages).replace('>=', '>=')
     f.write('\n'.join([header, pkg_ls]))

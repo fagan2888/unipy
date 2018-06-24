@@ -6,7 +6,7 @@ Created on Sun Jan  8 03:46:03 2017
 """
 
 
-from unipy.stats.base import *
+from unipy.stats.formula import *
 from unipy.stats.hypo_test import *
-from unipy.stats.interaction import *
-from unipy.stats.regression import *
+from unipy.stats.feature_selection import *
+from unipy.stats.metrics import *

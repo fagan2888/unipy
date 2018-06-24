@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>unipy.stats.hypo_test &#8212; unipy 0.0.4.20 documentation</title>
+    <title>unipy.stats.hypo_test &#8212; unipy 0.0.4.21 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -51,7 +51,7 @@
            <span class="s1">&#39;fisher_test&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="f_test"><a class="viewcode-back" href="../../../unipy.stats.hypo_test.html#unipy.stats.f_test">[docs]</a><span class="k">def</span> <span class="nf">f_test</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="f_test"><a class="viewcode-back" href="../../../unipy.stats.hypo_test.html#unipy.stats.hypo_test.f_test">[docs]</a><span class="k">def</span> <span class="nf">f_test</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span><span class="p">,</span>
            <span class="n">conf_level</span><span class="o">=.</span><span class="mi">95</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;F-Test.</span>
 
@@ -110,7 +110,7 @@
     <span class="k">return</span> <span class="n">res</span></div>
 
 
-<div class="viewcode-block" id="f_test_formula"><a class="viewcode-back" href="../../../unipy.stats.hypo_test.html#unipy.stats.f_test_formula">[docs]</a><span class="k">def</span> <span class="nf">f_test_formula</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="f_test_formula"><a class="viewcode-back" href="../../../unipy.stats.hypo_test.html#unipy.stats.hypo_test.f_test_formula">[docs]</a><span class="k">def</span> <span class="nf">f_test_formula</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span><span class="p">,</span>
                    <span class="n">conf_level</span><span class="o">=.</span><span class="mi">95</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;F-Test by formula.</span>
 
@@ -170,7 +170,7 @@
     <span class="k">return</span> <span class="n">res</span></div>
 
 
-<div class="viewcode-block" id="anova_test"><a class="viewcode-back" href="../../../unipy.stats.hypo_test.html#unipy.stats.anova_test">[docs]</a><span class="k">def</span> <span class="nf">anova_test</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="anova_test"><a class="viewcode-back" href="../../../unipy.stats.hypo_test.html#unipy.stats.hypo_test.anova_test">[docs]</a><span class="k">def</span> <span class="nf">anova_test</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;ANOVA Test.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -180,7 +180,7 @@
     <span class="k">return</span> <span class="n">res_anova</span><span class="p">,</span> <span class="n">lin_model</span></div>
 
 
-<div class="viewcode-block" id="anova_test_formula"><a class="viewcode-back" href="../../../unipy.stats.hypo_test.html#unipy.stats.anova_test_formula">[docs]</a><span class="k">def</span> <span class="nf">anova_test_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="anova_test_formula"><a class="viewcode-back" href="../../../unipy.stats.hypo_test.html#unipy.stats.hypo_test.anova_test_formula">[docs]</a><span class="k">def</span> <span class="nf">anova_test_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">typ</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;ANOVA Test by formula.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -190,26 +190,30 @@
     <span class="k">return</span> <span class="n">res_anova</span><span class="p">,</span> <span class="n">lin_model</span></div>
 
 
-<div class="viewcode-block" id="chisq_test"><a class="viewcode-back" href="../../../unipy.stats.hypo_test.html#unipy.stats.chisq_test">[docs]</a><span class="k">def</span> <span class="nf">chisq_test</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="chisq_test"><a class="viewcode-back" href="../../../unipy.stats.hypo_test.html#unipy.stats.hypo_test.chisq_test">[docs]</a><span class="k">def</span> <span class="nf">chisq_test</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                <span class="n">lambda_</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">print_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Chi-square Test.</span>
 
-<span class="sd">    lambda_ gives the power in the Cressie-Read power divergence statistic.</span>
+<span class="sd">    ``lambda_`` gives the power in the Cressie-Read power divergence statistic.</span>
 <span class="sd">    The default is 1.</span>
 <span class="sd">    For convenience, lambda_ may be assigned one of the following strings,</span>
 <span class="sd">    in which case the corresponding numerical value is used:</span>
 
-<span class="sd">    String              Value   Description</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data: pandas.DataFrame</span>
 
-<span class="sd">    &quot;pearson&quot;             1     Pearson&#39;s chi-squared statistic.</span>
-<span class="sd">                                In this case, the function is</span>
-<span class="sd">                                equivalent to `stats.chisquare`.</span>
-<span class="sd">    &quot;log-likelihood&quot;      0     Log-likelihood ratio. Also known as</span>
-<span class="sd">                                the G-test [R623]_.</span>
-<span class="sd">    &quot;freeman-tukey&quot;      -1/2   Freeman-Tukey statistic.</span>
-<span class="sd">    &quot;mod-log-likelihood&quot; -1     Modified log-likelihood ratio.</span>
-<span class="sd">    &quot;neyman&quot;             -2     Neyman&#39;s statistic.</span>
-<span class="sd">    &quot;cressie-read&quot;        2/3   The power recommended in [R625]_.</span>
+<span class="sd">    x: str (default: None)</span>
+
+<span class="sd">    y: str (default: None)</span>
+
+<span class="sd">    correction: (default: None)</span>
+
+<span class="sd">    lambda_: lambda (default: None)</span>
+
+<span class="sd">    margin: Boolean (default: True)</span>
+
+<span class="sd">    print_ok: Boolean (default: True)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dataChi</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
@@ -281,7 +285,7 @@
                       <span class="s1">&#39;expected&#39;</span><span class="p">:</span> <span class="n">expectedV</span><span class="p">})</span></div>
 
 
-<div class="viewcode-block" id="fisher_test"><a class="viewcode-back" href="../../../unipy.stats.hypo_test.html#unipy.stats.fisher_test">[docs]</a><span class="k">def</span> <span class="nf">fisher_test</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="fisher_test"><a class="viewcode-back" href="../../../unipy.stats.hypo_test.html#unipy.stats.hypo_test.fisher_test">[docs]</a><span class="k">def</span> <span class="nf">fisher_test</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span><span class="p">,</span>
                 <span class="n">margin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">print_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Fisher&#39;s Exact Test.</span>
 

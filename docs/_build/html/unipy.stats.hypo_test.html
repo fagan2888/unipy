@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>unipy.stats.hypo_test module &#8212; unipy 0.0.4.20 documentation</title>
+    <title>unipy.stats.hypo_test module &#8212; unipy 0.0.4.21 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -60,22 +60,27 @@
 <dt id="unipy.stats.hypo_test.chisq_test">
 <code class="descclassname">unipy.stats.hypo_test.</code><code class="descname">chisq_test</code><span class="sig-paren">(</span><em>data</em>, <em>x=None</em>, <em>y=None</em>, <em>correction=None</em>, <em>lambda_=None</em>, <em>margin=True</em>, <em>print_ok=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/stats/hypo_test.html#chisq_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.stats.hypo_test.chisq_test" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chi-square Test.</p>
-<p><a href="#id3"><span class="problematic" id="id4">lambda_</span></a> gives the power in the Cressie-Read power divergence statistic.
+<p><code class="docutils literal notranslate"><span class="pre">lambda_</span></code> gives the power in the Cressie-Read power divergence statistic.
 The default is 1.
-For convenience, <a href="#id5"><span class="problematic" id="id6">lambda_</span></a> may be assigned one of the following strings,
+For convenience, <a href="#id1"><span class="problematic" id="id2">lambda_</span></a> may be assigned one of the following strings,
 in which case the corresponding numerical value is used:</p>
-<p>String              Value   Description</p>
-<dl class="docutils">
-<dt>“pearson”             1     Pearson’s chi-squared statistic.</dt>
-<dd>In this case, the function is
-equivalent to <cite>stats.chisquare</cite>.</dd>
-<dt>“log-likelihood”      0     Log-likelihood ratio. Also known as</dt>
-<dd>the G-test [R623].</dd>
-</dl>
-<p>“freeman-tukey”      -1/2   Freeman-Tukey statistic.
-“mod-log-likelihood” -1     Modified log-likelihood ratio.
-“neyman”             -2     Neyman’s statistic.
-“cressie-read”        2/3   The power recommended in [R625].</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>pandas.DataFrame</em>) – </li>
+<li><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em> (</em><em>default: None</em><em>)</em>) – </li>
+<li><strong>y</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em> (</em><em>default: None</em><em>)</em>) – </li>
+<li><strong>correction</strong> (<em>(</em><em>default: None</em><em>)</em>) – </li>
+<li><strong>lambda</strong> (<em>lambda</em><em> (</em><em>default: None</em><em>)</em>) – </li>
+<li><strong>margin</strong> (<em>Boolean</em><em> (</em><em>default: True</em><em>)</em>) – </li>
+<li><strong>print_ok</strong> (<em>Boolean</em><em> (</em><em>default: True</em><em>)</em>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
