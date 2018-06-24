@@ -1,7 +1,7 @@
 .. image:: https://github.com/pydemia/unipy/blob/master/docs/images/unipy_logos/png/logo_white_background.svg
     :width: 400px
     :alt: unipy logo
-    :align: center
+    :align: left
 
 
 |Travis|_  |AppVeyor|_  |Coveralls|_  |Readthedocs|_   
@@ -35,6 +35,7 @@
 
 What's for?
 ===========
+
 `unipy` is a toolkit for data scientists.
 This offers a number of scientific, statistical objects.
 This also contains many pythonic objects like 
@@ -46,22 +47,19 @@ Some famous datasets embedded will make you easy to test.
 Installation
 ============
 
-```sh
-pip install unipy
+::
 
-```
+    pip install unipy
+
+
 
 Usage
 =====
 
-```py
-import unipy as up
-import unipy.dataset.api as dm
+::
 
-```
+    import unipy as up
+    import unipy.dataset.api as dm
 
-
-Issues
-======
 
 

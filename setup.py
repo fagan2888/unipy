@@ -20,9 +20,13 @@ except ImportError:
 from distutils.cmd import Command
 
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
-with open('README.rst', 'r') as readme_file:
+desc = """
+This contains a number of useful objects for data manipulation & analysis.
+"""
+
+with open('README.rst', 'r', encoding='utf-8') as readme_file:
     long_desc = readme_file.read()
 
 

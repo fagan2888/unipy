@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: unipy
-Version: 0.1.1
+Version: 0.1.2
 Summary: Useful tools for Data Scientists
 Home-page: https://unipy.readthedocs.io/en/latest/index.html
 Author: Young Ju Kim
@@ -10,7 +10,7 @@ Download-URL: http://github.com/pydemia/unipy
 Description: .. image:: https://github.com/pydemia/unipy/blob/master/docs/images/unipy_logos/png/logo_white_background.svg
             :width: 400px
             :alt: unipy logo
-            :align: center
+            :align: left
         
         
         |Travis|_  |AppVeyor|_  |Coveralls|_  |Readthedocs|_   
@@ -44,6 +44,7 @@ Description: .. image:: https://github.com/pydemia/unipy/blob/master/docs/images
         
         What's for?
         ===========
+        
         `unipy` is a toolkit for data scientists.
         This offers a number of scientific, statistical objects.
         This also contains many pythonic objects like 
@@ -55,23 +56,20 @@ Description: .. image:: https://github.com/pydemia/unipy/blob/master/docs/images
         Installation
         ============
         
-        ```sh
-        pip install unipy
+        ::
         
-        ```
+            pip install unipy
+        
+        
         
         Usage
         =====
         
-        ```py
-        import unipy as up
-        import unipy.dataset.api as dm
+        ::
         
-        ```
+            import unipy as up
+            import unipy.dataset.api as dm
         
-        
-        Issues
-        ======
         
         
         
