@@ -7,21 +7,47 @@ Modified on 2017-06-26 02:36:25
 """
 
 
+import os
 import datetime as dt
 import tarfile
+import distutils
+import subprocess
 
 try:
     from setuptools import setup, find_packages
 except ImportError:
     from distutils.core import setup, find_packages
+from distutils.cmd import Command
 
 
-__version__ = '0.0.4.22'
+__version__ = '0.0.4.23'
 
 long_desc = """
 This is made for some specific environment.
 This contains codes for data manipulation and Analysis tools.
 """
+
+
+class SphinxCommand(Command):
+    """Documentation Command"""
+
+def initialize_options(self):
+    """Set default values for options."""
+    pass
+
+def finalize_options(self):
+    """Post-process options."""
+    pass
+
+def run(self):
+    """Run command."""
+    command = ['cd docs;make html;cd ..']
+    # command.append(os.getcwd())
+    self.announce(
+        'Running command: %s' % str(command),
+        level=distutils.log.INFO)
+    subprocess.check_call(command)
+
 
 with open('unipy/__version__.py', 'w') as f:
     version_py_string = '''#-*- coding: utf-8 -*-
@@ -32,6 +58,8 @@ Modified on {modified_time}
 
 @author: Young Ju Kim
 """
+
+
 __all__ = ['__version__']
 
 
@@ -102,6 +130,7 @@ setup(name='unipy',
       packages=find_packages(exclude=['contrib',
                                      #  'docs',
                                       'tests']),
+      cmdclass={'documentation': SphinxCommand},
       #setup_requires=required_packages,
       install_requires=required_packages,
       zip_safe=False,

@@ -5,6 +5,9 @@ requirements_file: requirements.txt
 # conda:
 #   file: environment.yml
 
+build:
+    image: latest
+
 # Use python 3 for building
 python:
   version: 3.5, 3.6
