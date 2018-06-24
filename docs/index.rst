@@ -6,7 +6,7 @@
 .. image:: images/unipy_logos/svg/logo_white_background.svg
     :width: 400px
     :alt: unipy logo
-    :align: center
+    :align: left
 
 
 |Travis|_  |AppVeyor|_  |Coveralls|_  |Readthedocs|_
