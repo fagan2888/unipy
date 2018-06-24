@@ -1,5 +1,5 @@
-.. image:: https://github.com/pydemia/unipy/blob/master/docs/images/unipy_logos/jpg/logo_white_background_400x223.jpg
-    :height: 40px
+.. image:: https://github.com/pydemia/unipy/blob/master/docs/images/unipy_logos/png/logo_white_background.svg
+    :width: 100px
     :alt: unipy logo
     :align: center
 
