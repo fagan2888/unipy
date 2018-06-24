@@ -87,8 +87,14 @@ Indices and tables
 Contents
 ========
 
-unipy package
-=============
+Module contents
+---------------
+
+.. automodule:: unipy
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Subpackages
 -----------
@@ -105,10 +111,4 @@ Subpackages
     unipy.unipy_test
     unipy.utils
 
-Module contents
----------------
 
-.. automodule:: unipy
-    :members:
-    :undoc-members:
-    :show-inheritance:
