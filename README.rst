@@ -3,10 +3,6 @@
     :alt: unipy logo
     :align: center
 
-.. image:: https://github.com/pydemia/unipy/blob/master/docs/images/unipy_logos/jpg/logo_white_background.jpg
-    :width: 100px
-    :alt: unipy logo
-    :align: center
 
 |Travis|_  |AppVeyor|_  |Coveralls|_  |Readthedocs|_   
 |PyPi|_  |Python35|_  |Python36|_ |DOI|_
