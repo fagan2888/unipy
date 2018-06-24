@@ -20,7 +20,7 @@ except ImportError:
 from distutils.cmd import Command
 
 
-__version__ = '0.0.4.25'
+__version__ = '0.0.4.26'
 
 long_desc = """
 This is made for some specific environment.
