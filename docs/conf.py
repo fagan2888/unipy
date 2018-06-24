@@ -19,10 +19,12 @@ from unipy import __version__
 # __version__ = '0.0.4.19'
 sys.path.append(os.path.join(os.path.abspath(os.pardir)))
 
-with open('../requirements.txt') as file:
-    pkg_list = file.readlines()
-pkg_name_list = [line.split()[0] for line in pkg_list[1:]]
-autodoc_mock_imports = pkg_name_list
+# with open('../requirements.txt') as file:
+#     pkg_list = file.readlines()
+# pkg_name_list = [line.split()[0] for line in pkg_list[1:]]
+# autodoc_mock_imports = pkg_name_list
+autodoc_mock_imports = ["_tkinter"]
+
 
 # -- Project information -----------------------------------------------------
 
