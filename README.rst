@@ -5,7 +5,7 @@ unipy
 =====
 
 .. image:: docs/images/unipy_logos/jpg/logo_white_background.jpg
-    :height: 100px
+    :height: 40px
     :alt: unipy logo
     :align: center
 
