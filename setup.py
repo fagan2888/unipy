@@ -16,7 +16,7 @@ except ImportError:
     from distutils.core import setup, find_packages
 
 
-__version__ = '0.0.4.21'
+__version__ = '0.0.4.22'
 
 long_desc = """
 This is made for some specific environment.
@@ -99,7 +99,9 @@ setup(name='unipy',
             'Intended Audience :: Science/Research',
             'Natural Language :: English',
             ],
-      packages=find_packages(exclude=['contrib', 'docs', 'tests']),
+      packages=find_packages(exclude=['contrib',
+                                     #  'docs',
+                                      'tests']),
       #setup_requires=required_packages,
       install_requires=required_packages,
       zip_safe=False,
