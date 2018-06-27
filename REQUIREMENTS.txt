@@ -13,4 +13,6 @@ scikit-image >= 0.13.0
 PyDrive >= 1.2.1
 oauth2client >= 4.1.2
 google-auth-oauthlib >= 0.2.0
+pyasn1 >= 0.4.3
+pyasn1-modules >= 0.2.1
 mglearn >= 0.1.6

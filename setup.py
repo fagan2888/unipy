@@ -20,7 +20,7 @@ except ImportError:
 from distutils.cmd import Command
 
 
-__version__ = '0.1.5'
+__version__ = '0.1.7'
 
 desc = """
 This contains a number of useful objects for data manipulation & analysis.
@@ -96,6 +96,8 @@ required_packages = [
                      'PyDrive >= 1.2.1',
                      'oauth2client >= 4.1.2',
                      'google-auth-oauthlib >= 0.2.0',
+                     'pyasn1 >= 0.4.3',
+                     'pyasn1-modules >= 0.2.1',
                     #'pyqt5',
                      'mglearn >= 0.1.6',
                     # 'numba >= 0.34.0',

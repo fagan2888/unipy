@@ -15,7 +15,7 @@ annoying parts of Data Analysis. ``unipy`` offers you many functions maybe
 once you have tried to search in ``google`` or ``stackoverflow``.
 
 The docstring examples assume that `unipy` has been imported as `up`::
-  >>> import numpy as up
+  >>> import unipy as up
 
 Code snippets are indicated by three greater-than signs::
   >>> x = 42
@@ -27,7 +27,7 @@ Use the built-in ``help`` function to view a function's docstring::
 
 General-purpose documents like a glossary and help on the basic concepts
 of numpy are available under the ``docs`` sub-module::
-  >>> from numpy import docs
+  >>> from unipy import docs
   >>> help(docs)
   ... # doctest: +SKIP
 
@@ -64,14 +64,14 @@ from unipy import stats
 from unipy import tools
 from unipy import utils
 
-# from unipy.core import *
-# from unipy.dataset import *
-# from unipy.math import *
-# from unipy.plots import *
-# from unipy.image import *
-# from unipy.stats import *
-# from unipy.tools import *
-# from unipy.utils import *
+from unipy.core import *
+from unipy.dataset import *
+from unipy.math import *
+from unipy.plots import *
+from unipy.image import *
+from unipy.stats import *
+from unipy.tools import *
+from unipy.utils import *
 
 __all__ = []
 __all__ += ['__version__']
