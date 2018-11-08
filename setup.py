@@ -20,7 +20,7 @@ except ImportError:
 from distutils.cmd import Command
 
 
-__version__ = '0.1.8'
+__version__ = '0.1.9'
 
 desc = """
 This contains a number of useful objects for data manipulation & analysis.

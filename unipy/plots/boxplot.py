@@ -16,7 +16,7 @@ __all__ = ['point_boxplot',
 def point_boxplot(data, groupby=None, value=None,
                   rot=90, spread=.2,
                   dot_size=15., dot_color='b', dot_alpha=.2,
-                  *args, **kwargs):
+                  figsize=(12, 9), *args, **kwargs):
     """Boxplot with points.
 
     Draw boxplots by given keys(groupby, value).
@@ -97,7 +97,7 @@ def point_boxplot(data, groupby=None, value=None,
 
     grouped = data.groupby(groupby_list)[value_list]
 
-    fig, ax = plt.subplots(nrows=1, ncols=1)
+    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=figsize)
 
     data.boxplot(by=groupby_list, column=value_list, rot=rot, ax=ax,
                  flierprops=flierprops, showfliers=True,
@@ -120,6 +120,7 @@ def point_boxplot_axis(data, groupby=None, value=None,
                        rot=90, spread=.2,
                        dot_size=15., dot_color='b', dot_alpha=.2,
                        share_yrange=True,
+                       figsize=(12, 9),
                        *args, **kwargs):
     """Boxplot with points, horizontally seperated.
 
@@ -209,7 +210,7 @@ def point_boxplot_axis(data, groupby=None, value=None,
     ylim_min = data[value_list].min()[0]
     ylim_max = data[value_list].max()[0]
 
-    fig, axes = plt.subplots(nrows=1, ncols=len(grouped))
+    fig, axes = plt.subplots(nrows=1, ncols=len(grouped), figsize=figsize)
 
     for ax, (i, (key, subdata)) in zip(axes.flatten(), enumerate(grouped)):
         subdata.boxplot(column=value_list, rot=rot, ax=ax,
