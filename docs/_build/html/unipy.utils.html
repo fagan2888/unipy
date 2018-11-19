@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>unipy.utils package &mdash; unipy 0.0.4.28 documentation</title>
+  <title>unipy.utils package &mdash; unipy 0.1.12 documentation</title>
   
 
   
@@ -27,7 +27,9 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="unipy.utils.api module" href="unipy.utils.api.html" />
+    <link rel="prev" title="unipy.unipy_test.test_stats module" href="unipy.unipy_test.test_stats.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -56,7 +58,7 @@
             
             
               <div class="version">
-                0.0.4.28
+                0.1.12
               </div>
             
           
@@ -80,21 +82,36 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">unipy.utils package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-unipy.utils">Module contents</a><ul>
-<li><a class="reference internal" href="#decorator">decorator</a></li>
-<li><a class="reference internal" href="#generator">generator</a></li>
-<li><a class="reference internal" href="#wrapper">wrapper</a></li>
-<li><a class="reference internal" href="#gdrive">gdrive</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="unipy.core.html">unipy.core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.dataset.html">unipy.dataset package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.image.html">unipy.image package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.math.html">unipy.math package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.plots.html">unipy.plots package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.stats.html">unipy.stats package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.tools.html">unipy.tools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.unipy_test.html">unipy.unipy_test package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">unipy.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.api.html">unipy.utils.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.decorator.html">unipy.utils.decorator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.gdrive.html">unipy.utils.gdrive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.generator.html">unipy.utils.generator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.remote_ipyconnector.html">unipy.utils.remote_ipyconnector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.wrapper.html">unipy.utils.wrapper module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-unipy.utils">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#decorator">decorator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generator">generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wrapper">wrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gdrive">gdrive</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-</div>
+
             
           
         </div>
@@ -178,7 +195,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="unipy.utils.remote_ipyconnector.html">unipy.utils.remote_ipyconnector module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="unipy.utils.wrapper.html">unipy.utils.wrapper module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="unipy.utils.wrapper.html#high-level-code-wrapper">High-level Code Wrapper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unipy.utils.wrapper.html#high-level-function-wrapper">High-level Function Wrapper</a></li>
 </ul>
 </li>
 </ul>
@@ -234,7 +251,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>func</strong> (<em>Function</em>) – Any function without <code class="docutils literal notranslate"><span class="pre">lambda</span></code>.</li>
-<li><strong>worker</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em> (</em><em>default: 2</em><em>)</em>) – A number of processes.</li>
+<li><strong>worker</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em> (</em><em>default: 2</em><em>)</em>) – A number of processes.</li>
 <li><strong>arg_zip</strong> (<em>zip</em><em> (</em><em>default: None</em><em>)</em>) – A <code class="docutils literal notranslate"><span class="pre">zip</span></code> instance.</li>
 </ul>
 </td>
@@ -242,7 +259,7 @@
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list contains results of each processes.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.6)">list</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a></p>
 </td>
 </tr>
 </tbody>
@@ -288,6 +305,85 @@ option. This allows you to control printing in a function.</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.utils.lprint">
+<code class="descclassname">unipy.utils.</code><code class="descname">lprint</code><span class="sig-paren">(</span><em>input_x</em>, <em>output</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/wrapper.html#lprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.lprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print option interface.</p>
+<p>This function is to stdout the shape of input layer &amp; output layer
+in Deep Learning architecture.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>input_x</strong> (<em>numpy.ndarray</em>) – A <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> object of input source.</li>
+<li><strong>output</strong> (<em>numpy.ndarray</em>) – A <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> object of output target.</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> (</em><em>default: None</em><em>)</em>) – An optional name you want to print out.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.utils.aprint">
+<code class="descclassname">unipy.utils.</code><code class="descname">aprint</code><span class="sig-paren">(</span><em>*arr</em>, <em>maxlen=None</em>, <em>name_list=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/wrapper.html#aprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.aprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stdout the <cite>numpy.ndarray</cite> in pretty.</p>
+<p>It prints the multiple <cite>numpy.ndarray</cite> out “Side by Side.”</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>arr</strong> (<em>numpy.ndarray</em>) – Any arrays you want to print out.</li>
+<li><strong>maxlen</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em> (</em><em>default: None</em><em>)</em>) – A length for each array to print out.
+It is automatically calculated in case of <cite>None</cite>.</li>
+<li><strong>name_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> (</em><em>default: None</em><em>)</em>) – A list contains the names of each arrays.
+Upper Alphabet is given in case of <cite>None</cite>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">unipy.utils.wrapper</span> <span class="k">import</span> <span class="n">aprint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<span class="gp">... </span><span class="p">[</span><span class="o">.</span><span class="mi">6</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">[</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<span class="gp">... </span><span class="p">[</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span> <span class="o">.</span><span class="mi">6</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">[</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="o">.</span><span class="mi">3</span><span class="p">,],</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aprint</span><span class="p">(</span><span class="n">arr_x</span><span class="p">,</span> <span class="n">arr_y</span><span class="p">)</span>
+<span class="go">=========================================</span>
+<span class="go">|  A                 |    B             |</span>
+<span class="go">|  (2, 3)            |    (2, 2)        |</span>
+<span class="go">=========================================</span>
+<span class="go">|  [[0.6 0.5 0.1]    |    [[0.4 0.6]    |</span>
+<span class="go">|   [0.4 0.2 0.8]]   |     [0.7 0.3]]   |</span>
+<span class="go">=========================================</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aprint</span><span class="p">(</span><span class="n">arr_x</span><span class="p">,</span> <span class="n">arr_y</span><span class="p">,</span> <span class="n">name_list</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">])</span>
+<span class="go">=========================================</span>
+<span class="go">|  X                 |    Y             |</span>
+<span class="go">|  (2, 3)            |    (2, 2)        |</span>
+<span class="go">=========================================</span>
+<span class="go">|  [[0.6 0.5 0.1]    |    [[0.4 0.6]    |</span>
+<span class="go">|   [0.4 0.2 0.8]]   |     [0.7 0.3]]   |</span>
+<span class="go">=========================================</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aprint</span><span class="p">(</span><span class="n">arr_x</span><span class="p">,</span> <span class="n">arr_y</span><span class="p">,</span> <span class="n">arr_y</span><span class="p">[:</span><span class="mi">1</span><span class="p">],</span> <span class="n">name_list</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Y_1&#39;</span><span class="p">])</span>
+<span class="go">============================================================</span>
+<span class="go">|  X                 |    Y             |    Y_1           |</span>
+<span class="go">|  (2, 3)            |    (2, 2)        |    (1, 2)        |</span>
+<span class="go">============================================================</span>
+<span class="go">|  [[0.6 0.5 0.1]    |    [[0.4 0.6]    |    [[0.4 0.6]]   |</span>
+<span class="go">|   [0.4 0.2 0.8]]   |     [0.7 0.3]]   |                  |</span>
+<span class="go">============================================================</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -406,7 +502,7 @@ option. This allows you to control printing in a function.</p>
 <dl class="class">
 <dt id="unipy.utils.Infix">
 <em class="property">class </em><code class="descclassname">unipy.utils.</code><code class="descname">Infix</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/decorator.html#Infix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.Infix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Wrapper for define an operator.</p>
 <p>This wrapper translates a function to an operator.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -473,7 +569,7 @@ option. This allows you to control printing in a function.</p>
 <dl class="class">
 <dt id="unipy.utils.ReusableGenerator">
 <em class="property">class </em><code class="descclassname">unipy.utils.</code><code class="descname">ReusableGenerator</code><span class="sig-paren">(</span><em>generator</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/generator.html#ReusableGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.ReusableGenerator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Temporary Interface to re-use generator for convenience.</p>
 <p>Once assigned, It can be infinitely consumed
 <a href="#id1"><span class="problematic" id="id2">**</span></a>as long as an input generator remains un-exhausted.</p>
@@ -574,7 +670,7 @@ It yields a tuple of (start, start+(term-1)) pair, until start &gt; end.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – end or start, end[, term]
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – end or start, end[, term]
 It works like range function.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><em>tuple</em> – A tuple of (start, start+(term-1)) pair, until start &gt; end.</td>
@@ -611,9 +707,9 @@ It yields a tuple of (start, start+(term-1)) pair, until start &gt; end.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
-<li><strong>end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
-<li><strong>day_term</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – term of days.</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
+<li><strong>end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
+<li><strong>day_term</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – term of days.</li>
 <li><strong>tm_format</strong> (<em>(</em><em>default: '%Y%m%d'</em><em>)</em>) – datetime format string.</li>
 </ul>
 </td>
@@ -650,9 +746,9 @@ It yields a tuple of (start, start+(term-1)) pair, until start &gt; end.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
-<li><strong>end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
-<li><strong>day_term</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – term of days.</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
+<li><strong>end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
+<li><strong>day_term</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – term of days.</li>
 <li><strong>tm_string</strong> (list (default: <code class="docutils literal notranslate"><span class="pre">['000000',</span> <span class="pre">'235959']</span></code>)) – time strings to concatenate.</li>
 <li><strong>tm_format</strong> (<em>(</em><em>default: '%Y%m%d'</em><em>)</em>) – datetime format string.</li>
 </ul>
@@ -689,7 +785,7 @@ It yields a tuple of (start, start+(term-1)) pair, until start &gt; end.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – end or start, end[, term]
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – end or start, end[, term]
 It works like range function.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><em>tuple</em> – A tuple of (start, start+(term-1)) pair, until start &gt; end.</td>
@@ -733,11 +829,11 @@ It works like range function.</td>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>gdrive_url_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – An URL ID of an Google Drive directory which contains files to
+<li><strong>gdrive_url_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – An URL ID of an Google Drive directory which contains files to
 download.
 <cite>https://drive.google.com/drive/folders/&lt;google drive URL ID&gt;</cite>.</li>
-<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em> (</em><em>default: '*'</em><em>)</em>) – A pattern of regular expression to filter file in the target directory.</li>
-<li><strong>download_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em> (</em><em>default: './data'</em><em>)</em>) – A target directory to download files in given URL ID.</li>
+<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> (</em><em>default: '*'</em><em>)</em>) – A pattern of regular expression to filter file in the target directory.</li>
+<li><strong>download_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> (</em><em>default: './data'</em><em>)</em>) – A target directory to download files in given URL ID.</li>
 </ul>
 </td>
 </tr>
@@ -771,10 +867,10 @@ download.
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>gdrive_url_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – An URL ID of an Google Drive directory to upload files.
+<li><strong>gdrive_url_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – An URL ID of an Google Drive directory to upload files.
 <cite>https://drive.google.com/drive/folders/&lt;google drive URL ID&gt;</cite>.</li>
-<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em> (</em><em>default: '*'</em><em>)</em>) – A pattern of regular expression to filter file in the target directory.</li>
-<li><strong>src_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em> (</em><em>default: './data'</em><em>)</em>) – A source directory to upload files in given URL ID.</li>
+<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> (</em><em>default: '*'</em><em>)</em>) – A pattern of regular expression to filter file in the target directory.</li>
+<li><strong>src_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> (</em><em>default: './data'</em><em>)</em>) – A source directory to upload files in given URL ID.</li>
 </ul>
 </td>
 </tr>
@@ -808,6 +904,15 @@ download.
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="unipy.utils.api.html" class="btn btn-neutral float-right" title="unipy.utils.api module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="unipy.unipy_test.test_stats.html" class="btn btn-neutral" title="unipy.unipy_test.test_stats module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -835,7 +940,7 @@ download.
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.4.28',
+            VERSION:'0.1.12',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

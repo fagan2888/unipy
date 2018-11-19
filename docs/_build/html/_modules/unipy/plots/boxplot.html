@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>unipy.plots.boxplot &mdash; unipy 0.0.4.28 documentation</title>
+  <title>unipy.plots.boxplot &mdash; unipy 0.1.12 documentation</title>
   
 
   
@@ -56,7 +56,7 @@
             
             
               <div class="version">
-                0.0.4.28
+                0.1.12
               </div>
             
           
@@ -80,8 +80,18 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../unipy.core.html">unipy.core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../unipy.dataset.html">unipy.dataset package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../unipy.image.html">unipy.image package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../unipy.math.html">unipy.math package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../unipy.plots.html">unipy.plots package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../unipy.stats.html">unipy.stats package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../unipy.tools.html">unipy.tools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../unipy.unipy_test.html">unipy.unipy_test package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../unipy.utils.html">unipy.utils package</a></li>
+</ul>
+
             
           
         </div>
@@ -155,13 +165,14 @@
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;point_boxplot&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;point_boxplot_axis&#39;</span><span class="p">]</span>
+           <span class="s1">&#39;point_boxplot_axis&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;mosaic_plot&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="point_boxplot"><a class="viewcode-back" href="../../../unipy.plots.boxplot.html#unipy.plots.point_boxplot">[docs]</a><span class="k">def</span> <span class="nf">point_boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="point_boxplot"><a class="viewcode-back" href="../../../unipy.plots.boxplot.html#unipy.point_boxplot">[docs]</a><span class="k">def</span> <span class="nf">point_boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="n">rot</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">spread</span><span class="o">=.</span><span class="mi">2</span><span class="p">,</span>
                   <span class="n">dot_size</span><span class="o">=</span><span class="mf">15.</span><span class="p">,</span> <span class="n">dot_color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">dot_alpha</span><span class="o">=.</span><span class="mi">2</span><span class="p">,</span>
-                  <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                  <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Boxplot with points.</span>
 
 <span class="sd">    Draw boxplots by given keys(groupby, value).</span>
@@ -242,7 +253,7 @@
 
     <span class="n">grouped</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">groupby_list</span><span class="p">)[</span><span class="n">value_list</span><span class="p">]</span>
 
-    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
 
     <span class="n">data</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="n">groupby_list</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">value_list</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="n">rot</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
                  <span class="n">flierprops</span><span class="o">=</span><span class="n">flierprops</span><span class="p">,</span> <span class="n">showfliers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -261,10 +272,11 @@
     <span class="k">return</span> <span class="n">fig</span></div>
 
 
-<div class="viewcode-block" id="point_boxplot_axis"><a class="viewcode-back" href="../../../unipy.plots.boxplot.html#unipy.plots.point_boxplot_axis">[docs]</a><span class="k">def</span> <span class="nf">point_boxplot_axis</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="point_boxplot_axis"><a class="viewcode-back" href="../../../unipy.plots.boxplot.html#unipy.point_boxplot_axis">[docs]</a><span class="k">def</span> <span class="nf">point_boxplot_axis</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">rot</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">spread</span><span class="o">=.</span><span class="mi">2</span><span class="p">,</span>
                        <span class="n">dot_size</span><span class="o">=</span><span class="mf">15.</span><span class="p">,</span> <span class="n">dot_color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">dot_alpha</span><span class="o">=.</span><span class="mi">2</span><span class="p">,</span>
                        <span class="n">share_yrange</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
                        <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Boxplot with points, horizontally seperated.</span>
 
@@ -354,7 +366,7 @@
     <span class="n">ylim_min</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">value_list</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">ylim_max</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">value_list</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">grouped</span><span class="p">))</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">grouped</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">subdata</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">grouped</span><span class="p">)):</span>
         <span class="n">subdata</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">value_list</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="n">rot</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
@@ -371,6 +383,114 @@
             <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ylim_min</span><span class="p">,</span> <span class="n">ylim_max</span><span class="p">)</span>
 
     <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">fig</span></div>
+
+
+<div class="viewcode-block" id="mosaic_plot"><a class="viewcode-back" href="../../../unipy.plots.boxplot.html#unipy.mosaic_plot">[docs]</a><span class="k">def</span> <span class="nf">mosaic_plot</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">col_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show_values</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">rot</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">width</span><span class="o">=.</span><span class="mi">9</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mosaic Plot via Stacked bar plots.</span>
+
+<span class="sd">    Draw plots by given keys(groupby, value).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data: pandas.DataFrame</span>
+<span class="sd">        a dataset.</span>
+
+<span class="sd">    groupby: str or list-like (default: None)</span>
+<span class="sd">        A key column to separate. (X-axis, categorical)</span>
+<span class="sd">        When ``str``, it should be a column name to groupby.</span>
+<span class="sd">        When ``list-like``, it contains a column name to groupby.</span>
+
+<span class="sd">    col_list: str or list-like (default: None)</span>
+<span class="sd">        A key column to get values. (Y-axis, numerical)</span>
+<span class="sd">        When ``str``, it should be column names of values.</span>
+<span class="sd">        When ``list-like``, it contains column names of values.</span>
+
+<span class="sd">    rot: int (default: 90)</span>
+<span class="sd">        A rotation angle to show X-axis labels.</span>
+
+<span class="sd">    show_values: boolean (default: True)</span>
+<span class="sd">        Choose If `n` is annotated.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    matplotlib.figure.Figure</span>
+<span class="sd">        A plot figure.</span>
+
+<span class="sd">    Exceptions</span>
+<span class="sd">    ----------</span>
+<span class="sd">    AssertionError</span>
+<span class="sd">        It is raised when two or more names are given to</span>
+<span class="sd">        ``groupby`` or ``value``.</span>
+
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+<span class="sd">    ``pandas.DataFrame.barplot``</span>
+<span class="sd">    ``matplotlib.pyplot``</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import unipy.dataset.api as dm</span>
+<span class="sd">    &gt;&gt;&gt; from unipy.plots import mosaic_plot</span>
+<span class="sd">    &gt;&gt;&gt; dm.init()</span>
+<span class="sd">    &gt;&gt;&gt; data = dm.load(&#39;adult&#39;)</span>
+<span class="sd">    Dataset : iris</span>
+<span class="sd">    &gt;&gt;&gt; tmp = mosaic_plot(data, groupby=&#39;native_country&#39;,</span>
+<span class="sd">    ... col_list=[&#39;workclass&#39;, &#39;education&#39;])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">groupby</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="n">groupby_list</span> <span class="o">=</span> <span class="n">groupby</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">groupby</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">groupby_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">groupby</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">col_list</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="n">col_list</span> <span class="o">=</span> <span class="n">col_list</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">col_list</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">col_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">col_list</span><span class="p">]</span>
+
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">groupby_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;&#39;groupby&#39;: should be a single column&quot;</span>
+
+    <span class="n">grouped</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">groupby_list</span> <span class="o">+</span> <span class="n">col_list</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">groupby_list</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
+        <span class="n">nrows</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">grouped</span><span class="p">),</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">grp</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">grouped</span><span class="p">):</span>
+        <span class="n">tmp_table</span> <span class="o">=</span> <span class="n">grp</span><span class="p">[</span><span class="n">col_list</span><span class="p">]</span>
+        <span class="n">freq_table</span> <span class="o">=</span> <span class="n">tmp_table</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">)</span>
+        <span class="c1">#freq_ratio_table = freq_table.apply(lambda x: x / np.nansum(x))</span>
+        <span class="n">freq_table</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="c1">#figsize=(1.5 * tmp_table.shape[1], 12),</span>
+            <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+            <span class="n">rot</span><span class="o">=</span><span class="n">rot</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">groupby_list</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center right&#39;</span><span class="p">,</span>
+            <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.11</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">show_values</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+                <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">(),</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+                <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">get_xy</span><span class="p">()</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+                    <span class="n">f</span><span class="s1">&#39;</span><span class="si">{height:.0f}</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="p">(</span>
+                        <span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="o">.</span><span class="mi">5</span> <span class="o">*</span> <span class="n">width</span><span class="p">,</span>
+                        <span class="n">p</span><span class="o">.</span><span class="n">get_y</span><span class="p">()</span> <span class="o">+</span> <span class="o">.</span><span class="mi">5</span> <span class="o">*</span> <span class="n">height</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span>
+                <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">fig</span></div>
 
@@ -411,7 +531,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.0.4.28',
+            VERSION:'0.1.12',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

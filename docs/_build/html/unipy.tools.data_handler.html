@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>unipy.tools.data_handler module &mdash; unipy 0.0.4.28 documentation</title>
+  <title>unipy.tools.data_handler module &mdash; unipy 0.1.12 documentation</title>
   
 
   
@@ -27,7 +27,9 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="unipy.unipy_test package" href="unipy.unipy_test.html" />
+    <link rel="prev" title="unipy.tools.api module" href="unipy.tools.api.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -56,7 +58,7 @@
             
             
               <div class="version">
-                0.0.4.28
+                0.1.12
               </div>
             
           
@@ -80,11 +82,26 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">unipy.tools.data_handler module</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="unipy.core.html">unipy.core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.dataset.html">unipy.dataset package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.image.html">unipy.image package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.math.html">unipy.math package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.plots.html">unipy.plots package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.stats.html">unipy.stats package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="unipy.tools.html">unipy.tools package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="unipy.tools.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="unipy.tools.api.html">unipy.tools.api module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">unipy.tools.data_handler module</a></li>
 </ul>
-</div>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="unipy.tools.html#module-unipy.tools">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.unipy_test.html">unipy.unipy_test package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.utils.html">unipy.utils package</a></li>
+</ul>
+
             
           
         </div>
@@ -128,6 +145,8 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
+          <li><a href="unipy.tools.html">unipy.tools package</a> &raquo;</li>
+        
       <li>unipy.tools.data_handler module</li>
     
     
@@ -169,7 +188,7 @@ The items of An iterable should be the same type.</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A filtered list.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.6)">list</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a></p>
 </td>
 </tr>
 </tbody>
@@ -207,21 +226,21 @@ The items of An iterable should be the same type.</p>
 within the given size.
 ‘remaining’ is to split chunks with the given size,
 and the remains are bound as the last chunk.</li>
-<li><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – The number of chunks.</li>
+<li><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – The number of chunks.</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of chunks.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.6)">list</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a></p>
 </td>
 </tr>
 </tbody>
 </table>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.array_split()</span></code>, <a class="reference external" href="https://docs.python.org/3/library/itertools.html#itertools.islice" title="(in Python v3.6)"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.islice()</span></code></a></p>
+<p class="last"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.array_split()</span></code>, <a class="reference external" href="https://docs.python.org/3/library/itertools.html#itertools.islice" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.islice()</span></code></a></p>
 </div>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">unipy</span> <span class="k">as</span> <span class="nn">up</span>
@@ -322,9 +341,9 @@ StopIteration
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A list of tuples. Each tuple is an unique pair of values.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.6)">list</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a></td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.6)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> – If the lengths of argments are not equal.</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> – If the lengths of argments are not equal.</td>
 </tr>
 </tbody>
 </table>
@@ -374,7 +393,7 @@ StopIteration
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>data_frame</strong> (<em>pandas.DataFrame</em>) – DataFrame to get unique-pairs.</li>
-<li><strong>col_list</strong> (<em>pandas.Index</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.6)"><em>list</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)"><em>tuple</em></a>) – Column names of given DataFrame.</li>
+<li><strong>col_list</strong> (<em>pandas.Index</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.7)"><em>tuple</em></a>) – Column names of given DataFrame.</li>
 <li><strong>to_frame</strong> (<em>Boolean</em><em> (</em><em>default: False</em><em>)</em>) – Choose output type.
 If True, It returns pandas.DataFrame as an output.
 If False, It returns a list of tuples.</li>
@@ -448,11 +467,11 @@ When merged, the file is sorted by its name in ascending order.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>file_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – A directory path of source files.</li>
-<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – A File extension with conditional naming. (default: ‘<a href="#id1"><span class="problematic" id="id2">*</span></a>.csv’)</li>
-<li><strong>sep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – A symbol seperating data columns.</li>
+<li><strong>file_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – A directory path of source files.</li>
+<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – A File extension with conditional naming. (default: ‘<a href="#id1"><span class="problematic" id="id2">*</span></a>.csv’)</li>
+<li><strong>sep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – A symbol seperating data columns.</li>
 <li><strong>if_save</strong> (<em>Boolean</em><em> (</em><em>Optional</em><em>, </em><em>default: True</em><em>)</em>) – False if you don’t want to save the result.</li>
-<li><strong>save_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – A filename to save the result.
+<li><strong>save_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – A filename to save the result.
 It should be given if if_save=True.
 If inappropriate name is given, the first name of file list is used.</li>
 <li><strong>low_memory</strong> (<em>Boolean</em><em> (</em><em>Optional</em><em>, </em><em>default: True</em><em>)</em>) – It is used for pandas.read_csv() option only.</li>
@@ -544,7 +563,7 @@ If inappropriate name is given, the first name of file list is used.</li>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A dimension depth number.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)">int</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)">int</a></td>
 </tr>
 </tbody>
 </table>
@@ -582,7 +601,7 @@ Each elements of a given sequence is padded fixed-length.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>arr</strong> (<em>Iterable</em>) – A nested sequence containing 1-Dimensional numpy.ndarray.</li>
-<li><strong>max_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em> (</em><em>default: None</em><em>)</em>) – A required fixed-length of each sequences.
+<li><strong>max_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em> (</em><em>default: None</em><em>)</em>) – A required fixed-length of each sequences.
 If None, It calculates the max length of elements as max_len.</li>
 <li><strong>method</strong> (<em>{'forward'</em><em>, </em><em>'backward'}</em><em> (</em><em>default: 'backward'</em><em>)</em>) – where to pad.</li>
 </ul>
@@ -591,14 +610,14 @@ If None, It calculates the max length of elements as max_len.</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list containing 3-Dimensional numpy.ndarray with fixed-length 2D.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.6)">list</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a></p>
 </td>
 </tr>
 </tbody>
 </table>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-func docutils literal notranslate"><span class="pre">unipy.depth()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.pad()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.stack()</span></code></p>
+<p class="last"><a class="reference internal" href="unipy.html#unipy.depth" title="unipy.depth"><code class="xref py py-func docutils literal notranslate"><span class="pre">unipy.depth()</span></code></a>, <code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.pad()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.stack()</span></code></p>
 </div>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">unipy.tools.data_handler</span> <span class="k">import</span> <span class="n">zero_padder_2d</span>
@@ -633,7 +652,7 @@ Each elements of a given sequence is padded fixed-length.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>arr</strong> (<em>Iterable</em>) – A nested sequence containing 2-Dimensional numpy.ndarray.</li>
-<li><strong>max_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em> (</em><em>default: None</em><em>)</em>) – A required fixed-length of each sequences.
+<li><strong>max_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em> (</em><em>default: None</em><em>)</em>) – A required fixed-length of each sequences.
 If None, It calculates the max length of elements as max_len.</li>
 <li><strong>method</strong> (<em>{'forward'</em><em>, </em><em>'backward'}</em><em> (</em><em>default: 'backward'</em><em>)</em>) – where to pad.</li>
 </ul>
@@ -642,17 +661,17 @@ If None, It calculates the max length of elements as max_len.</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list containing 3-Dimensional numpy.ndarray with fixed-length 2D.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.6)">list</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a></p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.6)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> – All 3D shape of inner numpy.ndarray is not equal.</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> – All 3D shape of inner numpy.ndarray is not equal.</p>
 </td>
 </tr>
 </tbody>
 </table>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-func docutils literal notranslate"><span class="pre">unipy.depth()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.pad()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.stack()</span></code></p>
+<p class="last"><a class="reference internal" href="unipy.html#unipy.depth" title="unipy.depth"><code class="xref py py-func docutils literal notranslate"><span class="pre">unipy.depth()</span></code></a>, <code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.pad()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.stack()</span></code></p>
 </div>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">unipy.tools.data_handler</span> <span class="k">import</span> <span class="n">zero_padder_3d</span>
@@ -719,6 +738,15 @@ If None, It calculates the max length of elements as max_len.</li>
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="unipy.unipy_test.html" class="btn btn-neutral float-right" title="unipy.unipy_test package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="unipy.tools.api.html" class="btn btn-neutral" title="unipy.tools.api module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -746,7 +774,7 @@ If None, It calculates the max length of elements as max_len.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.4.28',
+            VERSION:'0.1.12',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

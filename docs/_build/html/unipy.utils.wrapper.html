@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>unipy.utils.wrapper module &mdash; unipy 0.0.4.28 documentation</title>
+  <title>unipy.utils.wrapper module &mdash; unipy 0.1.12 documentation</title>
   
 
   
@@ -27,7 +27,8 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="unipy.utils.remote_ipyconnector module" href="unipy.utils.remote_ipyconnector.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -56,7 +57,7 @@
             
             
               <div class="version">
-                0.0.4.28
+                0.1.12
               </div>
             
           
@@ -80,14 +81,33 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">unipy.utils.wrapper module</a><ul>
-<li><a class="reference internal" href="#high-level-code-wrapper">High-level Code Wrapper</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="unipy.core.html">unipy.core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.dataset.html">unipy.dataset package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.image.html">unipy.image package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.math.html">unipy.math package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.plots.html">unipy.plots package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.stats.html">unipy.stats package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.tools.html">unipy.tools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.unipy_test.html">unipy.unipy_test package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="unipy.utils.html">unipy.utils package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="unipy.utils.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.api.html">unipy.utils.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.decorator.html">unipy.utils.decorator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.gdrive.html">unipy.utils.gdrive module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.generator.html">unipy.utils.generator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.remote_ipyconnector.html">unipy.utils.remote_ipyconnector module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">unipy.utils.wrapper module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#high-level-function-wrapper">High-level Function Wrapper</a></li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="unipy.utils.html#module-unipy.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
             
           
         </div>
@@ -131,6 +151,8 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
+          <li><a href="unipy.utils.html">unipy.utils package</a> &raquo;</li>
+        
       <li>unipy.utils.wrapper module</li>
     
     
@@ -152,9 +174,9 @@
             
   <div class="section" id="module-unipy.utils.wrapper">
 <span id="unipy-utils-wrapper-module"></span><h1>unipy.utils.wrapper module<a class="headerlink" href="#module-unipy.utils.wrapper" title="Permalink to this headline">¶</a></h1>
-<p>Docstring for <code class="docutils literal notranslate"><span class="pre">wrapper</span></code>.</p>
-<div class="section" id="high-level-code-wrapper">
-<h2>High-level Code Wrapper<a class="headerlink" href="#high-level-code-wrapper" title="Permalink to this headline">¶</a></h2>
+<p>Docstring for <code class="docutils literal notranslate"><span class="pre">Wrapper</span></code>.</p>
+<div class="section" id="high-level-function-wrapper">
+<h2>High-level Function Wrapper<a class="headerlink" href="#high-level-function-wrapper" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
 <col width="26%" />
@@ -183,6 +205,12 @@
 <tr class="row-even"><td>uprint</td>
 <td>Print option interface within a function.</td>
 </tr>
+<tr class="row-odd"><td>lprint</td>
+<td>stdout the shape of input layer &amp; output layer in DL</td>
+</tr>
+<tr class="row-even"><td>aprint</td>
+<td>Stdout the <cite>numpy.ndarray</cite> in pretty.</td>
+</tr>
 </tbody>
 </table>
 <dl class="function">
@@ -196,7 +224,7 @@
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>func</strong> (<em>Function</em>) – Any function without <code class="docutils literal notranslate"><span class="pre">lambda</span></code>.</li>
-<li><strong>worker</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em> (</em><em>default: 2</em><em>)</em>) – A number of processes.</li>
+<li><strong>worker</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em> (</em><em>default: 2</em><em>)</em>) – A number of processes.</li>
 <li><strong>arg_zip</strong> (<em>zip</em><em> (</em><em>default: None</em><em>)</em>) – A <code class="docutils literal notranslate"><span class="pre">zip</span></code> instance.</li>
 </ul>
 </td>
@@ -204,7 +232,7 @@
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list contains results of each processes.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.6)">list</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)">list</a></p>
 </td>
 </tr>
 </tbody>
@@ -252,6 +280,85 @@ option. This allows you to control printing in a function.</p>
 </table>
 </dd></dl>
 
+<dl class="function">
+<dt id="unipy.utils.wrapper.lprint">
+<code class="descclassname">unipy.utils.wrapper.</code><code class="descname">lprint</code><span class="sig-paren">(</span><em>input_x</em>, <em>output</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/wrapper.html#lprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.wrapper.lprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print option interface.</p>
+<p>This function is to stdout the shape of input layer &amp; output layer
+in Deep Learning architecture.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>input_x</strong> (<em>numpy.ndarray</em>) – A <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> object of input source.</li>
+<li><strong>output</strong> (<em>numpy.ndarray</em>) – A <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> object of output target.</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> (</em><em>default: None</em><em>)</em>) – An optional name you want to print out.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="unipy.utils.wrapper.aprint">
+<code class="descclassname">unipy.utils.wrapper.</code><code class="descname">aprint</code><span class="sig-paren">(</span><em>*arr</em>, <em>maxlen=None</em>, <em>name_list=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/wrapper.html#aprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.wrapper.aprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stdout the <cite>numpy.ndarray</cite> in pretty.</p>
+<p>It prints the multiple <cite>numpy.ndarray</cite> out “Side by Side.”</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>arr</strong> (<em>numpy.ndarray</em>) – Any arrays you want to print out.</li>
+<li><strong>maxlen</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em> (</em><em>default: None</em><em>)</em>) – A length for each array to print out.
+It is automatically calculated in case of <cite>None</cite>.</li>
+<li><strong>name_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.7)"><em>list</em></a><em> (</em><em>default: None</em><em>)</em>) – A list contains the names of each arrays.
+Upper Alphabet is given in case of <cite>None</cite>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">unipy.utils.wrapper</span> <span class="k">import</span> <span class="n">aprint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<span class="gp">... </span><span class="p">[</span><span class="o">.</span><span class="mi">6</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">[</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<span class="gp">... </span><span class="p">[</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span> <span class="o">.</span><span class="mi">6</span><span class="p">],</span>
+<span class="gp">... </span><span class="p">[</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="o">.</span><span class="mi">3</span><span class="p">,],</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aprint</span><span class="p">(</span><span class="n">arr_x</span><span class="p">,</span> <span class="n">arr_y</span><span class="p">)</span>
+<span class="go">=========================================</span>
+<span class="go">|  A                 |    B             |</span>
+<span class="go">|  (2, 3)            |    (2, 2)        |</span>
+<span class="go">=========================================</span>
+<span class="go">|  [[0.6 0.5 0.1]    |    [[0.4 0.6]    |</span>
+<span class="go">|   [0.4 0.2 0.8]]   |     [0.7 0.3]]   |</span>
+<span class="go">=========================================</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aprint</span><span class="p">(</span><span class="n">arr_x</span><span class="p">,</span> <span class="n">arr_y</span><span class="p">,</span> <span class="n">name_list</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">])</span>
+<span class="go">=========================================</span>
+<span class="go">|  X                 |    Y             |</span>
+<span class="go">|  (2, 3)            |    (2, 2)        |</span>
+<span class="go">=========================================</span>
+<span class="go">|  [[0.6 0.5 0.1]    |    [[0.4 0.6]    |</span>
+<span class="go">|   [0.4 0.2 0.8]]   |     [0.7 0.3]]   |</span>
+<span class="go">=========================================</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aprint</span><span class="p">(</span><span class="n">arr_x</span><span class="p">,</span> <span class="n">arr_y</span><span class="p">,</span> <span class="n">arr_y</span><span class="p">[:</span><span class="mi">1</span><span class="p">],</span> <span class="n">name_list</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Y_1&#39;</span><span class="p">])</span>
+<span class="go">============================================================</span>
+<span class="go">|  X                 |    Y             |    Y_1           |</span>
+<span class="go">|  (2, 3)            |    (2, 2)        |    (1, 2)        |</span>
+<span class="go">============================================================</span>
+<span class="go">|  [[0.6 0.5 0.1]    |    [[0.4 0.6]    |    [[0.4 0.6]]   |</span>
+<span class="go">|   [0.4 0.2 0.8]]   |     [0.7 0.3]]   |                  |</span>
+<span class="go">============================================================</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </div>
 </div>
 
@@ -260,6 +367,13 @@ option. This allows you to control printing in a function.</p>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="unipy.utils.remote_ipyconnector.html" class="btn btn-neutral" title="unipy.utils.remote_ipyconnector module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -288,7 +402,7 @@ option. This allows you to control printing in a function.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.4.28',
+            VERSION:'0.1.12',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

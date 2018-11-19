@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>unipy.stats.feature_selection module &mdash; unipy 0.0.4.28 documentation</title>
+  <title>unipy.stats.feature_selection module &mdash; unipy 0.1.12 documentation</title>
   
 
   
@@ -27,7 +27,9 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="unipy.stats.formula module" href="unipy.stats.formula.html" />
+    <link rel="prev" title="unipy.stats.api module" href="unipy.stats.api.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -56,7 +58,7 @@
             
             
               <div class="version">
-                0.0.4.28
+                0.1.12
               </div>
             
           
@@ -80,11 +82,29 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">unipy.stats.feature_selection module</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="unipy.core.html">unipy.core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.dataset.html">unipy.dataset package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.image.html">unipy.image package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.math.html">unipy.math package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.plots.html">unipy.plots package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="unipy.stats.html">unipy.stats package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="unipy.stats.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="unipy.stats.api.html">unipy.stats.api module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">unipy.stats.feature_selection module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.stats.formula.html">unipy.stats.formula module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.stats.hypo_test.html">unipy.stats.hypo_test module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.stats.metrics.html">unipy.stats.metrics module</a></li>
 </ul>
-</div>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="unipy.stats.html#module-unipy.stats">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.tools.html">unipy.tools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.unipy_test.html">unipy.unipy_test package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.utils.html">unipy.utils package</a></li>
+</ul>
+
             
           
         </div>
@@ -128,6 +148,8 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
+          <li><a href="unipy.stats.html">unipy.stats package</a> &raquo;</li>
+        
       <li>unipy.stats.feature_selection module</li>
     
     
@@ -164,7 +186,7 @@
 <li><strong>y</strong> (<em>list-like</em>) – A column value for y.</li>
 <li><strong>data</strong> (<em>pandas.DataFrame</em>) – A DataFrame.</li>
 <li><strong>alpha</strong> (<em>Iterable</em>) – An Iterable contains alpha values.</li>
-<li><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – Threshold of coefficient matrix</li>
+<li><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – Threshold of coefficient matrix</li>
 <li><strong>plot</strong> (<em>Boolean</em><em> (</em><em>default: False</em><em>)</em>) – True if want to plot the result.</li>
 </ul>
 </td>
@@ -225,7 +247,7 @@ errors because of this.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>data</strong> (<em>DataFrame</em><em>, </em><em>(</em><em>rows: observed values</em><em>, </em><em>columns: multivariate variables</em><em>)</em>) – design dataframe with all explanatory variables, as for example used in
 regression</li>
-<li><strong>thresh</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) – A threshold of VIF</li>
+<li><strong>thresh</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – A threshold of VIF</li>
 </ul>
 </td>
 </tr>
@@ -257,6 +279,15 @@ regression</li>
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="unipy.stats.formula.html" class="btn btn-neutral float-right" title="unipy.stats.formula module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="unipy.stats.api.html" class="btn btn-neutral" title="unipy.stats.api module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -284,7 +315,7 @@ regression</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.4.28',
+            VERSION:'0.1.12',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

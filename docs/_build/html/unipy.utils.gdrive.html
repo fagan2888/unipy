@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>unipy.utils.gdrive module &mdash; unipy 0.0.4.28 documentation</title>
+  <title>unipy.utils.gdrive module &mdash; unipy 0.1.12 documentation</title>
   
 
   
@@ -27,7 +27,9 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="unipy.utils.generator module" href="unipy.utils.generator.html" />
+    <link rel="prev" title="unipy.utils.decorator module" href="unipy.utils.decorator.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -56,7 +58,7 @@
             
             
               <div class="version">
-                0.0.4.28
+                0.1.12
               </div>
             
           
@@ -80,14 +82,33 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">unipy.utils.gdrive module</a><ul>
-<li><a class="reference internal" href="#function-decorator">Function Decorator</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="unipy.core.html">unipy.core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.dataset.html">unipy.dataset package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.image.html">unipy.image package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.math.html">unipy.math package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.plots.html">unipy.plots package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.stats.html">unipy.stats package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.tools.html">unipy.tools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.unipy_test.html">unipy.unipy_test package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="unipy.utils.html">unipy.utils package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="unipy.utils.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.api.html">unipy.utils.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.decorator.html">unipy.utils.decorator module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">unipy.utils.gdrive module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#function-decorator">Function Decorator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.generator.html">unipy.utils.generator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.remote_ipyconnector.html">unipy.utils.remote_ipyconnector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.wrapper.html">unipy.utils.wrapper module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="unipy.utils.html#module-unipy.utils">Module contents</a></li>
 </ul>
 </li>
 </ul>
-</div>
+
             
           
         </div>
@@ -130,6 +151,8 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="unipy.utils.html">unipy.utils package</a> &raquo;</li>
         
       <li>unipy.utils.gdrive module</li>
     
@@ -183,11 +206,11 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>gdrive_url_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – An URL ID of an Google Drive directory which contains files to
+<li><strong>gdrive_url_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – An URL ID of an Google Drive directory which contains files to
 download.
 <cite>https://drive.google.com/drive/folders/&lt;google drive URL ID&gt;</cite>.</li>
-<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em> (</em><em>default: '*'</em><em>)</em>) – A pattern of regular expression to filter file in the target directory.</li>
-<li><strong>download_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em> (</em><em>default: './data'</em><em>)</em>) – A target directory to download files in given URL ID.</li>
+<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> (</em><em>default: '*'</em><em>)</em>) – A pattern of regular expression to filter file in the target directory.</li>
+<li><strong>download_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> (</em><em>default: './data'</em><em>)</em>) – A target directory to download files in given URL ID.</li>
 </ul>
 </td>
 </tr>
@@ -221,10 +244,10 @@ download.
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>gdrive_url_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – An URL ID of an Google Drive directory to upload files.
+<li><strong>gdrive_url_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – An URL ID of an Google Drive directory to upload files.
 <cite>https://drive.google.com/drive/folders/&lt;google drive URL ID&gt;</cite>.</li>
-<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em> (</em><em>default: '*'</em><em>)</em>) – A pattern of regular expression to filter file in the target directory.</li>
-<li><strong>src_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a><em> (</em><em>default: './data'</em><em>)</em>) – A source directory to upload files in given URL ID.</li>
+<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> (</em><em>default: '*'</em><em>)</em>) – A pattern of regular expression to filter file in the target directory.</li>
+<li><strong>src_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a><em> (</em><em>default: './data'</em><em>)</em>) – A source directory to upload files in given URL ID.</li>
 </ul>
 </td>
 </tr>
@@ -257,6 +280,15 @@ download.
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="unipy.utils.generator.html" class="btn btn-neutral float-right" title="unipy.utils.generator module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="unipy.utils.decorator.html" class="btn btn-neutral" title="unipy.utils.decorator module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -284,7 +316,7 @@ download.
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.4.28',
+            VERSION:'0.1.12',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

@@ -1,8 +1,8 @@
-"""Docstring for ``wrapper``.
+"""Docstring for ``Wrapper``.
 
-========================
-High-level Code Wrapper
-========================
+===========================
+High-level Function Wrapper
+===========================
 ==================== =========================================================
 Operation Wrapper
 ==============================================================================
@@ -12,15 +12,23 @@ multiprocessor       Functional wrapper for multiprocessing.
 Interfaces
 ==============================================================================
 uprint               Print option interface within a function.
+lprint               stdout the shape of input layer & output layer in DL
+aprint               Stdout the `numpy.ndarray` in pretty.
 ==================== =========================================================
 """
 
 
+import numpy as np
+import itertools as it
 import multiprocessing as mpr
 
 
-__all__ = ['multiprocessor',
-           'uprint']
+__all__ = [
+    'multiprocessor',
+    'uprint',
+    'lprint',
+    'aprint',
+]
 
 
 def multiprocessor(func, worker=2, arg_zip=None, *args, **kwargs):
@@ -91,3 +99,119 @@ def uprint(*args, print_ok=True, **kwargs):
     """
     if print_ok:
         print(*args, **kwargs)
+
+
+def lprint(input_x, output, name=None):
+    """Print option interface.
+
+    This function is to stdout the shape of input layer & output layer
+    in Deep Learning architecture.
+
+    Parameters
+    ----------
+    input_x: numpy.ndarray
+      A ``numpy.ndarray`` object of input source.
+
+    output: numpy.ndarray
+      A ``numpy.ndarray`` object of output target.
+
+    name: str (default: None)
+      An optional name you want to print out.
+
+    """
+    print(f'{str(name)}:\t{input_x.shape} -> {output.shape}')
+
+
+def aprint(*arr, maxlen=None, name_list=None):
+    """Stdout the `numpy.ndarray` in pretty.
+
+    It prints the multiple `numpy.ndarray` out "Side by Side."
+
+    Parameters
+    ----------
+    arr: numpy.ndarray
+      Any arrays you want to print out.
+
+    maxlen: int (default: None)
+      A length for each array to print out.
+      It is automatically calculated in case of `None`.
+
+    name_list: list (default: None)
+      A list contains the names of each arrays.
+      Upper Alphabet is given in case of `None`.
+
+
+    Examples
+    --------
+    >>> from unipy.utils.wrapper import aprint
+    >>> arr_x = np.array([
+    ... [.6, .5, .1],
+    ... [.4, .2, .8],
+    ... ])
+    >>> arr_y = np.array([
+    ... [.4, .6],
+    ... [.7, .3,],
+    ... ])
+    >>> aprint(arr_x, arr_y)
+    =========================================
+    |  A                 |    B             |
+    |  (2, 3)            |    (2, 2)        |
+    =========================================
+    |  [[0.6 0.5 0.1]    |    [[0.4 0.6]    |
+    |   [0.4 0.2 0.8]]   |     [0.7 0.3]]   |
+    =========================================
+    >>> aprint(arr_x, arr_y, name_list=['X', 'Y'])
+    =========================================
+    |  X                 |    Y             |
+    |  (2, 3)            |    (2, 2)        |
+    =========================================
+    |  [[0.6 0.5 0.1]    |    [[0.4 0.6]    |
+    |   [0.4 0.2 0.8]]   |     [0.7 0.3]]   |
+    =========================================
+    >>> aprint(arr_x, arr_y, arr_y[:1], name_list=['X', 'Y', 'Y_1'])
+    ============================================================
+    |  X                 |    Y             |    Y_1           |
+    |  (2, 3)            |    (2, 2)        |    (1, 2)        |
+    ============================================================
+    |  [[0.6 0.5 0.1]    |    [[0.4 0.6]    |    [[0.4 0.6]]   |
+    |   [0.4 0.2 0.8]]   |     [0.7 0.3]]   |                  |
+    ============================================================
+
+    """
+    if not all(isinstance(a, np.ndarray) for a in arr):
+        raise AttributeError("All objects should be 'numpy.ndarray' objects.")
+
+    arr_shape_list = [str(a.shape) for a in arr]
+    str_arr_list = [str(a).splitlines() for a in arr]
+
+    if maxlen is None:
+        maxlen_list = [len(max(s, key=len)) for s in str_arr_list]
+    else:
+        maxlen_list = [int(maxlen) for s in str_arr_list]
+
+    if name_list is None:
+        name_list = list(map(chr, range(ord('A'), ord('B')+1)))[:len(arr)]
+
+
+    def formatter(iterable, len_list):
+        base_format = "  {line:<{l}}   |"
+        return '|' + '  '.join([base_format.format(line=a, l=l)
+                                if a
+                                else base_format.format(line='', l=l)
+                                for (a, l) in zip(iterable, len_list)])
+
+
+    for i, arrs in enumerate(it.zip_longest(*str_arr_list)):
+        str_line = formatter(arrs, maxlen_list)
+        str_len = len(str_line)
+        if i == 0:
+            print('=' * str_len)
+            col_line = formatter(name_list, maxlen_list)
+            shape_line = formatter(arr_shape_list, maxlen_list)
+
+            print(col_line)
+            print(shape_line)
+            print('=' * str_len)
+        print(str_line)
+
+    print('=' * str_len)

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>unipy.utils.generator module &mdash; unipy 0.0.4.28 documentation</title>
+  <title>unipy.utils.generator module &mdash; unipy 0.1.12 documentation</title>
   
 
   
@@ -27,7 +27,9 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="unipy.utils.remote_ipyconnector module" href="unipy.utils.remote_ipyconnector.html" />
+    <link rel="prev" title="unipy.utils.gdrive module" href="unipy.utils.gdrive.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -56,7 +58,7 @@
             
             
               <div class="version">
-                0.0.4.28
+                0.1.12
               </div>
             
           
@@ -80,14 +82,33 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">unipy.utils.generator module</a><ul>
-<li><a class="reference internal" href="#versatile-generators">Versatile Generators</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="unipy.core.html">unipy.core package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.dataset.html">unipy.dataset package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.image.html">unipy.image package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.math.html">unipy.math package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.plots.html">unipy.plots package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.stats.html">unipy.stats package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.tools.html">unipy.tools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unipy.unipy_test.html">unipy.unipy_test package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="unipy.utils.html">unipy.utils package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="unipy.utils.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.api.html">unipy.utils.api module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.decorator.html">unipy.utils.decorator module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.gdrive.html">unipy.utils.gdrive module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">unipy.utils.generator module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#versatile-generators">Versatile Generators</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.remote_ipyconnector.html">unipy.utils.remote_ipyconnector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unipy.utils.wrapper.html">unipy.utils.wrapper module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="unipy.utils.html#module-unipy.utils">Module contents</a></li>
 </ul>
 </li>
 </ul>
-</div>
+
             
           
         </div>
@@ -130,6 +151,8 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="unipy.utils.html">unipy.utils package</a> &raquo;</li>
         
       <li>unipy.utils.generator module</li>
     
@@ -215,7 +238,7 @@
 <dl class="class">
 <dt id="unipy.utils.generator.ReusableGenerator">
 <em class="property">class </em><code class="descclassname">unipy.utils.generator.</code><code class="descname">ReusableGenerator</code><span class="sig-paren">(</span><em>generator</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/unipy/utils/generator.html#ReusableGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unipy.utils.generator.ReusableGenerator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Temporary Interface to re-use generator for convenience.</p>
 <p>Once assigned, It can be infinitely consumed
 <a href="#id1"><span class="problematic" id="id2">**</span></a>as long as an input generator remains un-exhausted.</p>
@@ -316,7 +339,7 @@ It yields a tuple of (start, start+(term-1)) pair, until start &gt; end.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – end or start, end[, term]
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – end or start, end[, term]
 It works like range function.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><em>tuple</em> – A tuple of (start, start+(term-1)) pair, until start &gt; end.</td>
@@ -353,9 +376,9 @@ It yields a tuple of (start, start+(term-1)) pair, until start &gt; end.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
-<li><strong>end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
-<li><strong>day_term</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – term of days.</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
+<li><strong>end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
+<li><strong>day_term</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – term of days.</li>
 <li><strong>tm_format</strong> (<em>(</em><em>default: '%Y%m%d'</em><em>)</em>) – datetime format string.</li>
 </ul>
 </td>
@@ -392,9 +415,9 @@ It yields a tuple of (start, start+(term-1)) pair, until start &gt; end.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
-<li><strong>end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
-<li><strong>day_term</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – term of days.</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
+<li><strong>end</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – start datetime like ‘yyyymmdd’.</li>
+<li><strong>day_term</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – term of days.</li>
 <li><strong>tm_string</strong> (list (default: <code class="docutils literal notranslate"><span class="pre">['000000',</span> <span class="pre">'235959']</span></code>)) – time strings to concatenate.</li>
 <li><strong>tm_format</strong> (<em>(</em><em>default: '%Y%m%d'</em><em>)</em>) – datetime format string.</li>
 </ul>
@@ -431,7 +454,7 @@ It yields a tuple of (start, start+(term-1)) pair, until start &gt; end.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – end or start, end[, term]
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – end or start, end[, term]
 It works like range function.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><em>tuple</em> – A tuple of (start, start+(term-1)) pair, until start &gt; end.</td>
@@ -474,6 +497,15 @@ It works like range function.</td>
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="unipy.utils.remote_ipyconnector.html" class="btn btn-neutral float-right" title="unipy.utils.remote_ipyconnector module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="unipy.utils.gdrive.html" class="btn btn-neutral" title="unipy.utils.gdrive module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
@@ -501,7 +533,7 @@ It works like range function.</td>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.0.4.28',
+            VERSION:'0.1.12',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
