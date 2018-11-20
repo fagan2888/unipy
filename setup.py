@@ -20,7 +20,7 @@ except ImportError:
 from distutils.cmd import Command
 
 
-__version__ = '0.1.14'
+__version__ = '0.1.15'
 
 desc = """
 This contains a number of useful objects for data manipulation & analysis.
@@ -124,7 +124,7 @@ setup(name='unipy',
             # How Mature: 3 - Alpha, 4 - Beta, 5 - Production/Stable
             'Development Status :: 4 - Beta',
             'Environment :: Console',
-            'Programming Language :: Python :: 3.5',
+            #'Programming Language :: Python :: 3.5',
             'Programming Language :: Python :: 3.6',
             'Operating System :: OS Independent',
             'Intended Audience :: End Users/Desktop',
