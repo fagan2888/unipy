@@ -328,7 +328,7 @@ def mosaic_plot(
                 width, height = p.get_width(), p.get_height()
                 x, y = p.get_xy()
                 ax.annotate(
-                    f'{height:.0f}',
+                    '{height:.0f}'.format(height=height),
                     (
                         p.get_x() + .5 * width,
                         p.get_y() + .5 * height,
