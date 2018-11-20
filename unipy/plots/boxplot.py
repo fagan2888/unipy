@@ -235,8 +235,7 @@ def point_boxplot_axis(data, groupby=None, value=None,
 def mosaic_plot(
     data, groupby=None, col_list=None, show_values=True,
     rot=90, width=.9,
-    figsize=(12, 9), *args, **kwargs,
-    ):
+    figsize=(12, 9), *args, **kwargs):
     """Mosaic Plot via Stacked bar plots.
 
     Draw plots by given keys(groupby, value).
