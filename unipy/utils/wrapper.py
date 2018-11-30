@@ -200,8 +200,8 @@ def aprint(*arr, maxlen=None, name_list=None, decimals=None):
 
 
     def formatter(iterable, len_list):
-        base_format = "  {line:<{l}}   |"
-        return '|' + '  '.join([base_format.format(line=a, l=l)
+        base_format = "  {line:<{l}}  |"
+        return '|' + ' '.join([base_format.format(line=a, l=l)
                                 if a
                                 else base_format.format(line='', l=l)
                                 for (a, l) in zip(iterable, len_list)])
