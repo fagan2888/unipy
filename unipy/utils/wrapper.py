@@ -122,7 +122,7 @@ def lprint(input_x, output, name=None):
     print(f'{str(name)}:\t{input_x.shape} -> {output.shape}')
 
 
-def aprint(*arr, maxlen=None, name_list=None, cut='round', digits=None):
+def aprint(*arr, maxlen=None, name_list=None, decimals=None):
     """Stdout the `numpy.ndarray` in pretty.
 
     It prints the multiple `numpy.ndarray` out "Side by Side."
@@ -140,12 +140,8 @@ def aprint(*arr, maxlen=None, name_list=None, cut='round', digits=None):
       A list contains the names of each arrays.
       Upper Alphabet is given in case of `None`.
 
-    digits: int (default: None)
-      A number to a specified number of digits to round
-
-    cut: str {'round', 'ceil', 'floor'} (default: 'round')
-      The methods to round.
-
+    decimals: int (default: None)
+      A number to a specified number of digits to truncate.
 
 
     Examples
@@ -187,6 +183,9 @@ def aprint(*arr, maxlen=None, name_list=None, cut='round', digits=None):
     """
     if not all(isinstance(a, np.ndarray) for a in arr):
         raise AttributeError("All objects should be 'numpy.ndarray' objects.")
+
+    if decimals is not None:
+        arr = [a.round(decimals) for a in arr]
 
     arr_shape_list = [str(a.shape) for a in arr]
     str_arr_list = [str(a).splitlines() for a in arr]
