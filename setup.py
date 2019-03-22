@@ -20,7 +20,7 @@ except ImportError:
 from distutils.cmd import Command
 
 
-__version__ = '0.1.22'
+__version__ = '0.1.23'
 
 desc = """
 This contains a number of useful objects for data manipulation & analysis.
@@ -82,27 +82,27 @@ def package_data_listup():
     return filelist
 
 required_packages = [
-                     'pandas >= 0.20.1',
-                     'numpy >= 1.13.1',
-                     'numpydoc >= 0.7.0',
-                     'scipy >= 0.19.1',
-                     'scikit-learn >= 0.18.0',
-                     'statsmodels >= 0.8.0',
-                     'matplotlib >= 2.0.2',
-                     'paramiko >= 2.1.2',
-                     'pandasql >= 0.7.3',
-                     'seaborn >= 0.8',
-                     'scikit-image >= 0.13.0',
-                     'PyDrive >= 1.2.1',
-                     'oauth2client >= 4.1.2',
-                     'google-auth-oauthlib >= 0.2.0',
-                     'pyasn1 >= 0.4.3',
-                     'pyasn1-modules >= 0.2.1',
-                    #'pyqt5',
-                     'mglearn >= 0.1.6',
-                    # 'numba >= 0.34.0',
-                    # 'nomkl',  # conda
-                    ]
+    'pandas >=0.20.2',
+    'numpy >=1.13.1',
+    'numpydoc >=0.7.0',
+    'scipy >=0.19.1',
+    'scikit-learn >=0.18.0',
+    'statsmodels >=0.8.0',
+    'matplotlib >=2.0.2',
+    'paramiko >=2.1.2',
+    'pandasql >=0.7.3',
+    'seaborn >=0.8',
+    'scikit-image >=0.13.0',
+    'PyDrive >=1.2.1',
+    'oauth2client >=4.1.2',
+    'google-auth-oauthlib >=0.2.0',
+    'pyasn1 >=0.4.3',
+    'pyasn1-modules >=0.2.1',
+    #'pyqt5',
+    'mglearn >=0.1.6',
+    # 'numba >=0.34.0',
+    # 'nomkl',  # conda
+]
 
 # REQUIREMENTS.txt for [`Travis CI`, `readthedocs`]
 for requirement_file in ['REQUIREMENTS.txt', 'requirements.txt']:
@@ -111,15 +111,37 @@ for requirement_file in ['REQUIREMENTS.txt', 'requirements.txt']:
         pkg_ls = '\n'.join(required_packages).replace('>=', '>=')
         f.write('\n'.join([header, pkg_ls]))
 
-setup(name='unipy',
-      version=__version__,
+
+
+# Package Description
+
+package_name = 'unipy'
+package_version = __version__
+short_desc = 'Useful tools for Data Scentists'
+package_source = '{name}-{version}.tar.gz'.format(
+    name=package_name,
+    version=package_version,
+)
+git_url = 'https://github.com/pydemia/unipy'
+doc_url = 'https://unipy.readthedocs.io/en/latest/index.html'
+required_on_run = '\n' + '\n'.join([(' ' * 4) + '- {dep}'.format(dep=dep)
+    for dep in (['python'] + required_packages)])
+required_on_build = '\n' + (' ' * 4) + '- setuptools' + required_on_run
+license_family_str = 'MIT'
+license_str = 'MIT License'
+
+
+
+setup(name=package_name,
+      version=package_version,
       description='Useful tools for Data Scientists',
       long_description=long_desc,
-      url='https://unipy.readthedocs.io/en/latest/index.html',
-      download_url='http://github.com/pydemia/unipy',
+      python_requires='>= 3.6',
+      url=doc_url,
+      download_url=git_url,
       author='Young Ju Kim',
       author_email='pydemia@gmail.com',
-      license='MIT License',
+      license=license_str,
       classifiers=[
             # How Mature: 3 - Alpha, 4 - Beta, 5 - Production/Stable
             'Development Status :: 4 - Beta',
@@ -141,3 +163,26 @@ setup(name='unipy',
       zip_safe=False,
       package_data={'unipy': ['*.gz', 'dataset/resources.tar.gz']}
       )
+
+
+# Managing conda-build
+with open('meta.yaml.template', 'r') as conda_file:
+    conda_build_str = conda_file.read()
+    conda_build_str = conda_build_str.format(
+        package_name=package_name,
+        package_version=package_version,
+        package_source=package_source,
+        package_url='./dist',
+        required_on_build=required_on_build,
+        required_on_run=required_on_run,
+        doc_url=doc_url,
+        license_str=license_str,
+        short_desc=short_desc,
+        license_family_str=license_family_str,
+    )
+
+with open('conda/unipy/meta.yaml', 'w') as conda_meta_file:
+    conda_meta_file.write(conda_build_str)
+
+
+

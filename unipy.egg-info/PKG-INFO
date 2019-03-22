@@ -1,12 +1,12 @@
-Metadata-Version: 1.1
+Metadata-Version: 1.2
 Name: unipy
-Version: 0.1.22
+Version: 0.1.23
 Summary: Useful tools for Data Scientists
 Home-page: https://unipy.readthedocs.io/en/latest/index.html
 Author: Young Ju Kim
 Author-email: pydemia@gmail.com
 License: MIT License
-Download-URL: http://github.com/pydemia/unipy
+Download-URL: https://github.com/pydemia/unipy
 Description: .. image:: https://unipy.readthedocs.io/en/latest/_images/logo_white_background.svg
             :width: 400px
             :alt: unipy logo
@@ -82,3 +82,4 @@ Classifier: Intended Audience :: End Users/Desktop
 Classifier: Intended Audience :: Developers
 Classifier: Intended Audience :: Science/Research
 Classifier: Natural Language :: English
+Requires-Python: >= 3.6

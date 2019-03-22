@@ -1,10 +1,10 @@
 package:
   name: unipy
-  version: "0.0.2.53"
+  version: 0.1.23
 
 source:
-  fn: unipy-0.0.2.53.tar.gz
-  url: https://pypi.python.org/packages/f1/47/77a5cb3e59c9cea4979418e970180867bc269283a3d201fbcd0ab3b12db5/unipy-0.0.2.53.tar.gz
+  fn: unipy-0.1.23.tar.gz
+  url: ./dist
   md5: b03a1ff8dff70fd397d11ed16a0f7c87
 #  patches:
    # List any patch files here
@@ -28,25 +28,45 @@ source:
 
 requirements:
   build:
-    - python
     - setuptools
+    - python
     - pandas >=0.20.2
-    - numpy ==1.12.1,<1.13.1
-    - scipy >=0.19.0
+    - numpy >=1.13.1
+    - numpydoc >=0.7.0
+    - scipy >=0.19.1
     - scikit-learn >=0.18.0
     - statsmodels >=0.8.0
     - matplotlib >=2.0.2
     - paramiko >=2.1.2
+    - pandasql >=0.7.3
+    - seaborn >=0.8
+    - scikit-image >=0.13.0
+    - PyDrive >=1.2.1
+    - oauth2client >=4.1.2
+    - google-auth-oauthlib >=0.2.0
+    - pyasn1 >=0.4.3
+    - pyasn1-modules >=0.2.1
+    - mglearn >=0.1.6
 
   run:
     - python
     - pandas >=0.20.2
-    - numpy ==1.12.1,<1.13.1
-    - scipy >=0.19.0
+    - numpy >=1.13.1
+    - numpydoc >=0.7.0
+    - scipy >=0.19.1
     - scikit-learn >=0.18.0
     - statsmodels >=0.8.0
     - matplotlib >=2.0.2
     - paramiko >=2.1.2
+    - pandasql >=0.7.3
+    - seaborn >=0.8
+    - scikit-image >=0.13.0
+    - PyDrive >=1.2.1
+    - oauth2client >=4.1.2
+    - google-auth-oauthlib >=0.2.0
+    - pyasn1 >=0.4.3
+    - pyasn1-modules >=0.2.1
+    - mglearn >=0.1.6
 
 test:
   # Python imports
@@ -75,11 +95,12 @@ test:
     # - nose
 
 about:
-  home: http://github.com/pydemia/unipy
+  home: https://unipy.readthedocs.io/en/latest/index.html
   license: MIT License
-  summary: 'Useful tools for Data Scientists'
+  summary: Useful tools for Data Scentists
   license_family: MIT
 
 # See
 # http://docs.continuum.io/conda/build.html for
 # more information about meta.yaml
+
