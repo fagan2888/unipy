@@ -33,22 +33,22 @@ with open('README.rst', 'r', encoding='utf-8') as readme_file:
 class SphinxCommand(Command):
     """Documentation Command"""
 
-def initialize_options(self):
-    """Set default values for options."""
-    pass
+    def initialize_options(self):
+        """Set default values for options."""
+        pass
 
-def finalize_options(self):
-    """Post-process options."""
-    pass
+    def finalize_options(self):
+        """Post-process options."""
+        pass
 
-def run(self):
-    """Run command."""
-    command = ['cd docs;make html;cd ..']
-    # command.append(os.getcwd())
-    self.announce(
-        'Running command: %s' % str(command),
-        level=distutils.log.INFO)
-    subprocess.check_call(command)
+    def run(self):
+        """Run command."""
+        command = ['cd docs;make html;cd ..']
+        # command.append(os.getcwd())
+        self.announce(
+            'Running command: %s' % str(command),
+            level=distutils.log.INFO)
+        subprocess.check_call(command)
 
 
 with open('unipy/__version__.py', 'w') as f:
@@ -139,7 +139,7 @@ setup(name=package_name,
       python_requires='>= 3.6',
       url=doc_url,
       download_url=git_url,
-      author='Young Ju Kim',
+      author='Youngju Jaden Kim',
       author_email='pydemia@gmail.com',
       license=license_str,
       classifiers=[
@@ -183,6 +183,3 @@ with open('meta.yaml.template', 'r') as conda_file:
 
 with open('conda/unipy/meta.yaml', 'w') as conda_meta_file:
     conda_meta_file.write(conda_build_str)
-
-
-

@@ -8,6 +8,7 @@ Profiler
 ==============================================================================
 time_profiler        Function running time command-line profiler.
 time_logger          Function running time log profiler.
+profiler             High level API combining `time_profiler` & `time_logger`.
 ==================== =========================================================
 ==================== =========================================================
 Commandline printout
@@ -31,6 +32,7 @@ from functools import wraps
 
 __all__ = ['time_profiler',
            'time_logger',
+           'profiler',
            'job_wrapper',
            'Infix',
            'infix']
@@ -140,6 +142,169 @@ def time_logger(func):
         return res
 
     return logger
+
+def time_profiler(func):
+    """Print wrapper for time profiling.
+
+    This wrapper prints out start, end and elapsed time.
+
+    Parameters
+    ----------
+    func: Function
+        A function to profile.
+
+    Returns
+    -------
+    Function
+        A wrapped function.
+
+    See Also
+    --------
+    ``functools.wraps``
+    ``decorator``
+
+    Examples
+    --------
+    >>> import unipy as up
+    >>> @up.time_profiler
+    ... def afunc(i):
+    ...     return len(list(range(i)))
+    ...
+    >>> res = afunc(58)
+    (afunc) Start   : 2018-06-20 22:11:35.511374
+    (afunc) End     : 2018-06-20 22:11:35.511424
+    (afunc) Elapsed :             0:00:00.000050
+    >>> res
+    58
+
+    """
+    @wraps(func)
+    def profiler(*args, **kwargs):
+
+        start_tm = dt.now()
+        print("(%s) Start   : %26s" % (func.__name__, start_tm))
+
+        res = func(*args, **kwargs)
+        end_tm = dt.now()
+        print("(%s) End     : %26s" % (func.__name__, end_tm))
+
+        elapsed_tm = end_tm - start_tm
+        print("(%s) Elapsed : %26s" % (func.__name__, elapsed_tm))
+        return res
+
+    return profiler
+
+
+def time_logger(func):
+    """Logging wrapper for time profiling.
+
+    This wrapper logs start, end and elapsed time.
+
+    Parameters
+    ----------
+    func: Function
+        A function to profile.
+
+    Returns
+    -------
+    Function
+        A wrapped function.
+
+    See Also
+    --------
+    ``functools.wraps``
+    ``decorator``
+
+    Examples
+    --------
+    >>> import unipy as up
+    >>> @up.time_logger
+    ... def afunc(i):
+    ...     return len(list(range(i)))
+    ...
+    >>> res = afunc(58)
+    (afunc) Start   : 2018-06-20 22:11:35.511374
+    (afunc) End     : 2018-06-20 22:11:35.511424
+    (afunc) Elapsed :             0:00:00.000050
+    >>> res
+    58
+
+    """
+    @wraps(func)
+    def logger(*args, **kwargs):
+
+        start_tm = dt.now()
+        logging.info("(%s) Start   : %26s" % func.__name__ + str(start_tm))
+
+        res = func(*args, **kwargs)
+
+        end_tm = dt.now()
+        logging.info("(%s) End     : %26s" % func.__name__ + str(end_tm))
+
+        elapsed_tm = end_tm - start_tm
+        logging.info("(%s) Elapsed : %26s" % func.__name__ + str(elapsed_tm))
+
+        return res
+
+    return logger
+
+
+class profiler(object):
+
+    def __init__(self, type='logging'):
+        if type not in {'logging', 'printing'}:
+            raise Exception("`type` should be one of {'logging', 'printing'}")
+        else:
+            self.type = type
+
+    def _printer(self, func):
+
+        @wraps(func)
+        def _stdout_fn(*args, **kwargs):
+
+            start_tm = dt.now()
+            print("(%s) Start   : %26s" % (func.__name__, start_tm))
+
+            res = func(*args, **kwargs)
+            end_tm = dt.now()
+            print("(%s) End     : %26s" % (func.__name__, end_tm))
+
+            elapsed_tm = end_tm - start_tm
+            print("(%s) Elapsed : %26s" % (func.__name__, elapsed_tm))
+
+            return res
+        return _stdout_fn
+
+    def _logger(self, func):
+        @wraps(func)
+        def _log_fn(*args, **kwargs):
+
+            start_tm = dt.now()
+            logging.info(
+                "(%s) Start   : %26s" % (func.__name__, start_tm)
+            )
+
+            res = func(*args, **kwargs)
+
+            end_tm = dt.now()
+            logging.info(
+                "(%s) End     : %26s" % (func.__name__, end_tm)
+            )
+
+            elapsed_tm = end_tm - start_tm
+            logging.info(
+                "(%s) Elapsed : %26s" % (func.__name__, elapsed_tm)
+            )
+
+            return res
+        return _log_fn
+
+    def __call__(self, func):
+
+        if self.type=='logging':
+            return self._logger(func)
+        else:
+            return self._printer(func)
 
 
 def job_wrapper(func):
