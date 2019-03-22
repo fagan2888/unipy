@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>unipy.utils.decorator &mdash; unipy 0.1.21 documentation</title>
+  <title>unipy.utils.decorator &mdash; unipy 0.1.24 documentation</title>
   
 
   
@@ -56,7 +56,7 @@
             
             
               <div class="version">
-                0.1.21
+                0.1.24
               </div>
             
           
@@ -163,6 +163,7 @@
 <span class="sd">==============================================================================</span>
 <span class="sd">time_profiler        Function running time command-line profiler.</span>
 <span class="sd">time_logger          Function running time log profiler.</span>
+<span class="sd">profiler             High level API combining `time_profiler` &amp; `time_logger`.</span>
 <span class="sd">==================== =========================================================</span>
 <span class="sd">==================== =========================================================</span>
 <span class="sd">Commandline printout</span>
@@ -186,12 +187,118 @@
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;time_profiler&#39;</span><span class="p">,</span>
            <span class="s1">&#39;time_logger&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;profiler&#39;</span><span class="p">,</span>
            <span class="s1">&#39;job_wrapper&#39;</span><span class="p">,</span>
            <span class="s1">&#39;Infix&#39;</span><span class="p">,</span>
            <span class="s1">&#39;infix&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="time_profiler"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.utils.decorator.time_profiler">[docs]</a><span class="k">def</span> <span class="nf">time_profiler</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">time_profiler</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print wrapper for time profiling.</span>
+
+<span class="sd">    This wrapper prints out start, end and elapsed time.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func: Function</span>
+<span class="sd">        A function to profile.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Function</span>
+<span class="sd">        A wrapped function.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    ``functools.wraps``</span>
+<span class="sd">    ``decorator``</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import unipy as up</span>
+<span class="sd">    &gt;&gt;&gt; @up.time_profiler</span>
+<span class="sd">    ... def afunc(i):</span>
+<span class="sd">    ...     return len(list(range(i)))</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; res = afunc(58)</span>
+<span class="sd">    (afunc) Start   : 2018-06-20 22:11:35.511374</span>
+<span class="sd">    (afunc) End     : 2018-06-20 22:11:35.511424</span>
+<span class="sd">    (afunc) Elapsed :             0:00:00.000050</span>
+<span class="sd">    &gt;&gt;&gt; res</span>
+<span class="sd">    58</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">profiler</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="n">start_tm</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) Start   : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">start_tm</span><span class="p">))</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">end_tm</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) End     : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">end_tm</span><span class="p">))</span>
+
+        <span class="n">elapsed_tm</span> <span class="o">=</span> <span class="n">end_tm</span> <span class="o">-</span> <span class="n">start_tm</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) Elapsed : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">elapsed_tm</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">return</span> <span class="n">profiler</span>
+
+
+<span class="k">def</span> <span class="nf">time_logger</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Logging wrapper for time profiling.</span>
+
+<span class="sd">    This wrapper logs start, end and elapsed time.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func: Function</span>
+<span class="sd">        A function to profile.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Function</span>
+<span class="sd">        A wrapped function.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    ``functools.wraps``</span>
+<span class="sd">    ``decorator``</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import unipy as up</span>
+<span class="sd">    &gt;&gt;&gt; @up.time_logger</span>
+<span class="sd">    ... def afunc(i):</span>
+<span class="sd">    ...     return len(list(range(i)))</span>
+<span class="sd">    ...</span>
+<span class="sd">    &gt;&gt;&gt; res = afunc(58)</span>
+<span class="sd">    (afunc) Start   : 2018-06-20 22:11:35.511374</span>
+<span class="sd">    (afunc) End     : 2018-06-20 22:11:35.511424</span>
+<span class="sd">    (afunc) Elapsed :             0:00:00.000050</span>
+<span class="sd">    &gt;&gt;&gt; res</span>
+<span class="sd">    58</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">logger</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="n">start_tm</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) Start   : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">start_tm</span><span class="p">))</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">end_tm</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) End     : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">end_tm</span><span class="p">))</span>
+
+        <span class="n">elapsed_tm</span> <span class="o">=</span> <span class="n">end_tm</span> <span class="o">-</span> <span class="n">start_tm</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) Elapsed : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">elapsed_tm</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">return</span> <span class="n">logger</span>
+
+<div class="viewcode-block" id="time_profiler"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.time_profiler">[docs]</a><span class="k">def</span> <span class="nf">time_profiler</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Print wrapper for time profiling.</span>
 
 <span class="sd">    This wrapper prints out start, end and elapsed time.</span>
@@ -243,7 +350,7 @@
     <span class="k">return</span> <span class="n">profiler</span></div>
 
 
-<div class="viewcode-block" id="time_logger"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.utils.decorator.time_logger">[docs]</a><span class="k">def</span> <span class="nf">time_logger</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<div class="viewcode-block" id="time_logger"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.time_logger">[docs]</a><span class="k">def</span> <span class="nf">time_logger</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Logging wrapper for time profiling.</span>
 
 <span class="sd">    This wrapper logs start, end and elapsed time.</span>
@@ -297,7 +404,65 @@
     <span class="k">return</span> <span class="n">logger</span></div>
 
 
-<div class="viewcode-block" id="job_wrapper"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.utils.decorator.job_wrapper">[docs]</a><span class="k">def</span> <span class="nf">job_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<div class="viewcode-block" id="profiler"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.profiler">[docs]</a><span class="k">class</span> <span class="nc">profiler</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;logging&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;logging&#39;</span><span class="p">,</span> <span class="s1">&#39;printing&#39;</span><span class="p">}:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;`type` should be one of {&#39;logging&#39;, &#39;printing&#39;}&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
+
+    <span class="k">def</span> <span class="nf">_printer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">_stdout_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+            <span class="n">start_tm</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) Start   : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">start_tm</span><span class="p">))</span>
+
+            <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">end_tm</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) End     : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">end_tm</span><span class="p">))</span>
+
+            <span class="n">elapsed_tm</span> <span class="o">=</span> <span class="n">end_tm</span> <span class="o">-</span> <span class="n">start_tm</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) Elapsed : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">elapsed_tm</span><span class="p">))</span>
+
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">return</span> <span class="n">_stdout_fn</span>
+
+    <span class="k">def</span> <span class="nf">_logger</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">_log_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+            <span class="n">start_tm</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) Start   : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">start_tm</span><span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="n">end_tm</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) End     : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">end_tm</span><span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="n">elapsed_tm</span> <span class="o">=</span> <span class="n">end_tm</span> <span class="o">-</span> <span class="n">start_tm</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">) Elapsed : </span><span class="si">%26s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">elapsed_tm</span><span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">res</span>
+        <span class="k">return</span> <span class="n">_log_fn</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="s1">&#39;logging&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_printer</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="job_wrapper"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.job_wrapper">[docs]</a><span class="k">def</span> <span class="nf">job_wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Print wrapper for time profiling.</span>
 
 <span class="sd">    This wrapper prints out start &amp; end line.</span>
@@ -358,7 +523,7 @@
     <span class="k">return</span> <span class="n">wrapper</span></div>
 
 
-<div class="viewcode-block" id="Infix"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.utils.decorator.Infix">[docs]</a><span class="k">class</span> <span class="nc">Infix</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Infix"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.Infix">[docs]</a><span class="k">class</span> <span class="nc">Infix</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Wrapper for define an operator.</span>
 
 <span class="sd">    This wrapper translates a function to an operator.</span>
@@ -412,7 +577,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="infix"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.utils.decorator.infix">[docs]</a><span class="k">def</span> <span class="nf">infix</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<div class="viewcode-block" id="infix"><a class="viewcode-back" href="../../../unipy.utils.decorator.html#unipy.infix">[docs]</a><span class="k">def</span> <span class="nf">infix</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A functional API for Infix decorator.</span>
 
 <span class="sd">    Returns</span>
@@ -472,7 +637,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.1.21',
+            VERSION:'0.1.24',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

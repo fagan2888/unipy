@@ -1,9 +1,9 @@
 Metadata-Version: 1.2
 Name: unipy
-Version: 0.1.23
+Version: 0.1.25
 Summary: Useful tools for Data Scientists
 Home-page: https://unipy.readthedocs.io/en/latest/index.html
-Author: Young Ju Kim
+Author: Youngju Jaden Kim
 Author-email: pydemia@gmail.com
 License: MIT License
 Download-URL: https://github.com/pydemia/unipy

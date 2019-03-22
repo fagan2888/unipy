@@ -1,9 +1,9 @@
 package:
   name: unipy
-  version: 0.1.23
+  version: 0.1.25
 
 source:
-  fn: unipy-0.1.23.tar.gz
+  fn: unipy-0.1.25.tar.gz
   url: ./dist
   md5: b03a1ff8dff70fd397d11ed16a0f7c87
 #  patches:
