@@ -20,7 +20,7 @@ except ImportError:
 from distutils.cmd import Command
 
 
-__version__ = '0.1.25'
+__version__ = '0.1.26'
 
 desc = """
 This contains a number of useful objects for data manipulation & analysis.
@@ -165,21 +165,21 @@ setup(name=package_name,
       )
 
 
-# Managing conda-build
-with open('meta.yaml.template', 'r') as conda_file:
-    conda_build_str = conda_file.read()
-    conda_build_str = conda_build_str.format(
-        package_name=package_name,
-        package_version=package_version,
-        package_source=package_source,
-        package_url='./dist',
-        required_on_build=required_on_build,
-        required_on_run=required_on_run,
-        doc_url=doc_url,
-        license_str=license_str,
-        short_desc=short_desc,
-        license_family_str=license_family_str,
-    )
+# # Managing conda-build
+# with open('meta.yaml.template', 'r') as conda_file:
+#     conda_build_str = conda_file.read()
+#     conda_build_str = conda_build_str.format(
+#         package_name=package_name,
+#         package_version=package_version,
+#         package_source=package_source,
+#         package_url='./dist',
+#         required_on_build=required_on_build,
+#         required_on_run=required_on_run,
+#         doc_url=doc_url,
+#         license_str=license_str,
+#         short_desc=short_desc,
+#         license_family_str=license_family_str,
+#     )
 
-with open('conda/unipy/meta.yaml', 'w') as conda_meta_file:
-    conda_meta_file.write(conda_build_str)
+# with open('conda/unipy/meta.yaml', 'w') as conda_meta_file:
+#     conda_meta_file.write(conda_build_str)
