@@ -17,9 +17,11 @@ import sys
 import matplotlib
 matplotlib.use('agg')  # to prevent ImportError: '_tkinter'
 
-sys.path.insert(0, os.path.abspath('..'))
+# sys.path.insert(0, os.path.abspath('..'))
 from unipy import __version__
 # __version__ = '0.0.4.19'
+sys.path.insert(0, os.path.abspath("../.."))
+
 sys.path.append(os.path.join(os.path.abspath(os.pardir)))
 
 # with open('../requirements.txt') as file:

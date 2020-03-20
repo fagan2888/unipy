@@ -10,6 +10,7 @@ import sklearn as skl
 import matplotlib.pyplot as plt
 from sklearn.linear_model import Lasso
 from unipy.stats.formula import from_formula
+from unipy.stats.metrics import vif
 
 
 __all__ = ['lasso_rank',

@@ -39,3 +39,44 @@ def func(*args, **kwargs):
     """
     pass
 
+
+class ReusableGenerator(object):
+    """Temporary Interface to re-use generator for convenience.
+
+    Once assigned, It can be infinitely consumed
+    **as long as an input generator remains un-exhausted.
+
+    Attributes
+    ----------
+    _source: generator
+        A source generator.
+
+    See Also
+    --------
+    generator
+    ``itertools.tee``
+
+    Examples
+    --------
+    >>> from unipy.utils.generator import ReusableGenerator
+    >>> gen = (i for i in range(10))
+    >>> gen
+    <generator object <genexpr> at 0x11120ebf8>
+    >>> regen = ReusableGenerator(gen)
+    >>> regen
+    <unipy.utils.generator.ReusableGenerator object at 0x1061a97f0>
+    >>> list(regen)
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    >>> list(regen)
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    >>> list(gen)  # If the source is used, copied one will be exhausted too.
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    >>> list(gen)
+    []
+    >>> list(regen)
+    []
+
+    """
+
+    def __init__(self, generator):
+        pass
