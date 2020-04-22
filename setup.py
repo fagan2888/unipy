@@ -161,7 +161,7 @@ setup(name=package_name,
       #setup_requires=required_packages,
       install_requires=required_packages,
       zip_safe=False,
-      package_data={'unipy': ['*.gz', 'dataset/resources.tar.gz']}
+      package_data={package_name: ['*.gz', 'dataset/resources.tar.gz']}
       )
 
 

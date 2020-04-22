@@ -1,0 +1,106 @@
+package:
+  name: unipy
+  version: 0.1.25
+
+source:
+  fn: unipy-0.1.25.tar.gz
+  url: ./dist
+  md5: b03a1ff8dff70fd397d11ed16a0f7c87
+#  patches:
+   # List any patch files here
+   # - fix.patch
+
+# build:
+  # noarch: python
+  # preserve_egg_dir: True
+  # entry_points:
+    # Put any entry points (scripts to be generated automatically) here. The
+    # syntax is module:function.  For example
+    #
+    # - unipy = unipy:main
+    #
+    # Would create an entry point called unipy that calls unipy.main()
+
+
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  # number: 1
+
+requirements:
+  build:
+    - setuptools
+    - python
+    - pandas >=0.20.2
+    - numpy >=1.13.1
+    - numpydoc >=0.7.0
+    - scipy >=0.19.1
+    - scikit-learn >=0.18.0
+    - statsmodels >=0.8.0
+    - matplotlib >=2.0.2
+    - paramiko >=2.1.2
+    - pandasql >=0.7.3
+    - seaborn >=0.8
+    - scikit-image >=0.13.0
+    - PyDrive >=1.2.1
+    - oauth2client >=4.1.2
+    - google-auth-oauthlib >=0.2.0
+    - pyasn1 >=0.4.3
+    - pyasn1-modules >=0.2.1
+    - mglearn >=0.1.6
+
+  run:
+    - python
+    - pandas >=0.20.2
+    - numpy >=1.13.1
+    - numpydoc >=0.7.0
+    - scipy >=0.19.1
+    - scikit-learn >=0.18.0
+    - statsmodels >=0.8.0
+    - matplotlib >=2.0.2
+    - paramiko >=2.1.2
+    - pandasql >=0.7.3
+    - seaborn >=0.8
+    - scikit-image >=0.13.0
+    - PyDrive >=1.2.1
+    - oauth2client >=4.1.2
+    - google-auth-oauthlib >=0.2.0
+    - pyasn1 >=0.4.3
+    - pyasn1-modules >=0.2.1
+    - mglearn >=0.1.6
+
+test:
+  # Python imports
+  imports:
+    - unipy
+    - unipy.core
+    - unipy.dataset
+    - unipy.image
+    - unipy.math
+    - unipy.plot
+    - unipy.stats
+    - unipy.tests
+    - unipy.tools
+    - unipy.util
+
+  # commands:
+    # You can put test commands to be run here.  Use this to test that the
+    # entry points work.
+
+
+  # You can also put a file called run_test.py in the recipe that will be run
+  # at test time.
+
+  # requires:
+    # Put any additional test requirements here.  For example
+    # - nose
+
+about:
+  home: https://unipy.readthedocs.io/en/latest/index.html
+  license: MIT License
+  summary: Useful tools for Data Scentists
+  license_family: MIT
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
+
